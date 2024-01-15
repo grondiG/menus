@@ -1,0 +1,20 @@
+<div class="container-fluid w-100 h-100">
+  <div class="d-flex align-items-center justify-content-center h-100 gap-2">
+    <p class="h3 text-white h-25 text-center">
+      <i class="bi-hourglass"></i>
+      <span>{{ timerValue * 1000 | date:'H:mm:ss':'UTC'}}</span>
+    </p>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Set timer
+      </button>
+      <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+        <li><p class="dropdown-item" (click)="createTimer(1)">1min</p></li>
+        <li><p class="dropdown-item" (click)="createTimer(5)">5min</p></li>
+        <li><p class="dropdown-item" (click)="createTimer(15)">15min</p></li>
+        <li><p class="dropdown-item" (click)="createTimer(30)">30min</p></li>
+        <li><p class="dropdown-item" (click)="createTimer(60)">60min</p></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import { PreventDefaultDirective } from './directives/prevent-default/prevent-default.directive';
 import { NutrituionsModalComponent } from './components/nutrituions-modal/nutrituions-modal.component';
+import { TimerComponent } from './components/timer/timer.component';
 @NgModule({
   imports: [
     RouterModule,
@@ -16,16 +17,18 @@ import { NutrituionsModalComponent } from './components/nutrituions-modal/nutrit
     RestaurantDescriptionPipe,
     RestaurantCardComponent,
     PreventDefaultDirective,
-    NutrituionsModalComponent
+    NutrituionsModalComponent,
+    TimerComponent
   ],
-    exports: [
-        RouterModule,
-        RestaurantDescriptionPipe,
-        RestaurantCardComponent,
-        CommonModule,
-        ReactiveFormsModule,
-        PreventDefaultDirective,
-        NutrituionsModalComponent
-    ]
+  exports: [
+    RouterModule,
+    RestaurantDescriptionPipe,
+    RestaurantCardComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    PreventDefaultDirective,
+    NutrituionsModalComponent,
+    TimerComponent
+  ]
 })
 export class SharedModule { }
