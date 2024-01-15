@@ -1,0 +1,22 @@
+<div class="container restaurants">
+  <form class="row restaurants-search align-items-center justify-content-center w-100 p-4"
+        appPreventDefault
+        (submit)="onSearch()">
+    <div class="col-auto restaurants-search-input">
+      <input type="text" id="restaurantName" [formControl]="searchValue" class="form-control"
+             placeholder="Restaurant name">
+      <i [ngClass]="searchValue.value.length>0 ? 'active':''"
+         class="bi bi-x restaurants-search-input-remove"
+         (click)="resetSearch()"
+      ></i>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-dark">Search <i class="bi-search"></i></button>
+    </div>
+  </form>
+  <div class="row restaurants-list overflow-y-auto">
+    <div *ngFor="let restaurant of restaurants" class="col-12 col-lg-4 col-md-6">
+      <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
+    </div>
+  </div>
+</div>
