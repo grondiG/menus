@@ -1,0 +1,20 @@
+<div class="row search align-items-center justify-content-center w-100 p-4" appPreventDefault>
+  <div class="col-auto search-input">
+    <input
+      [(ngModel)]="searchValue"
+      (ngModelChange)="onSearch($event)"
+      (keydown.enter)="onSearch(searchValue)"
+      type="text"
+      id="restaurantName"
+      class="form-control"
+      placeholder="Restaurant name"
+    >
+    <i [ngClass]="searchValue.length>0 ? 'active':''"
+       class="bi bi-x search-input-remove"
+       (click)="resetSearch()"
+    ></i>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-dark">Search <i class="bi-search"></i></button>
+  </div>
+</div>

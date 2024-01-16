@@ -5,7 +5,7 @@ import {NotFoundComponent} from "./pages/not-found/not-found.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'restaurants', loadChildren: () => import('./pages/restaurants/restaurants.module').then(m => m.RestaurantsModule)},
+  { path: 'restaurants', loadChildren: () => import('./modules/restaurants/restaurants.module').then(m => m.RestaurantsModule)},
   { path: '**', component: NotFoundComponent }
 ];
 

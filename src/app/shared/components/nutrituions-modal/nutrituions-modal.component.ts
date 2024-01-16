@@ -8,7 +8,7 @@ import {MenuItem} from "../../../core/models/restaurant.model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NutrituionsModalComponent {
-  @Input() public dish!: MenuItem;
-  @Input() public id!: string;
+  @Input() dish!: MenuItem;
+  @Input() id!: string;
 
 }

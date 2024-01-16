@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {mergeMap} from "rxjs";
-import {RestaurantsService} from "../../../core/services/restaurants/restaurants.service";
-import {Restaurant} from "../../../core/models/restaurant.model";
+import {RestaurantsService} from "../../services/restaurants/restaurants.service";
+import {Restaurant} from "../../models/restaurant.model";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
@@ -11,12 +11,13 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   styleUrl: './restaurant.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RestaurantComponent {
+export class RestaurantComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
-  public restaurant!: Restaurant;
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private restaurantsService: RestaurantsService = inject(RestaurantsService);
 
-  constructor(private route:ActivatedRoute,
-              private restaurantsService: RestaurantsService) { }
+  restaurant!: Restaurant;
+
 
   ngOnInit(): void {
     this.route.params.pipe(mergeMap(params => {
@@ -24,8 +25,7 @@ export class RestaurantComponent {
     }))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((restaurant: Restaurant) => {
-      this.restaurant = restaurant
+      this.restaurant = restaurant;
     });
   }
-
 }

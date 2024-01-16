@@ -1,0 +1,32 @@
+<div class="accordion" id="accordion">
+  <div *ngFor="let dish of menu" class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="dish.name | convertToAttributeFormat: '#c'"
+              [attr.aria-controls]="dish.name | convertToAttributeFormat: 'c'"
+              aria-expanded="false"
+      >
+        {{dish.name}}
+      </button>
+    </h2>
+    <div [id]="dish.name | convertToAttributeFormat: 'c'"
+         class="accordion-collapse collapse"
+         aria-labelledby="headingOne"
+         data-bs-parent="#accordion"
+    >
+      <div class="accordion-body">
+        <p>Ingredients: {{dish.ingredients}}</p>
+        <p>{{dish.price}}</p>
+
+        <button type="button" class="btn btn-dark"
+                data-bs-toggle="modal"
+                [attr.data-bs-target]="dish.name | convertToAttributeFormat: '#m'"
+        >Show nutritions
+        </button>
+        <app-nutrituions-modal
+          [dish]="dish" [id]="dish.name | convertToAttributeFormat: 'm'"
+        ></app-nutrituions-modal>
+      </div>
+    </div>
+  </div>
+</div>
