@@ -1,0 +1,5 @@
+<div class="row restaurants-list overflow-y-auto">
+  <div *ngFor="let restaurant of restaurants" class="col-12 col-lg-4 col-md-6">
+    <app-restaurant-card [restaurant]="restaurant"></app-restaurant-card>
+  </div>
+</div>

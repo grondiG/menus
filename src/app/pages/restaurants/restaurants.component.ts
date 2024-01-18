@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
 import { RestaurantsService } from '../../core/services/restaurants/restaurants.service';
 import {Restaurant} from "../../core/models/restaurant.model";
-import {FormControl} from "@angular/forms";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 @Component({
   selector: 'app-restaurants',
@@ -9,13 +8,14 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   styleUrl: './restaurants.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RestaurantsComponent {
-  private destroyRef = inject(DestroyRef);
-  public restaurants: Restaurant[] = [];
-  public searchValue: FormControl = new FormControl('');
+export class RestaurantsComponent implements OnInit {
+  private destroyRef: DestroyRef = inject(DestroyRef);
+  private restaurantsService: RestaurantsService = inject(RestaurantsService);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-  constructor(private restaurantsService: RestaurantsService,
-              private cdr: ChangeDetectorRef) { }
+  restaurants: Restaurant[] = [];
+  searchValue: string = '';
+
 
   ngOnInit(): void {
     this.restaurantsService.getRestaurants()
@@ -26,10 +26,8 @@ export class RestaurantsComponent {
     });
   }
 
-  public onSearch(): void {
-
-    const searchValue = this.searchValue.value;
-    this.restaurantsService.searchRestaurants(searchValue)
+  onSearch(): void {
+    this.restaurantsService.searchRestaurants(this.searchValue)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((restaurants: Restaurant[]) => {
       this.restaurants = restaurants;
@@ -37,10 +35,8 @@ export class RestaurantsComponent {
     });
   }
 
-  public resetSearch(): void {
-    this.searchValue.setValue('');
+  resetSearch(): void {
+    this.searchValue = '';
     this.onSearch();
   }
-
-  protected readonly alert = alert;
 }

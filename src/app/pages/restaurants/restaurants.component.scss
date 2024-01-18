@@ -1,28 +1,6 @@
 .restaurants{
   height: 80vh;
 
-  &-search {
-    height: 20%;
-
-    &-input {
-      position: relative;
-
-      &-remove {
-        display: none;
-        font-size: 1.3rem;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(-100%, -50%);
-        cursor: pointer;
-
-        &.active {
-          display: block;
-        }
-      }
-    }
-  }
-
   &-list{
     height: 80%;
   }
