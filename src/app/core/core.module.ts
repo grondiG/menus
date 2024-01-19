@@ -1,27 +1,30 @@
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './containers/header/header.component';
 import { FooterComponent } from './containers/footer/footer.component';
-import { SharedModule } from "../shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
-import { RestaurantCardContainerComponent } from './containers/restaurant-card-container/restaurant-card-container.component';
-import { RestaurantAccordionComponent } from './containers/restaurant-accordion/restaurant-accordion.component';
+import { RestaurantCardComponent } from "./components/restaurant-card/restaurant-card.component";
+import { RouterLink } from "@angular/router";
+import { AsyncPipe, NgClass, NgForOf, NgIf } from "@angular/common";
+import { GetCurrentPageByUrlPipe } from "./pipes/get-current-page-by-url/get-current-page-by-url.pipe";
 
 @NgModule({
   imports: [
-    SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    RestaurantCardComponent,
+    RouterLink,
+    NgForOf,
+    AsyncPipe,
+    GetCurrentPageByUrlPipe,
+    NgClass,
+    NgIf
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    RestaurantCardContainerComponent,
-    RestaurantAccordionComponent
   ],
   declarations: [
     HeaderComponent,
     FooterComponent,
-    RestaurantCardContainerComponent,
-    RestaurantAccordionComponent,
   ]
 })
 export class CoreModule { }

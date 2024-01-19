@@ -4,5 +4,5 @@
     (searchValueChange)="onSearch()"
     (resetSearchChange)="resetSearch()"
   ></app-filter>
-  <app-restaurant-card-container [restaurants]="restaurants"></app-restaurant-card-container>
+  <app-restaurant-card-container [restaurants]="restaurants$ | async"></app-restaurant-card-container>
 </div>

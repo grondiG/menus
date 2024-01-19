@@ -11,7 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

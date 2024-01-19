@@ -1,7 +1,8 @@
 import {Directive, HostListener} from '@angular/core';
 
 @Directive({
-  selector: '[appPreventDefault]'
+  selector: '[appPreventDefault]',
+  standalone: true
 })
 export class PreventDefaultDirective {
   @HostListener('submit', ['$event'])

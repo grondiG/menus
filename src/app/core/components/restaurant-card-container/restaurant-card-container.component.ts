@@ -1,11 +1,18 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Restaurant} from "../../models/restaurant.model";
+import { NgForOf } from "@angular/common";
+import { RestaurantCardComponent } from "../restaurant-card/restaurant-card.component";
 
 @Component({
   selector: 'app-restaurant-card-container',
   templateUrl: './restaurant-card-container.component.html',
   styleUrl: './restaurant-card-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgForOf,
+    RestaurantCardComponent
+  ]
 })
 export class RestaurantCardContainerComponent {
   @Input() restaurants!: Restaurant[];

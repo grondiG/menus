@@ -1,38 +1,39 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit} from '@angular/core';
-import { RestaurantsService } from '../../core/services/restaurants/restaurants.service';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {Restaurant} from "../../core/models/restaurant.model";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {RestaurantsStore} from "./restaurants.store";
+import {Observable} from "rxjs";
+import { FilterComponent } from "../../core/components/filter/filter.component";
+import { CoreModule } from "../../core/core.module";
+import { AsyncPipe } from "@angular/common";
+import {
+  RestaurantCardContainerComponent
+} from "../../core/components/restaurant-card-container/restaurant-card-container.component";
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
   styleUrl: './restaurants.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [RestaurantsStore],
+  standalone: true,
+  imports: [
+    FilterComponent,
+    CoreModule,
+    AsyncPipe,
+    RestaurantCardContainerComponent
+  ]
 })
-export class RestaurantsComponent implements OnInit {
-  private destroyRef: DestroyRef = inject(DestroyRef);
-  private restaurantsService: RestaurantsService = inject(RestaurantsService);
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+export class RestaurantsComponent {
+  private restaurantsStore: RestaurantsStore = inject(RestaurantsStore);
 
-  restaurants: Restaurant[] = [];
+  restaurants$: Observable<Restaurant[]> = this.restaurantsStore.restaurants$;
   searchValue: string = '';
 
-
-  ngOnInit(): void {
-    this.restaurantsService.getRestaurants()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((restaurants: Restaurant[]) => {
-      this.restaurants = restaurants;
-      this.cdr.markForCheck();
-    });
+  constructor() {
+    this.restaurantsStore.loadRestaurants();
   }
 
   onSearch(): void {
-    this.restaurantsService.searchRestaurants(this.searchValue)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((restaurants: Restaurant[]) => {
-      this.restaurants = restaurants;
-      this.cdr.markForCheck();
-    });
+    this.restaurantsStore.searchRestaurants(this.searchValue);
   }
 
   resetSearch(): void {
