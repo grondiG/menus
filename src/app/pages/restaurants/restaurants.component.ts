@@ -8,6 +8,7 @@ import { AsyncPipe } from "@angular/common";
 import {
   RestaurantCardContainerComponent
 } from "../../core/components/restaurant-card-container/restaurant-card-container.component";
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
@@ -19,7 +20,7 @@ import {
     FilterComponent,
     CoreModule,
     AsyncPipe,
-    RestaurantCardContainerComponent
+    RestaurantCardContainerComponent,
   ]
 })
 export class RestaurantsComponent {

@@ -3,8 +3,8 @@ import { HeaderComponent } from './containers/header/header.component';
 import { FooterComponent } from './containers/footer/footer.component';
 import { HttpClientModule } from "@angular/common/http";
 import { RestaurantCardComponent } from "./components/restaurant-card/restaurant-card.component";
-import { RouterLink } from "@angular/router";
-import { AsyncPipe, NgClass, NgForOf, NgIf } from "@angular/common";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common';
 import { GetCurrentPageByUrlPipe } from "./pipes/get-current-page-by-url/get-current-page-by-url.pipe";
 
 @NgModule({
@@ -16,7 +16,10 @@ import { GetCurrentPageByUrlPipe } from "./pipes/get-current-page-by-url/get-cur
     AsyncPipe,
     GetCurrentPageByUrlPipe,
     NgClass,
-    NgIf
+    NgIf,
+    RouterLinkActive,
+    JsonPipe,
+    TitleCasePipe
   ],
   exports: [
     HeaderComponent,

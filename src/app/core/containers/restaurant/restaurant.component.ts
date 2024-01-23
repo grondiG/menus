@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Observable } from "rxjs";
-import { Restaurant } from "../../core/models/restaurant.model";
-import { RestaurantsStore } from "../restaurants/restaurants.store";
+import { Restaurant } from "../../models/restaurant.model";
+import { RestaurantsStore } from "../../../pages/restaurants/restaurants.store";
 import { AsyncPipe, NgIf } from "@angular/common";
-import { CoreModule } from "../../core/core.module";
+import { CoreModule } from "../../core.module";
 import {
   RestaurantAccordionComponent
-} from "../../core/components/restaurant-accordion/restaurant-accordion.component";
+} from "../../components/restaurant-accordion/restaurant-accordion.component";
 
 @Component({
   selector: 'app-restaurant',

@@ -3,20 +3,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { RestaurantsComponent } from "./pages/restaurants/restaurants.component";
-import { RestaurantComponent } from "./pages/restaurant/restaurant.component";
+import { RestaurantComponent } from "./core/containers/restaurant/restaurant.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    title: 'Home'
   },
   {
     path: 'restaurants',
-    component: RestaurantsComponent,
+    title: 'Restaurants',
+    loadChildren: () => import('./pages/restaurants/restaurants.module').then(m => m.RestaurantsModule),
   },
   {
-    path: 'restaurants/:id',
-    component: RestaurantComponent
+    path: 'orders',
+    component: HomeComponent,
+    title: 'Orders'
+  },
+  {
+    path: 'profile',
+    component: HomeComponent,
+    title: 'Profile'
   },
   {
     path: '**',
