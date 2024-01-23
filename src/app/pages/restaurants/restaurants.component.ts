@@ -1,14 +1,14 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {Restaurant} from "../../core/models/restaurant.model";
-import {RestaurantsStore} from "./restaurants.store";
-import {Observable} from "rxjs";
-import { FilterComponent } from "../../core/components/filter/filter.component";
-import { CoreModule } from "../../core/core.module";
-import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Restaurant } from '../../core/models/restaurant.model';
+import { RestaurantsStore } from './restaurants.store';
+import { Observable } from 'rxjs';
+import { FilterComponent } from '../../core/components/filter/filter.component';
+import { CoreModule } from '../../core/core.module';
+import { AsyncPipe } from '@angular/common';
 import {
   RestaurantCardContainerComponent
-} from "../../core/components/restaurant-card-container/restaurant-card-container.component";
-import { RouterOutlet } from '@angular/router';
+} from '../../core/components/restaurant-card-container/restaurant-card-container.component';
+
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',

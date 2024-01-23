@@ -11,35 +11,12 @@
           <ul class="header__menu__list text-light d-flex justify-content-center gap-3 w-100 p-0 mb-2">
             <li
               class="header__menu__list-item"
-              [routerLink]="'home'"
+              *ngFor="let route of routerData"
+              [routerLink]="route.path"
               [routerLinkActive]="'active'"
               [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
             >
-              <span>Home</span>
-            </li>
-            <li
-              class="header__menu__list-item"
-              [routerLink]="'restaurants'"
-              [routerLinkActive]="'active'"
-              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-            >
-              <span>Restaurants</span>
-            </li>
-            <li
-              class="header__menu__list-item"
-              [routerLink]="'orders'"
-              [routerLinkActive]="'active'"
-              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-            >
-              <span>Orders</span>
-            </li>
-            <li
-              class="header__menu__list-item"
-              [routerLink]="'profile'"
-              [routerLinkActive]="'active'"
-              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-            >
-              <span>Profile</span>
+              <span>{{ route.title | titlecase }}</span>
             </li>
           </ul>
         </div>
