@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { filter, map, Observable } from "rxjs";
-import { NavigationEnd, Router } from "@angular/router";
+import { RouterData } from "../../models/router-data.model";
+import { ROUTER_DATA } from "../../../app.config";
 
 export interface Route {
   path: string;
@@ -14,34 +14,5 @@ export interface Route {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private router: Router = inject(Router);
-
-  route$: Observable<string> = this.router.events.pipe(
-    filter(event => event instanceof NavigationEnd),
-    map((event: NavigationEnd) => {
-      console.log(event.url);
-      return event.url;
-    })
-  );
-  routes: Route[] = [
-    {
-      path: '/',
-      title: 'Home'
-    },
-    {
-      path: '/restaurants',
-      title: 'Restaurants'
-    },
-    {
-      path: '/orders',
-      title: 'Orders'
-    },
-    {
-      path: '/profile',
-      title: 'Profile'
-    }
-  ]
-
-  constructor() {
-  }
+  routes: RouterData[] = inject(ROUTER_DATA);
 }

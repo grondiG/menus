@@ -2,21 +2,33 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
-import { RestaurantsComponent } from "./pages/restaurants/restaurants.component";
-import { RestaurantComponent } from "./pages/restaurant/restaurant.component";
+import { RoutePath, RouteTitle } from "./app.config";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    pathMatch: 'full',
+    redirectTo: 'home'
   },
   {
-    path: 'restaurants',
-    component: RestaurantsComponent,
+    path: RoutePath.HOME,
+    component: HomeComponent,
+    title: RouteTitle.HOME
   },
   {
-    path: 'restaurants/:id',
-    component: RestaurantComponent
+    path: RoutePath.RESTAURANTS,
+    title: RouteTitle.RESTAURANTS,
+    loadChildren: () => import('./pages/restaurants/restaurants.module').then(m => m.RestaurantsModule),
+  },
+  {
+    path: RoutePath.ORDERS,
+    component: HomeComponent,
+    title: RouteTitle.ORDERS
+  },
+  {
+    path: RoutePath.PROFILE,
+    component: HomeComponent,
+    title: RouteTitle.PROFILE
   },
   {
     path: '**',

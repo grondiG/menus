@@ -1,4 +1,3 @@
-<ng-container *ngIf="route$ | async | getCurrentPageByUrl as currentPath">
   <div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
       <div class="col-4 col-md-4 h-100">
@@ -12,11 +11,13 @@
             <li
               class="header__menu__list-item"
               *ngFor="let route of routes"
-              [ngClass]="{'active': currentPath === route.path}"
+              [routerLink]="route.path"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
             >
-              <a [routerLink]="route.path">
-                {{ route.title }}
-              </a>
+              <span>
+                {{ route.title | titlecase }}
+              </span>
             </li>
           </ul>
         </div>
@@ -25,4 +26,3 @@
       </div>
     </div>
   </div>
-</ng-container>
