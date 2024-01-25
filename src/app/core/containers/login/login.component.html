@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
+    <h2 class="text-center">Login</h2>
+    <form
+      class="col-md-6 col-12 form-group"
+      appPreventDefault
+      [formGroup]="loginForm"
+      (submit)="login()"
+    >
+      <label for="login">Login</label>
+      <input
+        type="text"
+        class="form-control my-2"
+        id="login"
+        placeholder="Login"
+        formControlName="login"
+      >
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control my-2"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      >
+      <div class="d-flex align-items-center gap-3">
+        <button
+          type="submit"
+          class="btn btn-primary mt-3 ml-4"
+          [disabled]="loginForm.invalid"
+        >
+          Login</button>
+        <a [routerLink]="'../register'" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an account?</a>
+      </div>
+    </form>
+  </div>
+</div>

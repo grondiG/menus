@@ -1,1 +1,70 @@
-<p>register works!</p>
+<div class="container">
+  <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
+    <h2 class="text-center">Register</h2>
+    <form
+      class="col-md-6 col-12 form-group"
+      appPreventDefault
+      [formGroup]="registerData"
+      (submit)="register()"
+    >
+      <label for="login">Login</label>
+      <input
+        type="text"
+        class="form-control my-2"
+        id="login"
+        placeholder="Login"
+        formControlName="login"
+      >
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control my-2"
+        id="email"
+        placeholder="Email"
+        formControlName="mail"
+      />
+      <label for="restaurantName">Restaurant Name</label>
+      <input
+        type="text"
+        class="form-control my-2"
+        id="restaurantName"
+        placeholder="Restaurant Name"
+        formControlName="restaurantName"
+      />
+      <label for="address">Address</label>
+      <input
+        type="text"
+        class="form-control my-2"
+        id="address"
+        placeholder="Address"
+        formControlName="restaurantAddress"
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control my-2"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+      >
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control my-2"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+      />
+      <div class="d-flex align-items-center gap-3">
+        <button
+          type="submit"
+          class="btn btn-primary mt-3 ml-4"
+          [disabled]="registerData.invalid"
+        >
+          Register
+        </button>
+        <a [routerLink]="'../login'" class="text-dark text-decoration-underline mt-3 ml-4">Already have an account?</a>
+      </div>
+    </form>
+  </div>
+</div>
