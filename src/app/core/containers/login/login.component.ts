@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
 import { RouterLink } from "@angular/router";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { LoginData } from "../../models/login-data";
 import { ModelFormGroup } from "../../types/form";
+import { Store } from "@ngrx/store";
+import {loadProfile} from "../../../store/profile/profile.actions";
+import {of} from "rxjs";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,12 +21,14 @@ import { ModelFormGroup } from "../../types/form";
 
 })
 export class LoginComponent {
+  private profileStore: Store<any> = inject(Store);
+
   loginForm: ModelFormGroup<LoginData> = new FormGroup({
     login: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   })
 
   login(): void {
-    console.log(this.loginForm.value);
+    this.profileStore.dispatch(loadProfile(<LoginData>this.loginForm.value));
   }
 }
