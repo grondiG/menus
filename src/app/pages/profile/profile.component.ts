@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-
+import { Store } from "@ngrx/store";
+import { profileIsLoggedSelector } from "../../store/profile/profile.selectors";
+import { Observable } from "rxjs";
+import { AsyncPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from "@angular/common";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -8,10 +11,19 @@ import { RouterLink, RouterOutlet } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    NgSwitchCase,
+    NgSwitch,
+    AsyncPipe,
+    NgSwitchDefault
   ],
   standalone: true
 })
 export class ProfileComponent {
+  private store: Store = inject(Store);
+  isLogged$: Observable<boolean> = this.store.select(profileIsLoggedSelector);
 
+  logout(): void {
+
+  }
 }

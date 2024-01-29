@@ -1,16 +1,35 @@
 <div class="container p-4">
-  <div class="row">
-  <div class="alert alert-danger">
-    <strong>Warning!</strong> You're not authorized yet.
-  </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 d-flex justify-content-end">
-      <a class="btn btn-primary" [routerLink]="'login'">Login</a>
+  <ng-container [ngSwitch]="isLogged$ | async">
+    <div *ngSwitchCase="true">
+      <div class="row">
+        <div class="alert alert-info">
+          <strong>Success!</strong> You're now registered.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-end">
+          <a class="btn btn-primary" [routerLink]="'profile'">Profile</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-primary" (click)="logout()">Logout</a>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <a class="btn btn-primary" [routerLink]="'register'">Register</a>
+    <div *ngSwitchDefault>
+      <div class="row">
+        <div class="alert alert-danger">
+          <strong>Warning!</strong> You're not authorized yet.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 d-flex justify-content-end">
+          <a class="btn btn-primary" [routerLink]="'login'">Login</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-primary" [routerLink]="'register'">Register</a>
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 <router-outlet></router-outlet>

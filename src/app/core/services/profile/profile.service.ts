@@ -1,8 +1,8 @@
-import {inject, Injectable} from '@angular/core';
-import {LoginData} from "../../models/login-data";
-import {Observable, of} from "rxjs";
-import {RegisterData} from "../../models/register-data";
-import {HttpClient} from "@angular/common/http";
+import { inject, Injectable } from '@angular/core';
+import { LoginData } from "../../models/login-data";
+import { Observable } from "rxjs";
+import { RegisterData } from "../../models/register-data";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,11 @@ import {HttpClient} from "@angular/common/http";
 export class ProfileService {
   private http: HttpClient = inject(HttpClient);
 
-  constructor() { }
+  constructor() {
+  }
 
   login(credentials: LoginData): Observable<any> {
-    console.log(credentials);
-
-    return of(null)
+    return this.http.post('/api/login', credentials);
   }
 
   register(credentials: RegisterData): Observable<any> {
