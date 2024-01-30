@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProfileService } from "../../core/services/profile/profile.service";
-import { loadProfile, register } from "./profile.actions";
-import { catchError, EMPTY, exhaustMap, map } from "rxjs";
+import { loadProfile, logout, register } from "./profile.actions";
+import { catchError, EMPTY, exhaustMap, map, tap } from "rxjs";
 
 
 @Injectable()
@@ -21,6 +21,9 @@ export class ProfileEffects {
           token: data.token
         }
       })),
+      tap(data => {
+        this.profileService.addTokenToLocalStorage(data.payload.token);
+      }),
       catchError(() => EMPTY)
     ))),
   );
@@ -36,7 +39,17 @@ export class ProfileEffects {
           token: data.token
         }
       })),
+      tap(data => {
+        this.profileService.addTokenToLocalStorage(data.payload.token);
+      }),
       catchError(() => EMPTY)
     )),
   ));
+
+  logout$ = createEffect(() => this.actions$.pipe(
+    ofType(logout),
+    tap(() => {
+      this.profileService.removeTokenFromLocalStorage();
+    })
+  ), { dispatch: false });
 }

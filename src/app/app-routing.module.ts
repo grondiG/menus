@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { RoutePath, RouteTitle } from "./app.config";
+import { authenticationGuard } from "./core/guards/authentication.guard";
 
 export const routes: Routes = [
   {
@@ -23,7 +24,8 @@ export const routes: Routes = [
   {
     path: RoutePath.ORDERS,
     component: HomeComponent,
-    title: RouteTitle.ORDERS
+    title: RouteTitle.ORDERS,
+    canActivate: [authenticationGuard]
   },
   {
     path: RoutePath.PROFILE,

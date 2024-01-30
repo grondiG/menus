@@ -20,4 +20,12 @@ export class ProfileService {
   register(credentials: RegisterData): Observable<any> {
     return this.http.post('/api/register', credentials);
   }
+
+  addTokenToLocalStorage(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  removeTokenFromLocalStorage(): void {
+    localStorage.removeItem('token');
+  }
 }
