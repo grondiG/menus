@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterData } from "../../models/router-data.model";
-import { ROUTER_DATA } from "../../../app.config";
-import { Observable } from "rxjs";
-import { profileIsLoggedSelector } from "../../../store/profile/profile.selectors";
-import { Store } from "@ngrx/store";
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { RouterData } from '../../models/router-data.model';
+import { ROUTER_DATA } from '../../../app.config';
+import { profileIsLoggedSelector } from '../../../store/profile/profile.selectors';
 
 export interface Route {
   path: string;

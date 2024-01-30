@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
-import { RouterLink } from "@angular/router";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { LoginData } from "../../models/login-data";
-import { ModelFormGroup } from "../../types/form";
-import { Store } from "@ngrx/store";
-import {loadProfile} from "../../../store/profile/profile.actions";
-import {of} from "rxjs";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { RouterLink } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginData } from '../../models/login-data';
+import { ModelFormGroup } from '../../types/form';
+import { Store } from '@ngrx/store';
+import * as profileAction from '../../../store/profile/profile.actions';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +21,7 @@ import {of} from "rxjs";
 
 })
 export class LoginComponent {
-  private profileStore: Store<any> = inject(Store);
+  private store: Store = inject(Store);
 
   loginForm: ModelFormGroup<LoginData> = new FormGroup({
     login: new FormControl('', [Validators.required]),
@@ -29,6 +29,12 @@ export class LoginComponent {
   })
 
   login(): void {
-    this.profileStore.dispatch(loadProfile(<LoginData>this.loginForm.value));
+    if (this.loginForm.invalid) {
+      this.loginForm.markAsDirty();
+      return;
+    }
+
+    const data: LoginData = this.loginForm.getRawValue();
+    this.store.dispatch(profileAction.loadProfile({ data }));
   }
 }

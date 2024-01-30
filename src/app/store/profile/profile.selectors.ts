@@ -1,7 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { profileFeatureKey, ProfileState } from "./profile.reducer";
 
-
 const profileFeatureSelector = createFeatureSelector<ProfileState>(profileFeatureKey);
 
 export const profileSelector = createSelector(
@@ -11,5 +10,5 @@ export const profileSelector = createSelector(
 
 export const profileIsLoggedSelector = createSelector(
     profileFeatureSelector,
-    (state) => state.isLogged
+    (state) => !!state?.isLogged
 );

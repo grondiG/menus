@@ -3,6 +3,7 @@ import { LoginData } from "../../models/login-data";
 import { Observable } from "rxjs";
 import { RegisterData } from "../../models/register-data";
 import { HttpClient } from "@angular/common/http";
+import { ProfileState } from '../../../store/profile/profile.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class ProfileService {
   constructor() {
   }
 
-  login(credentials: LoginData): Observable<any> {
-    return this.http.post('/api/login', credentials);
+  login(credentials: LoginData): Observable<ProfileState> {
+    return this.http.post<ProfileState>('/api/login', credentials);
   }
-
+  // TODO provide type
   register(credentials: RegisterData): Observable<any> {
     return this.http.post('/api/register', credentials);
   }
