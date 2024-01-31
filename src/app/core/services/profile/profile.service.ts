@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { RegisterData } from "../../models/register-data";
 import { HttpClient } from "@angular/common/http";
 import { ProfileState } from '../../../store/profile/profile.reducer';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class ProfileService {
   login(credentials: LoginData): Observable<ProfileState> {
     return this.http.post<ProfileState>('/api/login', credentials);
   }
+
   register(credentials: RegisterData): Observable<ProfileState> {
     return this.http.post<ProfileState>('/api/register', credentials);
   }

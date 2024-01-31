@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ProfileService } from '../../core/services/profile/profile.service';
-import * as profileActions from './profile.actions';
-import { catchError, EMPTY, exhaustMap, map, Observable, of, switchMap, tap } from 'rxjs';
-import { ProfileState } from './profile.reducer';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
+import * as profileActions from './profile.actions';
+import { ProfileState } from './profile.reducer';
+import { ProfileService } from '../../core/services/profile/profile.service';
 
 
 @Injectable()

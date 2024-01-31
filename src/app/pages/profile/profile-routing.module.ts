@@ -3,7 +3,7 @@ import { ProfileComponent } from "./profile.component";
 import { RegisterComponent } from "../../core/containers/register/register.component";
 import { LoginComponent } from "../../core/containers/login/login.component";
 import { NgModule } from "@angular/core";
-import {skipLoginGuard} from "../../core/guards/skip-login.guard";
+import { skipLoginGuard } from "../../core/guards/skip-login.guard";
 
 const routes: Routes = [
   {
@@ -31,4 +31,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class ProfileRoutingModule {}
+export class ProfileRoutingModule {
+}

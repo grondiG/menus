@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import {loadProfile, loadProfileSuccess, logout, register} from './profile.actions';
+import { loadProfile, loadProfileSuccess, logout, register } from './profile.actions';
 
 export interface ProfileState {
   loading: boolean;
@@ -22,7 +22,7 @@ export const profileFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(loadProfile, (state) => ({ ...state, loading: true, isLogged: true })),
-    on(loadProfileSuccess, (state, {response}) => ({ ...state, ...response})),
+    on(loadProfileSuccess, (state, { response }) => ({ ...state, ...response })),
     on(logout, (state) => ({ ...state, data: null, isLogged: false, token: null })),
     on(register, (state) => ({ ...state, loading: true })),
   ),

@@ -10,6 +10,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { ProfileEffects } from "./store/profile/profile.effects";
 import { appReducers } from "./app.store";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,10 +22,11 @@ import { appReducers } from "./app.store";
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([ProfileEffects]),
+    EffectsModule.forRoot([ ProfileEffects ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

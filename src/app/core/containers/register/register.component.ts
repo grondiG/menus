@@ -1,26 +1,26 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ModelFormGroup } from "../../types/form";
-import { RegisterData } from "../../models/register-data";
-import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
-import { passwordValidator } from "../../validators/password";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Store } from "@ngrx/store";
 import { RouterLink } from "@angular/router";
 import { NgStyle } from "@angular/common";
-import {Store} from "@ngrx/store";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
+import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
+import { passwordValidator } from "../../validators/password";
+import { RegisterData } from "../../models/register-data";
+import { ModelFormGroup } from "../../types/form";
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PreventDefaultDirective,
     ReactiveFormsModule,
     RouterLink,
     NgStyle
   ],
-    standalone: true
+  standalone: true
 })
 export class RegisterComponent {
   private store: Store = inject(Store);
@@ -35,7 +35,6 @@ export class RegisterComponent {
   }, confirmPasswordValidator)
 
   register(): void {
-    console.log(this.registerData.value);
     this.store.dispatch({type: "[Profile] Register", data: this.registerData.value});
   }
 

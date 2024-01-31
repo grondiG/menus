@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import * as profileAction from '../../../store/profile/profile.actions';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { LoginData } from '../../models/login-data';
 import { ModelFormGroup } from '../../types/form';
-import { Store } from '@ngrx/store';
-import * as profileAction from '../../../store/profile/profile.actions';
 
 @Component({
   selector: 'app-login',
