@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RouterData } from '../../models/router-data.model';
 import { ROUTER_DATA } from '../../../app.config';
 import { profileIsLoggedSelector } from '../../../store/profile/profile.selectors';
+import * as profileActions from '../../../store/profile/profile.actions';
 
 export interface Route {
   path: string;
@@ -23,6 +24,6 @@ export class HeaderComponent {
   isLogged$: Observable<boolean> = this.store.select(profileIsLoggedSelector);
 
   logout(): void {
-
+    this.store.dispatch(profileActions.logout());
   }
 }

@@ -19,18 +19,6 @@ export class ProfileEffects {
       tap(console.log),
       map((response: ProfileState) => profileActions.loadProfileSuccess({ response })),
       catchError((error: HttpErrorResponse) => of(profileActions.loadProfileError({ error }))),
-      // map(data => ({
-      //   type: '[Profile] Load Profile Success', payload: {
-      //     data: data.data,
-      //     loading: false,
-      //     isLogged: true,
-      //     token: data.token
-      //   }
-      // })),
-      // tap(data => {
-      //   this.profileService.addTokenToLocalStorage(data.payload.token);
-      // }),
-      // catchError(() => EMPTY)
     ))),
   );
 
@@ -43,25 +31,15 @@ export class ProfileEffects {
     ofType(profileActions.addTokenToLocalStorage),
     tap((action) => {
       this.profileService.addTokenToLocalStorage(action.response.token);
-    })
+      this.profileService.navigateToProfile();
+    }),
   ), { dispatch: false });
 
   register$ = createEffect(() => this.actions$.pipe(
     ofType(profileActions.register),
-    exhaustMap(({data}) => this.profileService.register(data).pipe(
-      map(data => ({
-        type: '[Profile] Load Profile Success', payload: {
-          data: data.data,
-          loading: false,
-          isLogged: true,
-          token: data.token
-        }
-      })),
-      tap(data => {
-        this.profileService.addTokenToLocalStorage(data.payload.token);
-      }),
-      catchError(() => EMPTY)
-    )),
+    tap(console.log),
+    map((response: ProfileState) => profileActions.loadProfileSuccess({ response })),
+    catchError((error: HttpErrorResponse) => of(profileActions.loadProfileError({ error })))
   ));
 
   logout$ = createEffect(() => this.actions$.pipe(

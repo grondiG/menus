@@ -19,7 +19,6 @@ export const loadProfileSuccess = createAction(ProfileActionTypes.LoadProfileSuc
 export const loadProfileError = createAction(ProfileActionTypes.LoadProfileFail, props<{ error: HttpErrorResponse }>());
 export const logout = createAction(ProfileActionTypes.Logout);
 export const addTokenToLocalStorage = createAction(ProfileActionTypes.AddTokenToLocalStorage, props<{ response: ProfileState }>());
-
 // export const profileApiActions = createActionGroup({
 //   source: '[Profile]',
 //   events: {

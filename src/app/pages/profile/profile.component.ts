@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { profileIsLoggedSelector } from "../../store/profile/profile.selectors";
 import { Observable } from "rxjs";
 import { AsyncPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from "@angular/common";
-import { logout } from "../../store/profile/profile.actions";
+import * as profileActions from "../../store/profile/profile.actions";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -25,6 +25,6 @@ export class ProfileComponent {
   isLogged$: Observable<boolean> = this.store.select(profileIsLoggedSelector);
 
   logout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(profileActions.logout());
   }
 }

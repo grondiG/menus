@@ -3,6 +3,7 @@ import { ProfileComponent } from "./profile.component";
 import { RegisterComponent } from "../../core/containers/register/register.component";
 import { LoginComponent } from "../../core/containers/login/login.component";
 import { NgModule } from "@angular/core";
+import {skipLoginGuard} from "../../core/guards/skip-login.guard";
 
 const routes: Routes = [
   {
@@ -11,11 +12,13 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [skipLoginGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [skipLoginGuard]
   }
 ];
 

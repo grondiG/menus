@@ -4,12 +4,14 @@ import { Observable } from "rxjs";
 import { RegisterData } from "../../models/register-data";
 import { HttpClient } from "@angular/common/http";
 import { ProfileState } from '../../../store/profile/profile.reducer';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
   private http: HttpClient = inject(HttpClient);
+  private router: Router = inject(Router);
 
   constructor() {
   }
@@ -17,13 +19,16 @@ export class ProfileService {
   login(credentials: LoginData): Observable<ProfileState> {
     return this.http.post<ProfileState>('/api/login', credentials);
   }
-  // TODO provide type
-  register(credentials: RegisterData): Observable<any> {
-    return this.http.post('/api/register', credentials);
+  register(credentials: RegisterData): Observable<ProfileState> {
+    return this.http.post<ProfileState>('/api/register', credentials);
   }
 
   addTokenToLocalStorage(token: string): void {
     localStorage.setItem('token', token);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
   }
 
   removeTokenFromLocalStorage(): void {

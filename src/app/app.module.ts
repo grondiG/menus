@@ -8,6 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './pages/home/home.component';
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { ProfileEffects } from "./store/profile/profile.effects";
+import { appReducers } from "./app.store";
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,8 +20,8 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    StoreModule.forRoot(),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([ProfileEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
