@@ -1,3 +1,4 @@
+<ng-container *ngIf="{ isLogged: isLogged$ | async } as data">
   <div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
       <div class="col-4 col-md-4 h-100">
@@ -10,24 +11,21 @@
           <ul class="header__menu__list text-light d-flex justify-content-center gap-3 w-100 p-0 mb-2">
             <li
               class="header__menu__list-item"
-              *ngFor="let route of routes"
+              *ngFor="let route of routes | filterRoute | async"
               [routerLink]="route.path"
               [routerLinkActive]="'active'"
               [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
             >
-              <span>
-                {{ route.title | titlecase }}
-              </span>
+              <span>{{ route.title | titlecase }}</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="col-2 col-md-4 h-100">
-        <ng-container *ngIf="isLogged$ | async">
-          <div class="header__auth d-flex align-items-center justify-content-end h-100">
-            <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-          </div>
-        </ng-container>
+        <div *ngIf="data.isLogged" class="header__auth d-flex align-items-center justify-content-end h-100">
+          <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </div>
+</ng-container>

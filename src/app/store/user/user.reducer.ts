@@ -1,7 +1,8 @@
-import { createFeature, createReducer } from '@ngrx/store';
+import { createFeature, createReducer, createSelector } from '@ngrx/store';
+import { User } from '../../core/models/user';
 
 export interface UserState {
-  user: any|null;
+  user: User|null;
 }
 
 export const initialState: UserState = {
@@ -24,3 +25,5 @@ export const {
   reducer,
   selectUser,
 } = userFeature;
+
+export const isUserLogged = createSelector(selectUser, (user: User|null) => !!user);

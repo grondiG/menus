@@ -1,4 +1,6 @@
+import { RoutePath, RouteTitle } from '../../app.config';
+
 export interface RouterData {
-  path: string,
-  title: string
+  path: RoutePath,
+  title: RouteTitle,
 }

@@ -6,20 +6,22 @@ import { RestaurantCardComponent } from "./components/restaurant-card/restaurant
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AsyncPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from "@angular/common";
 import { GetCurrentPageByUrlPipe } from "./pipes/get-current-page-by-url/get-current-page-by-url.pipe";
+import { FilterRoutePipe } from './pipes/filter-route.pipe';
 
 @NgModule({
-    imports: [
-        HttpClientModule,
-        RestaurantCardComponent,
-        RouterLink,
-        NgForOf,
-        AsyncPipe,
-        GetCurrentPageByUrlPipe,
-        NgClass,
-        NgIf,
-        RouterLinkActive,
-        TitleCasePipe
-    ],
+  imports: [
+    HttpClientModule,
+    RestaurantCardComponent,
+    RouterLink,
+    NgForOf,
+    AsyncPipe,
+    GetCurrentPageByUrlPipe,
+    NgClass,
+    NgIf,
+    RouterLinkActive,
+    TitleCasePipe,
+    FilterRoutePipe
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,
@@ -29,4 +31,5 @@ import { GetCurrentPageByUrlPipe } from "./pipes/get-current-page-by-url/get-cur
     FooterComponent,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

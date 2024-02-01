@@ -1,5 +1,6 @@
-import { RouterData } from "./core/models/router-data.model";
-import { InjectionToken } from "@angular/core";
+import { RouterData } from './core/models/router-data.model';
+import { InjectionToken } from '@angular/core';
+import { ValueOf } from './core/types/value-of.type';
 
 
 export const RoutePath = {
@@ -9,6 +10,8 @@ export const RoutePath = {
   PROFILE: 'profile',
 } as const;
 
+export type RoutePath = ValueOf<typeof RoutePath>;
+
 export const RouteTitle = {
   HOME: 'Home',
   RESTAURANTS: 'Restaurants',
@@ -16,10 +19,12 @@ export const RouteTitle = {
   PROFILE: 'Profile',
 } as const;
 
+export type RouteTitle = ValueOf<typeof RouteTitle>;
+
 const routerData: RouterData[] = [
   {
     path: RoutePath.HOME,
-    title: RouteTitle.HOME
+    title: RouteTitle.HOME,
   },
   {
     path: RoutePath.RESTAURANTS,
