@@ -9,6 +9,6 @@ export const profileSelector = createSelector(
 );
 
 export const profileIsLoggedSelector = createSelector(
-    profileFeatureSelector,
-    (state) => !!state?.isLogged
+  profileFeatureSelector,
+  (state) => !!state?.isLogged
 );

@@ -25,7 +25,7 @@ export const routes: Routes = [
     path: RoutePath.ORDERS,
     component: HomeComponent,
     title: RouteTitle.ORDERS,
-    canActivate: [authenticationGuard]
+    canActivate: [ authenticationGuard ]
   },
   {
     path: RoutePath.PROFILE,
@@ -39,10 +39,10 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
+  imports: [ RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules
-  })],
-  exports: [RouterModule]
+  }) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule {
 }

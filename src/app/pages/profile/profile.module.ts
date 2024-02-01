@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { StoreModule } from "@ngrx/store";
 import { profileFeature } from "../../store/profile/profile.reducer";
-import {EffectsModule} from "@ngrx/effects";
-import {ProfileEffects} from "../../store/profile/profile.effects";
-
+import { EffectsModule } from "@ngrx/effects";
+import { ProfileEffects } from "../../store/profile/profile.effects";
 
 
 @NgModule({
@@ -18,4 +17,5 @@ import {ProfileEffects} from "../../store/profile/profile.effects";
   ],
   exports: [StoreModule]
 })
-export class ProfileModule { }
+export class ProfileModule {
+}

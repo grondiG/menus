@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { profileIsLoggedSelector } from "../../store/profile/profile.selectors";
-import { Observable } from "rxjs";
 import { AsyncPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from "@angular/common";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { profileIsLoggedSelector } from "../../store/profile/profile.selectors";
 import * as profileActions from "../../store/profile/profile.actions";
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

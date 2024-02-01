@@ -1,4 +1,4 @@
-import {Directive, HostListener} from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appPreventDefault]',
@@ -10,6 +10,7 @@ export class PreventDefaultDirective {
     event.preventDefault();
   }
 
-  constructor() { }
+  constructor() {
+  }
 
 }
