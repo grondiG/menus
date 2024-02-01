@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
+  <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2 py-2">
     <h2 class="text-center">Register</h2>
     <form
       class="col-md-6 col-12 form-group"
@@ -15,6 +15,9 @@
         placeholder="Login"
         formControlName="login"
       >
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
+        Login is required
+      </p>
       <label for="email">Email</label>
       <input
         type="email"
@@ -23,6 +26,9 @@
         placeholder="Email"
         formControlName="mail"
       />
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('mail')">
+        Email is invalid
+      </p>
       <label for="restaurantName">Restaurant Name</label>
       <input
         type="text"
@@ -31,6 +37,9 @@
         placeholder="Restaurant Name"
         formControlName="restaurantName"
       />
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('restaurantName')">
+        Restaurant Name is required
+      </p>
       <label for="address">Address</label>
       <input
         type="text"
@@ -39,6 +48,9 @@
         placeholder="Address"
         formControlName="restaurantAddress"
       />
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('restaurantAddress')">
+        Address is required
+      </p>
       <label for="password">Password</label>
       <input
         type="password"
@@ -47,6 +59,9 @@
         placeholder="Password"
         formControlName="password"
       >
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
+        Password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character
+      </p>
       <label for="confirmPassword">Confirm Password</label>
       <input
         type="password"
@@ -55,6 +70,9 @@
         placeholder="Confirm Password"
         formControlName="confirmPassword"
       />
+      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('confirmPassword')">
+        Passwords do not match
+      </p>
       <div class="d-flex align-items-center gap-3">
         <button
           type="submit"

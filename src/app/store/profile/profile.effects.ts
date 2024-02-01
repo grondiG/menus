@@ -31,8 +31,15 @@ export class ProfileEffects {
     ofType(profileActions.addTokenToLocalStorage),
     tap((action) => {
       this.profileService.addTokenToLocalStorage(action.response.token);
-      this.profileService.navigateToProfile();
     }),
+    map(() => profileActions.navigateToProfile()),
+  ));
+
+  navigateToProfile$ = createEffect(() => this.actions$.pipe(
+    ofType(profileActions.navigateToProfile),
+    tap(() => {
+      this.profileService.navigateToProfile();
+    })
   ), { dispatch: false });
 
   register$ = createEffect(() => this.actions$.pipe(

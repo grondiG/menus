@@ -6,7 +6,7 @@ import { RegisterData } from "../../models/register-data";
 import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
 import { passwordValidator } from "../../validators/password";
 import { RouterLink } from "@angular/router";
-import { NgStyle } from "@angular/common";
+import {NgIf, NgStyle} from "@angular/common";
 import {Store} from "@ngrx/store";
 
 @Component({
@@ -18,7 +18,8 @@ import {Store} from "@ngrx/store";
     PreventDefaultDirective,
     ReactiveFormsModule,
     RouterLink,
-    NgStyle
+    NgStyle,
+    NgIf
   ],
     standalone: true
 })
@@ -37,6 +38,13 @@ export class RegisterComponent {
   register(): void {
     console.log(this.registerData.value);
     this.store.dispatch({type: "[Profile] Register", data: this.registerData.value});
+  }
+
+  checkIfInputIsInvalid(inputName: string): boolean {
+    if(inputName === 'confirmPassword' && this.registerData.controls[inputName].touched){
+      return this.registerData.hasError('passwordMismatch');
+    }
+    return this.registerData.controls[inputName].invalid && this.registerData.controls[inputName].touched;
   }
 
 }

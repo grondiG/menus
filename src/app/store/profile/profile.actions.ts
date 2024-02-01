@@ -11,6 +11,7 @@ export enum ProfileActionTypes {
   LoadProfileFail = '[Profile] Load Profile Fail',
   Logout = '[Profile] Logout',
   AddTokenToLocalStorage = '[Profile] Add Token To Local Storage',
+  NavigateToProfile = '[Profile] Navigate To Profile'
 }
 
 export const register = createAction(ProfileActionTypes.Register, props<{ data: RegisterData }>());
@@ -19,6 +20,7 @@ export const loadProfileSuccess = createAction(ProfileActionTypes.LoadProfileSuc
 export const loadProfileError = createAction(ProfileActionTypes.LoadProfileFail, props<{ error: HttpErrorResponse }>());
 export const logout = createAction(ProfileActionTypes.Logout);
 export const addTokenToLocalStorage = createAction(ProfileActionTypes.AddTokenToLocalStorage, props<{ response: ProfileState }>());
+export const navigateToProfile = createAction(ProfileActionTypes.NavigateToProfile);
 // export const profileApiActions = createActionGroup({
 //   source: '[Profile]',
 //   events: {

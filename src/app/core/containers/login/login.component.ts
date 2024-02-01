@@ -6,6 +6,7 @@ import { LoginData } from '../../models/login-data';
 import { ModelFormGroup } from '../../types/form';
 import { Store } from '@ngrx/store';
 import * as profileAction from '../../../store/profile/profile.actions';
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import * as profileAction from '../../../store/profile/profile.actions';
   imports: [
     PreventDefaultDirective,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   standalone: true
 
@@ -36,5 +38,9 @@ export class LoginComponent {
 
     const data: LoginData = this.loginForm.getRawValue();
     this.store.dispatch(profileAction.loadProfile({ data }));
+  }
+
+  checkIfInputIsInvalid(inputName: string): boolean {
+    return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
   }
 }
