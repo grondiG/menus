@@ -1,13 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
+import { RouterLink } from "@angular/router";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { NgIf, NgStyle } from "@angular/common";
+import { Store } from "@ngrx/store";
+import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
 import { ModelFormGroup } from "../../types/form";
 import { RegisterData } from "../../models/register-data";
 import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
 import { passwordValidator } from "../../validators/password";
-import { RouterLink } from "@angular/router";
-import {NgIf, NgStyle} from "@angular/common";
-import {Store} from "@ngrx/store";
 
 @Component({
     selector: 'app-register',
