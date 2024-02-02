@@ -6,7 +6,7 @@ export const skipLoginGuard: CanActivateFn = (route, state) => {
 
   const token = localStorage.getItem('token');
   if (token) {
-    router.navigate(['/profile']);
+    router.navigate(['/user']);
     return false;
   } else {
     return true;

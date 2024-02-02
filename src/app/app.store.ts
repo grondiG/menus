@@ -1,10 +1,10 @@
 import { ActionReducerMap } from '@ngrx/store';
 import * as fromUser from './store/user/user.reducer';
-import * as fromProfile from './store/profile/profile.reducer';
+import * as fromProfile from './store/user/user.reducer';
 
 export interface GlobalState {
   user: fromUser.UserState;
-  profile: fromProfile.ProfileState;
+  profile: fromProfile.UserState;
 }
 
 export const initialAppState: GlobalState = {

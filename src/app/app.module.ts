@@ -8,8 +8,13 @@ import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './pages/home/home.component';
 import { EffectsModule } from "@ngrx/effects";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { ProfileEffects } from "./store/profile/profile.effects";
+import { UserEffects } from "./store/user/user.effects";
 import { appReducers } from "./app.store";
+import { ToastrModule } from "ngx-toastr";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { authorizationInterceptor } from "./core/interceptors/authorization.interceptor";
+import { LoadingComponent } from "./core/components/loading/loading/loading.component";
 
 @NgModule({
   declarations: [
@@ -22,10 +27,17 @@ import { appReducers } from "./app.store";
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([ ProfileEffects ]),
+    EffectsModule.forRoot([ UserEffects ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    LoadingComponent
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(
+      withInterceptors([authorizationInterceptor])
+    )
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

@@ -6,7 +6,8 @@ import { NgIf } from "@angular/common";
 import { Store } from '@ngrx/store';
 import { LoginData } from '../../models/login-data';
 import { ModelFormGroup } from '../../types/form';
-import * as profileAction from '../../../store/profile/profile.actions';
+import * as profileAction from '../../../store/user/user.actions';
+import { CoreModule } from "../../core.module";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import * as profileAction from '../../../store/profile/profile.actions';
     PreventDefaultDirective,
     RouterLink,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    CoreModule
   ],
   standalone: true
 
@@ -37,7 +39,7 @@ export class LoginComponent {
     }
 
     const data: LoginData = this.loginForm.getRawValue();
-    this.store.dispatch(profileAction.loadProfile({ data }));
+    this.store.dispatch(profileAction.loadUser({ data }));
   }
 
   checkIfInputIsInvalid(inputName: string): boolean {

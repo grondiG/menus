@@ -1,4 +1,5 @@
-  <div class="header container-fluid w-100 bg-dark m-0">
+<ng-container *ngIf="{ isLogged: isLogged$ | async } as data">
+<div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
       <div class="col-4 col-md-4 h-100">
         <div class="header__logo d-flex align-items-center h-100 px-2">
@@ -8,17 +9,51 @@
       <div class="col-4 col-md-4 h-100">
         <div class="header__menu d-flex align-items-center justify-content-end h-100">
           <ul class="header__menu__list text-light d-flex justify-content-center gap-3 w-100 p-0 mb-2">
-            <li
-              class="header__menu__list-item"
-              *ngFor="let route of routes"
-              [routerLink]="route.path"
+<!--            <li-->
+<!--              class="header__menu__list-item"-->
+<!--              *ngFor="let route of routes"-->
+<!--              [routerLink]="route.path"-->
+<!--              [routerLinkActive]="'active'"-->
+<!--              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"-->
+<!--            >-->
+<!--              <span>-->
+<!--                {{ route.title | titlecase }}-->
+<!--              </span>-->
+<!--            </li>-->
+            <li class="header__menu__list-item">
+              <a
+                [routerLink]="RoutePath.HOME"
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
+                class="text-light">
+                {{ RouteTitle.HOME | titlecase }}
+              </a>
+            </li>
+            <li class="header__menu__list-item">
+              <a
+                [routerLink]="RoutePath.RESTAURANTS"
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
+                class="text-light">
+                {{ RouteTitle.RESTAURANTS | titlecase }}
+              </a>
+            <li class="header__menu__list-item" *ngIf="data.isLogged">
+              <a
+                [routerLink]="RoutePath.ORDERS"
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
+                class="text-light">
+                {{ RouteTitle.ORDERS | titlecase }}
+              </a>
+            </li>
+            <li class="header__menu__list-item">
+            <a
+              [routerLink]="RoutePath.PROFILE"
               [routerLinkActive]="'active'"
               [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-            >
-              <span>
-                {{ route.title | titlecase }}
-              </span>
-            </li>
+              class="text-light">
+              {{ RouteTitle.PROFILE | titlecase }}
+            </a>
           </ul>
         </div>
       </div>
@@ -31,3 +66,4 @@
       </div>
     </div>
   </div>
+</ng-container>

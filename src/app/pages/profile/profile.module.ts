@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { StoreModule } from "@ngrx/store";
-import { profileFeature } from "../../store/profile/profile.reducer";
+import { userFeature } from "../../store/user/user.reducer";
 import { EffectsModule } from "@ngrx/effects";
-import { ProfileEffects } from "../../store/profile/profile.effects";
+import { UserEffects } from "../../store/user/user.effects";
 
 
 @NgModule({
@@ -12,8 +12,8 @@ import { ProfileEffects } from "../../store/profile/profile.effects";
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    StoreModule.forFeature(profileFeature),
-    EffectsModule.forFeature([ProfileEffects])
+    StoreModule.forFeature(userFeature),
+    EffectsModule.forFeature([UserEffects])
   ],
   exports: [StoreModule]
 })

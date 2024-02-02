@@ -3,25 +3,25 @@ import { LoginData } from "../../models/login-data";
 import { Observable } from "rxjs";
 import { RegisterData } from "../../models/register-data";
 import { HttpClient } from "@angular/common/http";
-import { ProfileState } from '../../../store/profile/profile.reducer';
+import { UserState } from '../../../store/user/user.reducer';
 import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class UserService {
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
 
   constructor() {
   }
 
-  login(credentials: LoginData): Observable<ProfileState> {
-    return this.http.post<ProfileState>('/api/login', credentials);
+  login(credentials: LoginData): Observable<UserState> {
+    return this.http.post<UserState>('/api/login', credentials);
   }
 
-  register(credentials: RegisterData): Observable<ProfileState> {
-    return this.http.post<ProfileState>('/api/register', credentials);
+  register(credentials: RegisterData): Observable<UserState> {
+    return this.http.post<UserState>('/api/register', credentials);
   }
 
   addTokenToLocalStorage(token: string): void {
@@ -34,5 +34,9 @@ export class ProfileService {
 
   removeTokenFromLocalStorage(): void {
     localStorage.removeItem('token');
+  }
+
+  isTokenValid(): Observable<UserState> {
+    return this.http.get<UserState>('/api/isTokenValid');
   }
 }
