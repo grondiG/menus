@@ -2,9 +2,9 @@ import { CanActivateFn, Router } from '@angular/router';
 import { inject } from "@angular/core";
 
 export const skipLoginGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
+  const router: Router = inject(Router);
 
-  const token = localStorage.getItem('token');
+  const token: string = localStorage.getItem('token');
   if (token) {
     router.navigate(['/user']);
     return false;

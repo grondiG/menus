@@ -20,40 +20,32 @@
 <!--                {{ route.title | titlecase }}-->
 <!--              </span>-->
 <!--            </li>-->
-            <li class="header__menu__list-item">
-              <a
+            <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.HOME"
                 [routerLinkActive]="'active'"
-                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-                class="text-light">
-                {{ RouteTitle.HOME | titlecase }}
-              </a>
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
+              <span>{{ RouteTitle.HOME | titlecase }}</span>
             </li>
-            <li class="header__menu__list-item">
-              <a
+            <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.RESTAURANTS"
                 [routerLinkActive]="'active'"
-                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-                class="text-light">
-                {{ RouteTitle.RESTAURANTS | titlecase }}
-              </a>
-            <li class="header__menu__list-item" *ngIf="data.isLogged">
-              <a
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
+              <span>{{ RouteTitle.RESTAURANTS | titlecase }}</span>
+            </li>
+            <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.ORDERS"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-                class="text-light">
-                {{ RouteTitle.ORDERS | titlecase }}
-              </a>
+                *ngIf="data.isLogged"
+            >
+              <span>{{ RouteTitle.ORDERS | titlecase }}</span>
             </li>
-            <li class="header__menu__list-item">
-            <a
-              [routerLink]="RoutePath.PROFILE"
-              [routerLinkActive]="'active'"
-              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
-              class="text-light">
-              {{ RouteTitle.PROFILE | titlecase }}
-            </a>
+            <li class="header__menu__list-item text-light"
+                [routerLink]="RoutePath.PROFILE"
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
+              <span>{{ RouteTitle.PROFILE | titlecase }}</span>
+            </li>
           </ul>
         </div>
       </div>

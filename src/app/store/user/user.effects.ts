@@ -15,11 +15,15 @@ export class UserEffects {
   private profileService: UserService = inject(UserService);
   private toastr: any = inject(ToastrService);
 
+  private wasTokenValid: boolean = false;
+
   init$ = createEffect(() => this.actions$.pipe(
     ofType(ROOT_EFFECTS_INIT),
     switchMap(() => this.profileService.isTokenValid().pipe(
-      tap(console.log),
-      map((response: UserState) => userActions.loadUserSuccess({ response })),
+      map((response: UserState) => {
+        this.wasTokenValid = true;
+        return userActions.loadUserSuccess({ response });
+      }),
       catchError((error: HttpErrorResponse) => of(userActions.logout())),
     )),
   ));
@@ -56,7 +60,9 @@ export class UserEffects {
   navigateToProfile$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.navigateToProfile),
     tap(() => {
-      this.profileService.navigateToProfile();
+      if(!this.wasTokenValid) {
+        this.profileService.navigateToProfile();
+      }
     })
   ), { dispatch: false });
 

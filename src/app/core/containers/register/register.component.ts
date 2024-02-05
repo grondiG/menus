@@ -36,7 +36,6 @@ export class RegisterComponent {
   }, confirmPasswordValidator)
 
   register(): void {
-    console.log(this.registerData.value);
     this.store.dispatch({type: "[Profile] Register", data: this.registerData.value});
   }
 

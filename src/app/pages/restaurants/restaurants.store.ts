@@ -25,24 +25,24 @@ export class RestaurantsStore extends ComponentStore<RestaurantsState> {
     super(defaultState);
   }
 
-  readonly restaurants$: Observable<Restaurant[]> = this.select(state => state.restaurants);
-  readonly restaurant$: Observable<Restaurant> = this.select(state => state.restaurant);
+  readonly restaurants$: Observable<Restaurant[]> = this.select((state: RestaurantsState) => state.restaurants);
+  readonly restaurant$: Observable<Restaurant> = this.select((state: RestaurantsState) => state.restaurant);
 
-  readonly setRestaurants = this.updater((state, restaurants: Restaurant[]) => {
+  readonly setRestaurants = this.updater((state: RestaurantsState, restaurants: Restaurant[]) => {
     return {
       ...state,
       restaurants
     };
   });
 
-  readonly setRestaurant = this.updater((state, restaurant: Restaurant) => {
+  readonly setRestaurant = this.updater((state: RestaurantsState, restaurant: Restaurant) => {
     return {
       ...state,
       restaurant
     };
   });
 
-  readonly loadRestaurants = this.effect<void>((trigger$) =>
+  readonly loadRestaurants = this.effect<void>((trigger$: Observable<void>) =>
     trigger$.pipe(
       exhaustMap(() => this.restaurantsService.getRestaurants().pipe(
         tapResponse({
@@ -53,7 +53,7 @@ export class RestaurantsStore extends ComponentStore<RestaurantsState> {
     ),
   );
 
-  readonly loadRestaurant = this.effect<void>((trigger$) =>
+  readonly loadRestaurant = this.effect<void>((trigger$: Observable<void>) =>
     trigger$.pipe(
       exhaustMap(() => this.restaurantsService.getRestaurant(this.route.snapshot.params['id']).pipe(
         tapResponse({
@@ -64,7 +64,7 @@ export class RestaurantsStore extends ComponentStore<RestaurantsState> {
     ),
   );
 
-  readonly searchRestaurants = this.effect<string>((searchValue$) =>
+  readonly searchRestaurants = this.effect<string>((searchValue$: Observable<string>) =>
     searchValue$.pipe(
       switchMap((searchValue) => this.restaurantsService.searchRestaurants(searchValue).pipe(
         tapResponse({

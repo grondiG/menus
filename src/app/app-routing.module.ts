@@ -4,6 +4,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { RoutePath, RouteTitle } from "./app.config";
 import { authenticationGuard } from "./core/guards/authentication.guard";
+import { OrdersComponent } from "./pages/orders/orders.component";
 
 export const routes: Routes = [
   {
@@ -23,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: RoutePath.ORDERS,
-    component: HomeComponent,
+    component: OrdersComponent,
     title: RouteTitle.ORDERS,
     canActivate: [ authenticationGuard ]
   },

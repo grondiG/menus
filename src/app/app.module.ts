@@ -15,12 +15,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { authorizationInterceptor } from "./core/interceptors/authorization.interceptor";
 import { LoadingComponent } from "./core/components/loading/loading/loading.component";
+import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
