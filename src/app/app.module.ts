@@ -1,20 +1,20 @@
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { isDevMode, NgModule } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ToastrModule } from 'ngx-toastr';
+import { authorizationInterceptor } from './core/interceptors/authorization.interceptor';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from "./core/core.module";
-import { StoreModule } from '@ngrx/store';
+import { CoreModule } from './core/core.module';
 import { HomeComponent } from './pages/home/home.component';
-import { EffectsModule } from "@ngrx/effects";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { UserEffects } from "./store/user/user.effects";
-import { appReducers } from "./app.store";
-import { ToastrModule } from "ngx-toastr";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { provideHttpClient, withInterceptors } from "@angular/common/http";
-import { authorizationInterceptor } from "./core/interceptors/authorization.interceptor";
-import { LoadingComponent } from "./core/components/loading/loading/loading.component";
+import { UserEffects } from './store/user/user.effects';
+import { appReducers } from './app.store';
+import { LoadingComponent } from './core/components/loading/loading/loading.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([ UserEffects ]),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
@@ -40,7 +40,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
       withInterceptors([authorizationInterceptor])
     )
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -1,10 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { LoginData } from "../../models/login-data";
-import { Observable } from "rxjs";
-import { RegisterData } from "../../models/register-data";
-import { HttpClient } from "@angular/common/http";
-import { UserState } from '../../../store/user/user.reducer';
-import { Router } from "@angular/router";
+import { LoginData, ResponseDataDto } from '../../models/login-data';
+import { Observable } from 'rxjs';
+import { RegisterData } from '../../models/register-data';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +15,12 @@ export class UserService {
   constructor() {
   }
 
-  login(credentials: LoginData): Observable<UserState> {
-    return this.http.post<UserState>('/api/login', credentials);
+  login(credentials: LoginData): Observable<ResponseDataDto> {
+    return this.http.post<ResponseDataDto>('/api/login', credentials);
   }
 
-  register(credentials: RegisterData): Observable<UserState> {
-    return this.http.post<UserState>('/api/register', credentials);
+  register(credentials: RegisterData): Observable<ResponseDataDto> {
+    return this.http.post<ResponseDataDto>('/api/register', credentials);
   }
 
   addTokenToLocalStorage(token: string): void {
@@ -36,7 +35,7 @@ export class UserService {
     localStorage.removeItem('token');
   }
 
-  isTokenValid(): Observable<UserState> {
-    return this.http.get<UserState>('/api/isTokenValid');
+  isTokenValid(): Observable<ResponseDataDto> {
+    return this.http.get<ResponseDataDto>('/api/isTokenValid');
   }
 }

@@ -1,9 +1,11 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { loadUser, loadUserError, loadUserSuccess, logout, register } from './user.actions';
+import { createFeature, createReducer, on } from '@ngrx/store'
+import * as userActions from './user.actions';
+import { UserUtils } from './user.utils';
+import { UserData } from '../../core/models/login-data';
 
 export interface UserState {
   loading: boolean;
-  data: unknown;
+  data: UserData;
   isLogged: boolean;
   token: string;
 }
@@ -21,11 +23,25 @@ export const userFeature = createFeature({
   name: userFeatureKey,
   reducer: createReducer(
     initialState,
-    on(loadUser, (state) => ({ ...state, loading: true, isLogged: false })),
-    on(loadUserSuccess, (state, { response }) => ({ ...state, ...response, isLogged: true, loading: false })),
-    on(loadUserError, (state) => ({ ...state, loading: false, isLogged: false })),
-    on(logout, (state) => ({ ...state, data: null, isLogged: false, token: null })),
-    on(register, (state) => ({ ...state, loading: true })),
+    on(userActions.loadUser, (state) => ({ ...state, loading: true, isLogged: false })),
+    on(
+      userActions.loadUserSuccess,
+      userActions.checkTokenSuccess,
+      (state, action) => ({
+        ...state,
+        isLogged: true,
+        loading: false,
+        data: UserUtils.mapUserDataDtoToUserData(action.response.data),
+        token: action.response.token
+      })
+    ),
+    on(userActions.loadUserFail, (state) => ({ ...state, loading: false, isLogged: false })),
+    on(
+      userActions.logout,
+      userActions.checkTokenFail,
+      (state) => ({ ...state, data: null, isLogged: false, token: null })
+    ),
+    on(userActions.register, (state) => ({ ...state, loading: true })),
   ),
 });
 
