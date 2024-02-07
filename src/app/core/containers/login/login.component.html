@@ -1,43 +1,52 @@
-<div class="container">
-  <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
-    <h2 class="text-center">Login</h2>
-    <form
-      class="col-md-6 col-12 form-group"
-      appPreventDefault
-      [formGroup]="loginForm"
-      (submit)="login()"
-    >
-      <label for="login">Login</label>
-      <input
-        type="text"
-        class="form-control my-2"
-        id="login"
-        placeholder="Login"
-        formControlName="login"
+<ng-container *ngIf="{
+  error: error$ | async,
+  isLoading: isLoading$ | async
+  } as data">
+  <div class="container">
+    <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
+      <app-error-card [error]="data.error"></app-error-card>
+      <h2 class="text-center">Login</h2>
+      <form
+        class="col-md-6 col-12 form-group"
+        appPreventDefault
+        [formGroup]="loginForm"
+        (submit)="login()"
       >
-      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
-        Login is required
-      </p>
-      <label for="password">Password</label>
-      <input
-        type="password"
-        class="form-control my-2"
-        id="password"
-        placeholder="Password"
-        formControlName="password"
-      >
-      <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
-        Password is required
-      </p>
-      <div class="d-flex align-items-center gap-3">
-        <button
-          type="submit"
-          class="btn btn-primary mt-3 ml-4"
-          [disabled]="loginForm.invalid"
+        <label for="login">Login</label>
+        <input
+          type="text"
+          class="form-control my-2"
+          id="login"
+          placeholder="Login"
+          formControlName="login"
         >
-          Login</button>
-        <a [routerLink]="'../register'" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an account?</a>
-      </div>
-    </form>
+        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
+          Login is required
+        </p>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control my-2"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+        >
+        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
+          Password is required
+        </p>
+        <div class="d-flex align-items-center gap-3">
+          <button
+            type="submit"
+            class="btn btn-primary mt-3 ml-4"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+          <a [routerLink]="'../register'" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an
+            account?</a>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
+  <app-loading *ngIf="data.isLoading"></app-loading>
+</ng-container>

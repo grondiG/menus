@@ -1,0 +1,7 @@
+<div class="card text-white bg-danger mx-auto mb-4 w-50" *ngIf="error">
+  <div class="card-header">{{ error.status }}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ error.statusText }}</h5>
+    <p class="card-text">{{ error.error.message }}</p>
+  </div>
+</div>

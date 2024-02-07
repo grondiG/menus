@@ -31,6 +31,10 @@ export class UserService {
     this.router.navigate(['/profile']);
   }
 
+  navigateToLogin(): void {
+    this.router.navigate(['profile','login']);
+  }
+
   removeTokenFromLocalStorage(): void {
     localStorage.removeItem('token');
   }

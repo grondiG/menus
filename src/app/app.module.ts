@@ -30,7 +30,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
     CoreModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([UserEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: isDevMode() }),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     LoadingComponent

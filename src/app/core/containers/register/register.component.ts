@@ -1,13 +1,17 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { NgIf, NgStyle } from "@angular/common";
+import { AsyncPipe, NgIf, NgStyle } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
 import { ModelFormGroup } from "../../types/form";
 import { RegisterData } from "../../models/register-data";
 import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
 import { passwordValidator } from "../../validators/password";
+import { userErrorSelector, userIsLoadingSelector } from "../../../store/user/user.selectors";
+import { CoreModule } from "../../core.module";
+import { Observable } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
     selector: 'app-register',
@@ -19,12 +23,16 @@ import { passwordValidator } from "../../validators/password";
     ReactiveFormsModule,
     RouterLink,
     NgStyle,
-    NgIf
+    NgIf,
+    CoreModule,
+    AsyncPipe
   ],
     standalone: true
 })
 export class RegisterComponent {
   private store: Store = inject(Store);
+  error$: Observable<HttpErrorResponse> = this.store.select(userErrorSelector);
+  isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
   registerData: ModelFormGroup<RegisterData> = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.minLength(3)]),

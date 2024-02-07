@@ -1,6 +1,3 @@
-<ng-container *ngIf="{ isLogged: isLoading$ | async } as data">
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
-  <app-loading *ngIf="data.isLogged"></app-loading>
-</ng-container>
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

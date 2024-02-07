@@ -5,7 +5,6 @@ import * as userActions from './user.actions';
 import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
-import { ToastrService } from 'ngx-toastr';
 import { ResponseDataDto } from '../../core/models/login-data';
 
 
@@ -13,24 +12,12 @@ import { ResponseDataDto } from '../../core/models/login-data';
 export class UserEffects {
   private actions$: Actions = inject(Actions);
   private userService: UserService = inject(UserService);
-  private toastrService: ToastrService = inject(ToastrService);
-
-  private wasTokenValid: boolean = false;
 
   init$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ROOT_EFFECTS_INIT),
     mergeMap(() => [
       userActions.checkToken(),
     ]),
-  ));
-
-  checkToken$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(userActions.checkToken),
-
-    switchMap(() => this.userService.isTokenValid().pipe(
-      map((response: ResponseDataDto) => userActions.checkTokenSuccess({ response })),
-      catchError((error: HttpErrorResponse) => of(userActions.checkTokenFail({ error }))),
-    )),
   ));
 
   login$ = createEffect(() => this.actions$.pipe(
@@ -48,10 +35,32 @@ export class UserEffects {
 
   loadUserFail$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.loadUserFail),
-    tap((action) => {
-      this.toastrService.error(action.error.message, 'Error');
-    }),
   ), { dispatch: false });
+
+  register$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(userActions.register),
+    tap(console.log),
+    map((response: ResponseDataDto) => userActions.loadUserSuccess({ response })),
+    catchError((error: HttpErrorResponse) => of(userActions.loadUserFail({ error })))
+  ));
+
+  registerSuccess$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(userActions.registerSuccess),
+    map((action) => userActions.addTokenToLocalStorage({ response: action.response })),
+  ));
+
+  registerFail$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(userActions.registerFail),
+  ), { dispatch: false });
+
+  checkToken$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(userActions.checkToken),
+
+    switchMap(() => this.userService.isTokenValid().pipe(
+      map((response: ResponseDataDto) => userActions.checkTokenSuccess({ response })),
+      catchError((error: HttpErrorResponse) => of(userActions.checkTokenFail({ error }))),
+    )),
+  ));
 
   addTokenToLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.addTokenToLocalStorage),
@@ -61,30 +70,27 @@ export class UserEffects {
     map(() => userActions.navigateToProfile()),
   ));
 
-  navigateToProfile$ = createEffect(() => this.actions$.pipe(
+  navigateToProfile$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.navigateToProfile),
     tap(() => {
-      // TODO remove
-      if(!this.wasTokenValid) {
         this.userService.navigateToProfile();
-      }
     })
   ), { dispatch: false });
 
-  register$ = createEffect(() => this.actions$.pipe(
-    ofType(userActions.register),
-    tap(console.log),
-    map((response: ResponseDataDto) => userActions.loadUserSuccess({ response })),
-    catchError((error: HttpErrorResponse) => of(userActions.loadUserFail({ error })))
-  ));
-
-  removeTokenCases$ = createEffect(() => this.actions$.pipe(
+  removeTokenCases$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(
       userActions.logout,
       userActions.checkTokenFail
     ),
     tap(() => {
       this.userService.removeTokenFromLocalStorage();
+    })
+  ), { dispatch: false });
+
+  redirectAfterLogout$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(userActions.logout),
+    tap(() => {
+      this.userService.navigateToLogin();
     })
   ), { dispatch: false });
 }

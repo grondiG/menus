@@ -17,3 +17,8 @@ export const userIsLoadingSelector = createSelector(
   userFeatureSelector,
   (state) => state?.loading
 );
+
+export const userErrorSelector = createSelector(
+  userFeatureSelector,
+  (state) => state?.error
+);
