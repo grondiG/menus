@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AsyncPipe, NgIf } from "@angular/common";
 import { Observable } from "rxjs";
 import { Restaurant } from "../../models/restaurant.model";
 import { RestaurantsStore } from "../../../pages/restaurants/restaurants.store";
-import { AsyncPipe, NgIf } from "@angular/common";
 import { CoreModule } from "../../core.module";
 import {
   RestaurantAccordionComponent

@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from "@angular/router";
-import { ProfileComponent } from "./profile.component";
-import { RegisterComponent } from "../../core/containers/register/register.component";
-import { LoginComponent } from "../../core/containers/login/login.component";
 import { NgModule } from "@angular/core";
 import { skipLoginGuard } from "../../core/guards/skip-login.guard";
+import { RegisterComponent } from "../../core/containers/register/register.component";
+import { LoginComponent } from "../../core/containers/login/login.component";
+import { ProfileComponent } from "./profile.component";
 
 const routes: Routes = [
   {

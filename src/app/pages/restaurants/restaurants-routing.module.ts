@@ -20,6 +20,7 @@ const routes: Routes = [
     RestaurantComponent,
     RestaurantsComponent,
   ],
-  exports: [RouterModule]
+  exports: [ RouterModule ]
 })
-export class RestaurantsRoutingModule {}
+export class RestaurantsRoutingModule {
+}

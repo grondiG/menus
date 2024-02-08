@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { ResponseDataDto } from '../../core/models/authentication';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
-import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Action } from '@ngrx/store';
-import { ResponseDataDto } from '../../core/models/login-data';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class UserEffects {
     ]),
   ));
 
-  login$ = createEffect(() => this.actions$.pipe(
+  login$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.loadUser),
     switchMap((action) => this.userService.login(action.data).pipe(
       map((response: ResponseDataDto) => userActions.loadUserSuccess({ response })),
@@ -39,9 +39,11 @@ export class UserEffects {
 
   register$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.register),
-    tap(console.log),
-    map((response: ResponseDataDto) => userActions.loadUserSuccess({ response })),
-    catchError((error: HttpErrorResponse) => of(userActions.loadUserFail({ error })))
+    switchMap((action) => this.userService.register(action.data)
+      .pipe(
+        map((response: ResponseDataDto) => userActions.registerSuccess({ response })),
+        catchError((error: HttpErrorResponse) => of(userActions.registerFail({ error })))
+      ))
   ));
 
   registerSuccess$: Observable<Action> = createEffect(() => this.actions$.pipe(

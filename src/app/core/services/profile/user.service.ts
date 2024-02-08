@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { LoginData, ResponseDataDto } from '../../models/login-data';
-import { Observable } from 'rxjs';
-import { RegisterData } from '../../models/register-data';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { LoginData, RegisterData, ResponseDataDto } from '../../models/authentication';
 
 @Injectable({
   providedIn: 'root'

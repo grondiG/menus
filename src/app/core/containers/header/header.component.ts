@@ -5,11 +5,6 @@ import { userIsLoggedSelector } from '../../../store/user/user.selectors';
 import * as profileActions from '../../../store/user/user.actions';
 import { RoutePath, RouteTitle } from "../../../app.config";
 
-export interface Route {
-  path: string;
-  title: string;
-}
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

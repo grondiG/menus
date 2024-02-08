@@ -1,4 +1,4 @@
-import { UserData, UserDataDto } from '../../core/models/login-data';
+import { UserData, UserDataDto } from '../../core/models/authentication';
 
 export class UserUtils {
   static mapUserDataDtoToUserData(dto: UserDataDto): UserData {

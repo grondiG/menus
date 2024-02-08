@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
-import { RouterLink } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpErrorResponse } from "@angular/common/http";
 import { AsyncPipe, NgIf } from "@angular/common";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Observable } from "rxjs";
 import { Store } from '@ngrx/store';
-import { LoginData } from '../../models/login-data';
 import { ModelFormGroup } from '../../types/form';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { LoginData } from '../../models/authentication';
 import * as profileAction from '../../../store/user/user.actions';
 import { CoreModule } from "../../core.module";
 import { userErrorSelector, userIsLoadingSelector } from "../../../store/user/user.selectors";
-import { Observable } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
 import { LoadingComponent } from "../../components/loading/loading/loading.component";
 
 @Component({
@@ -36,8 +36,8 @@ export class LoginComponent {
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
   loginForm: ModelFormGroup<LoginData> = new FormGroup({
-    login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
+    login: new FormControl('', [ Validators.required ]),
+    password: new FormControl('', [ Validators.required ])
   })
 
   login(): void {

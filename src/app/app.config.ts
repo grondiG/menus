@@ -1,7 +1,3 @@
-import { RouterData } from "./core/models/router-data.model";
-import { InjectionToken } from "@angular/core";
-
-
 export const RoutePath = {
   HOME: 'home',
   RESTAURANTS: 'restaurants',
@@ -16,7 +12,7 @@ export const RouteTitle = {
   PROFILE: 'Profile',
 } as const;
 
-const routerData: RouterData[] = [
+/*const routerData: RouterData[] = [
   {
     path: RoutePath.HOME,
     title: RouteTitle.HOME
@@ -37,4 +33,4 @@ const routerData: RouterData[] = [
 
 export const ROUTER_DATA: InjectionToken<RouterData[]> = new InjectionToken<RouterData[]>('router data', {
   factory: () => routerData,
-})
+})*/

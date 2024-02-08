@@ -1,10 +1,10 @@
 import { inject, Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Restaurant } from "../../core/models/restaurant.model";
-import { exhaustMap, Observable, switchMap } from "rxjs";
-import { RestaurantsService } from "../../core/services/restaurants/restaurants.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
+import { exhaustMap, Observable, switchMap } from "rxjs";
+import { Restaurant } from "../../core/models/restaurant.model";
+import { RestaurantsService } from "../../core/services/restaurants/restaurants.service";
 
 export interface RestaurantsState {
   restaurants: Restaurant[];

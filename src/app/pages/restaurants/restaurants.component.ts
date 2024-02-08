@@ -1,19 +1,20 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe } from "@angular/common";
-import {Observable} from "rxjs";
-import {RestaurantsStore} from "./restaurants.store";
+import { Observable } from "rxjs";
+import { Restaurant } from "../../core/models/restaurant.model";
+import { RestaurantsStore } from "./restaurants.store";
 import { CoreModule } from "../../core/core.module";
-import { FilterComponent } from "../../core/components/filter/filter.component";
 import {
   RestaurantCardContainerComponent
 } from "../../core/components/restaurant-card-container/restaurant-card-container.component";
-import {Restaurant} from "../../core/models/restaurant.model";
+import { FilterComponent } from "../../core/components/filter/filter.component";
+
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
   styleUrl: './restaurants.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [RestaurantsStore],
+  providers: [ RestaurantsStore ],
   standalone: true,
   imports: [
     FilterComponent,

@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RegisterData } from '../../core/models/register-data';
-import { LoginData, ResponseDataDto } from '../../core/models/login-data';
+import { LoginData, RegisterData, ResponseDataDto } from '../../core/models/authentication';
 
 export enum UserActionTypes {
   CheckToken = '[User] Check Token',

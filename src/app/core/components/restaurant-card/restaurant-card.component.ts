@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Restaurant} from "../../models/restaurant.model";
-import { RestaurantDescriptionPipe } from "../../pipes/restaurant-description/restaurant-description.pipe";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { Restaurant } from "../../models/restaurant.model";
+import { RestaurantDescriptionPipe } from "../../pipes/restaurant-description/restaurant-description.pipe";
 
 @Component({
   selector: 'app-restaurant-card',

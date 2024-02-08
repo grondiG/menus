@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ToastrModule } from 'ngx-toastr';
 import { authorizationInterceptor } from './core/interceptors/authorization.interceptor';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +30,6 @@ import { OrdersComponent } from './pages/orders/orders.component';
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: isDevMode() }),
-    ToastrModule.forRoot(),
     BrowserAnimationsModule,
     LoadingComponent
   ],

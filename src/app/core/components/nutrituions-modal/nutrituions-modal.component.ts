@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {MenuItem} from "../../models/restaurant.model";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MenuItem } from "../../models/restaurant.model";
 
 @Component({
   selector: 'app-nutrituions-modal',
