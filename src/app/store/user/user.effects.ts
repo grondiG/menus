@@ -1,17 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { catchError, map, mergeMap, Observable, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { Actions, concatLatestFrom, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Action, Store } from '@ngrx/store';
 import { ResponseDataDto } from '../../core/models/authentication';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
+import * as userSelectors from './user.selectors';
 
 
 @Injectable()
 export class UserEffects {
   private actions$: Actions = inject(Actions);
   private userService: UserService = inject(UserService);
+  private store: Store = inject(Store);
 
   init$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(ROOT_EFFECTS_INIT),
@@ -72,10 +74,14 @@ export class UserEffects {
     map(() => userActions.navigateToProfile()),
   ));
 
-  navigateToProfile$: Observable<Action> = createEffect(() => this.actions$.pipe(
+  navigateToProfile$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.navigateToProfile),
-    tap(() => {
-        this.userService.navigateToProfile();
+    concatLatestFrom(() => [
+      this.store.select(userSelectors.userToken)
+    ]),
+    tap(([, token]: [Action, string|null]) => {
+      console.log(token);
+      this.userService.navigateToProfile();
     })
   ), { dispatch: false });
 

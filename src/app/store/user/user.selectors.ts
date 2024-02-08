@@ -10,15 +10,20 @@ export const userSelector = createSelector(
 
 export const userIsLoggedSelector = createSelector(
   userFeatureSelector,
-  (state) => !!state?.isLogged
+  (state) => !!state.isLogged
 );
 
 export const userIsLoadingSelector = createSelector(
   userFeatureSelector,
-  (state) => state?.loading
+  (state) => state.loading
 );
 
 export const userErrorSelector = createSelector(
   userFeatureSelector,
-  (state) => state?.error
+  (state) => state.error
+);
+
+export const userToken = createSelector(
+  userFeatureSelector,
+  (state) => state.token
 );

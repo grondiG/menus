@@ -9,7 +9,7 @@ export interface UserState {
   data: UserData;
   isLogged: boolean;
   token: string;
-  error: HttpErrorResponse;
+  error: HttpErrorResponse | null;
 }
 
 export const initialState: UserState = {
@@ -61,5 +61,5 @@ export const userFeature = createFeature({
 
 export const {
   name,
-  reducer,
+  reducer
 } = userFeature;
