@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgForOf } from "@angular/common";
-import { MenuItem } from "../../models/restaurant.model";
-import { ConvertToAttributeFormatPipe } from "../../pipes/convert-to-attribute-format/convert-to-attribute-format.pipe";
-import { NutrituionsModalComponent } from "../nutrituions-modal/nutrituions-modal.component";
+import { NgForOf } from '@angular/common';
+import { MenuItem } from '../../models/restaurant.model';
+import { ConvertToAttributeFormatPipe } from '../../pipes/convert-to-attribute-format/convert-to-attribute-format.pipe';
+import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-modal.component';
 
 @Component({
   selector: 'app-restaurant-accordion',

@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from "@angular/router";
-import { HttpErrorResponse } from "@angular/common/http";
-import { AsyncPipe, NgIf, NgStyle } from "@angular/common";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { PreventDefaultDirective } from "../../directives/prevent-default/prevent-default.directive";
-import { ModelFormGroup } from "../../types/form";
-import { confirmPasswordValidator } from "../../validators/confirm-password.validator";
-import { passwordValidator } from "../../validators/password";
-import { userErrorSelector, userIsLoadingSelector } from "../../../store/user/user.selectors";
-import { CoreModule } from "../../core.module";
-import { RegisterData } from "../../models/authentication";
+import { RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { ModelFormGroup } from '../../types/form';
+import { confirmPasswordValidator } from '../../validators/confirm-password.validator';
+import { passwordValidator } from '../../validators/password';
+import { userErrorSelector, userIsLoadingSelector } from '../../../store/user/user.selectors';
+import { CoreModule } from '../../core.module';
+import { RegisterData } from '../../models/authentication';
 
 @Component({
   selector: 'app-register',

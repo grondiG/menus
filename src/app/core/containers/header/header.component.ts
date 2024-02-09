@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { userIsLoggedSelector } from '../../../store/user/user.selectors';
 import * as profileActions from '../../../store/user/user.actions';
-import { RoutePath, RouteTitle } from "../../../app.config";
+import { RoutePath, RouteTitle } from '../../../app.config';
 
 @Component({
   selector: 'app-header',

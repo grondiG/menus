@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { HttpErrorResponse } from "@angular/common/http";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { HttpErrorResponse } from '@angular/common/http';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ModelFormGroup } from '../../types/form';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { LoginData } from '../../models/authentication';
 import * as profileAction from '../../../store/user/user.actions';
-import { CoreModule } from "../../core.module";
-import { userErrorSelector, userIsLoadingSelector } from "../../../store/user/user.selectors";
-import { LoadingComponent } from "../../components/loading/loading/loading.component";
+import { CoreModule } from '../../core.module';
+import { userErrorSelector, userIsLoadingSelector } from '../../../store/user/user.selectors';
+import { LoadingComponent } from '../../components/loading/loading/loading.component';
 
 @Component({
   selector: 'app-login',

@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse } from '@angular/common/http';
 import { UserData } from '../../core/models/authentication';
 import * as userActions from './user.actions';
 import { UserUtils } from './user.utils';

@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export const passwordValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
   const password: string = control.value;

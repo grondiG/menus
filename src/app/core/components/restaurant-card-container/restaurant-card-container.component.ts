@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgForOf } from "@angular/common";
-import { Restaurant } from "../../models/restaurant.model";
-import { RestaurantCardComponent } from "../restaurant-card/restaurant-card.component";
+import { NgForOf } from '@angular/common';
+import { Restaurant } from '../../models/restaurant.model';
+import { RestaurantCardComponent } from '../restaurant-card/restaurant-card.component';
 
 @Component({
   selector: 'app-restaurant-card-container',
