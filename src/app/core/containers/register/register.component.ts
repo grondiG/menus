@@ -8,7 +8,7 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
 import { ModelFormGroup } from '../../types/form';
 import { confirmPasswordValidator } from '../../validators/confirm-password.validator';
 import { passwordValidator } from '../../validators/password';
-import { userIsLoadingSelector } from '../../../store/user/user.selectors';
+import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { CoreModule } from '../../core.module';
 import { RegisterData } from '../../models/authentication';
 

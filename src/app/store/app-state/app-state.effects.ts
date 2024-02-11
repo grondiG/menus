@@ -4,7 +4,6 @@ import * as appStateActions from './app-state.actions';
 import { tap } from 'rxjs';
 import { ModalService } from '../../core/services/modal/modal.service';
 
-
 @Injectable()
 export class AppStateEffects {
   private actions$: Actions = inject(Actions);
