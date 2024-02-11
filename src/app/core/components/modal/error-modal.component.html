@@ -1,0 +1,32 @@
+<!--create modal-->
+<ng-container
+  *ngIf="{
+  isModalOpen: isModalOpen$ | async,
+  error: error$ | async
+  } as data"
+>
+<div
+  class="modal-wrapper"
+  *ngIf="data.isModalOpen"
+  >
+  <div class="modal__content">
+    <div class="modal__content__header">
+      <p class="modal__content__header-title">Error {{ data?.error.status }}</p>
+      <button
+        class="btn modal__content__header-close"
+        (click)="closeModal()"
+      >
+        <i class="bi bi-x modal__content__header-close-icon"></i>
+      </button>
+    </div>
+    <div class="modal__content__description">
+      <h3 class="modal__content__description-status">
+        {{ data?.error.statusText }}
+      </h3>
+      <p class="modal__content__description-text">
+        {{ data?.error.error.message }}
+      </p>
+    </div>
+  </div>
+</div>
+</ng-container>

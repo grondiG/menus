@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -10,7 +9,7 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
 import { LoginData } from '../../models/authentication';
 import * as profileAction from '../../../store/user/user.actions';
 import { CoreModule } from '../../core.module';
-import { userErrorSelector, userIsLoadingSelector } from '../../../store/user/user.selectors';
+import { userIsLoadingSelector } from '../../../store/user/user.selectors';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
 
 @Component({
@@ -32,7 +31,6 @@ import { LoadingComponent } from '../../components/loading/loading/loading.compo
 })
 export class LoginComponent {
   private store: Store = inject(Store);
-  error$: Observable<HttpErrorResponse> = this.store.select(userErrorSelector);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
   loginForm: ModelFormGroup<LoginData> = new FormGroup({

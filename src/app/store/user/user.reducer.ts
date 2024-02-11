@@ -1,5 +1,4 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
-import { HttpErrorResponse } from '@angular/common/http';
 import { UserData } from '../../core/models/authentication';
 import * as userActions from './user.actions';
 import { UserUtils } from './user.utils';
@@ -9,7 +8,6 @@ export interface UserState {
   data: UserData;
   isLogged: boolean;
   token: string;
-  error: HttpErrorResponse;
 }
 
 export const initialState: UserState = {
@@ -17,7 +15,6 @@ export const initialState: UserState = {
   data: null,
   isLogged: false,
   token: null,
-  error: null
 };
 
 export const userFeatureKey: "user" = "user" as const;
@@ -47,7 +44,7 @@ export const userFeature = createFeature({
     on(userActions.loadUserFail,
       userActions.registerFail,
       (state, action) => ({
-        ...state, loading: false, isLogged: false, error: action.error
+        ...state, loading: false, isLogged: false
       })
     ),
     on(

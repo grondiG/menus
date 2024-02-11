@@ -1,10 +1,9 @@
 <ng-container *ngIf="{
-  error: error$ | async,
   isLoading: isLoading$ | async
   } as data">
   <div class="container">
     <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
-      <app-error-card [error]="data.error"></app-error-card>
+<!--      <app-error-card [error]="data.error"></app-error-card>-->
       <h2 class="text-center">Login</h2>
       <form
         class="col-md-6 col-12 form-group"

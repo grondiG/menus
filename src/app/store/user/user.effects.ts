@@ -6,6 +6,7 @@ import { Action } from '@ngrx/store';
 import { ResponseDataDto } from '../../core/models/authentication';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
+import * as appStateActions from '../app-state/app-state.actions';
 
 
 @Injectable()
@@ -35,7 +36,8 @@ export class UserEffects {
 
   loadUserFail$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.loadUserFail),
-  ), { dispatch: false });
+    map((action) => appStateActions.setError(action.error)
+  )));
 
   register$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.register),
