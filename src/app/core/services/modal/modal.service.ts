@@ -1,25 +1,30 @@
-import { ComponentRef, inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import { ErrorModalComponent } from '../../components/modal/error-modal.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  private modalComponent: ComponentRef<ErrorModalComponent>;
-  private store: Store = inject(Store);
+  private alertViewContainer: ViewContainerRef;
+  private componentSubscriber!: Subject<string>;
+  private componentRef!: ComponentRef<ErrorModalComponent>;
 
-  isModalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isModalOpen$: Observable<boolean> = this.isModalOpen.asObservable();
-
-  constructor() { }
-
-  openModal() {
-    this.isModalOpen.next(true);
+  setAlertViewContainerRef(viewContainerRef: ViewContainerRef) {
+    this.alertViewContainer = viewContainerRef;
   }
 
+  createModal(error: HttpErrorResponse): void {
+    this.componentRef = this.alertViewContainer.createComponent(ErrorModalComponent);
+    this.componentRef.instance.error = error;
+    this.componentRef.instance.closeModal.subscribe(() => { this.closeModal(); });
+    this.componentSubscriber = new Subject<string>();
+  }
+
+
   closeModal() {
-    this.isModalOpen.next(false);
+    this.componentSubscriber.complete();
+    this.componentRef.destroy();
   }
 }
