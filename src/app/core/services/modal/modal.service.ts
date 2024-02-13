@@ -7,19 +7,19 @@ import { ErrorModalComponent } from '../../components/modal/error-modal.componen
   providedIn: 'root'
 })
 export class ModalService {
-  private modalComponent: ComponentRef<ErrorModalComponent>;
-  private store: Store = inject(Store);
-
-  isModalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  isModalOpen$: Observable<boolean> = this.isModalOpen.asObservable();
-
-  constructor() { }
-
-  openModal() {
-    this.isModalOpen.next(true);
-  }
-
-  closeModal() {
-    this.isModalOpen.next(false);
-  }
+  // private modalComponent: ComponentRef<ErrorModalComponent>;
+  // private store: Store = inject(Store);
+  //
+  // isModalOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // isModalOpen$: Observable<boolean> = this.isModalOpen.asObservable();
+  //
+  // constructor() { }
+  //
+  // openModal() {
+  //   this.isModalOpen.next(true);
+  // }
+  //
+  // closeModal() {
+  //   this.isModalOpen.next(false);
+  // }
 }

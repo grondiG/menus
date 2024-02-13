@@ -10,17 +10,17 @@ export class AppStateEffects {
   private actions$: Actions = inject(Actions);
   private modalService: ModalService = inject(ModalService);
 
-  setError$ = createEffect(() => this.actions$.pipe(
-    ofType(appStateActions.setError),
-    tap(() => {
-      this.modalService.openModal();
-    })
-  ), { dispatch: false });
-
-  clearError$ = createEffect(() => this.actions$.pipe(
-    ofType(appStateActions.clearError),
-    tap(() => {
-      this.modalService.closeModal();
-    })
-  ), { dispatch: false });
+  // setError$ = createEffect(() => this.actions$.pipe(
+  //   ofType(appStateActions.setError),
+  //   tap(() => {
+  //     this.modalService.openModal();
+  //   })
+  // ), { dispatch: false });
+  //
+  // clearError$ = createEffect(() => this.actions$.pipe(
+  //   ofType(appStateActions.clearError),
+  //   tap(() => {
+  //     this.modalService.closeModal();
+  //   })
+  // ), { dispatch: false });
 }
