@@ -26,8 +26,8 @@ export class UserService {
     localStorage.setItem('token', token);
   }
 
-  navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+  navigateToHome(): void {
+    this.router.navigate(['/home']);
   }
 
   navigateToLogin(): void {

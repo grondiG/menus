@@ -12,7 +12,7 @@
         class="col-md-6 col-12 form-group"
         appPreventDefault
         [formGroup]="registerData"
-        (submit)="register()"
+        (ngSubmit)="register()"
       >
         <label for="login">Login</label>
         <input
@@ -89,7 +89,7 @@
           >
             Register
           </button>
-          <a [routerLink]="'../login'" class="text-dark text-decoration-underline mt-3 ml-4">Already have an
+          <a [routerLink]="['/profile','login']" class="text-dark text-decoration-underline mt-3 ml-4">Already have an
             account?</a>
         </div>
       </form>

@@ -77,7 +77,7 @@ export class UserEffects {
   navigateToProfile$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.navigateToProfile),
     tap(() => {
-        this.userService.navigateToProfile();
+        this.userService.navigateToHome();
     })
   ), { dispatch: false });
 

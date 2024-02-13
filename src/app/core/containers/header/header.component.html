@@ -43,7 +43,8 @@
             <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.PROFILE"
                 [routerLinkActive]="'active'"
-                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
+                *ngIf="!data.isLogged">
               <span>{{ RouteTitle.PROFILE | titlecase }}</span>
             </li>
           </ul>

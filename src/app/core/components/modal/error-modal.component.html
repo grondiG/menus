@@ -1,10 +1,16 @@
 <!--create modal-->
-<ng-container *ngIf="{ error: error$ | async } as data">
+<ng-container *ngIf="{
+  error: error$ | async,
+  counter: counter$ | async
+} as data">
   <div class="modal-wrapper" *ngIf="data.error">
     <div class="modal__content">
       <div class="modal__content__header">
         <p class="modal__content__header-title">
           Error {{ data?.error.status }}
+        </p>
+        <p class="modal__content__header-timer" *ngIf="data?.counter">
+          Automatically closes at: {{ data?.counter }}s
         </p>
         <button class="btn modal__content__header-close" (click)="closeModal()">
           <i class="bi bi-x modal__content__header-close-icon"></i>

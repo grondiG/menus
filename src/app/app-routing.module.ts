@@ -5,6 +5,7 @@ import { authenticationGuard } from "./core/guards/authentication.guard";
 import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { OrdersComponent } from "./pages/orders/orders.component";
+import { skipLoginGuard } from './core/guards/skip-login.guard';
 
 export const routes: Routes = [
   {
@@ -26,12 +27,13 @@ export const routes: Routes = [
     path: RoutePath.ORDERS,
     component: OrdersComponent,
     title: RouteTitle.ORDERS,
-    canActivate: [ authenticationGuard ]
+    canActivate: [authenticationGuard]
   },
   {
     path: RoutePath.PROFILE,
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
-    title: RouteTitle.PROFILE
+    title: RouteTitle.PROFILE,
+    canActivate: [skipLoginGuard]
   },
   {
     path: '**',

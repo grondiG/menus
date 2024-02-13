@@ -9,7 +9,7 @@
         class="col-md-6 col-12 form-group"
         appPreventDefault
         [formGroup]="loginForm"
-        (submit)="login()"
+        (ngSubmit)="login()"
       >
         <label for="login">Login</label>
         <input
@@ -41,7 +41,7 @@
           >
             Login
           </button>
-          <a [routerLink]="'../register'" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an
+          <a [routerLink]="['/profile','register']" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an
             account?</a>
         </div>
       </form>

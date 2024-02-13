@@ -15,7 +15,6 @@ import { UserEffects } from './store/user/user.effects';
 import { appReducers } from './app.store';
 import { LoadingComponent } from './core/components/loading/loading/loading.component';
 import { OrdersComponent } from './pages/orders/orders.component';
-import { AppStateEffects } from './store/app-state/app-state.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ import { AppStateEffects } from './store/app-state/app-state.effects';
     AppRoutingModule,
     CoreModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([AppStateEffects, UserEffects]),
+    EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: isDevMode() }),
     BrowserAnimationsModule,
     LoadingComponent
