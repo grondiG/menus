@@ -59,7 +59,6 @@ export class UserEffects {
 
   checkToken$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(userActions.checkToken),
-
     switchMap(() => this.userService.isTokenValid().pipe(
       map((response: ResponseDataDto) => userActions.checkTokenSuccess({ response })),
       catchError((error: HttpErrorResponse) => of(userActions.checkTokenFail({ error }))),

@@ -22,12 +22,13 @@ import { ErrorModalComponent } from './components/modal/error-modal.component';
         RouterLinkActive,
         TitleCasePipe
     ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    ErrorCardComponent,
-    ErrorModalComponent,
-  ],
+    exports: [
+        HeaderComponent,
+        FooterComponent,
+        ErrorCardComponent,
+        ErrorModalComponent,
+        AlertsComponent,
+    ],
   declarations: [
     HeaderComponent,
     FooterComponent,

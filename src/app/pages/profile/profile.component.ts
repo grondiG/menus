@@ -3,7 +3,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { AsyncPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { userIsLoggedSelector } from '../../store/user/user.selectors';
+import { userIsLoggedSelector } from '../../store/user/user.reducer';
 import * as profileActions from '../../store/user/user.actions';
 
 @Component({

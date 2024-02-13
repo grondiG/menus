@@ -9,7 +9,7 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
 import { LoginData } from '../../models/authentication';
 import * as profileAction from '../../../store/user/user.actions';
 import { CoreModule } from '../../core.module';
-import { userIsLoadingSelector } from '../../../store/user/user.selectors';
+import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
 
 @Component({

@@ -1,4 +1,4 @@
-import { createFeature, createReducer, on } from '@ngrx/store'
+import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store'
 import { UserData } from '../../core/models/authentication';
 import * as userActions from './user.actions';
 import { UserUtils } from './user.utils';
@@ -54,6 +54,24 @@ export const userFeature = createFeature({
     ),
   ),
 });
+
+const userFeatureSelector = createFeatureSelector<UserState>(userFeatureKey);
+
+export const userSelector = createSelector(
+  userFeatureSelector,
+  (state) => state
+);
+
+export const userIsLoggedSelector = createSelector(
+  userFeatureSelector,
+  (state) => !!state?.isLogged
+);
+
+export const userIsLoadingSelector = createSelector(
+  userFeatureSelector,
+  (state) => state?.loading
+);
+
 
 
 export const {
