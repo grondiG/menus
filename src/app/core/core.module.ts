@@ -10,25 +10,24 @@ import { ErrorCardComponent } from './components/error-card/error-card.component
 import { ErrorModalComponent } from './components/modal/error-modal.component';
 
 @NgModule({
-    imports: [
-        HttpClientModule,
-        RestaurantCardComponent,
-        RouterLink,
-        NgForOf,
-        AsyncPipe,
-        GetCurrentPageByUrlPipe,
-        NgClass,
-        NgIf,
-        RouterLinkActive,
-        TitleCasePipe
-    ],
-    exports: [
-        HeaderComponent,
-        FooterComponent,
-        ErrorCardComponent,
-        ErrorModalComponent,
-        AlertsComponent,
-    ],
+  imports: [
+    HttpClientModule,
+    RestaurantCardComponent,
+    RouterLink,
+    NgForOf,
+    AsyncPipe,
+    GetCurrentPageByUrlPipe,
+    NgClass,
+    NgIf,
+    RouterLinkActive,
+    TitleCasePipe
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    ErrorCardComponent,
+    ErrorModalComponent,
+  ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -36,4 +35,5 @@ import { ErrorModalComponent } from './components/modal/error-modal.component';
     ErrorModalComponent,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}
