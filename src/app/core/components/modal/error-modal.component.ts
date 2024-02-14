@@ -14,7 +14,7 @@ import * as appActions from '../../../store/app-state/app-state.actions';
 export class ErrorModalComponent {
   private store: Store = inject(Store);
   private countToValue: number = 10;
-  private stopTimer$: Subject<string> = new Subject();
+  private stopTimer: Subject<string> = new Subject();
 
   counter$!: Observable<number>;
   error$: Observable<HttpErrorResponse | null> = this.store.select(fromApp.appStateError).pipe(
@@ -28,7 +28,7 @@ export class ErrorModalComponent {
   createCloseModalTimer(): void {
     this.counter$ = interval(1000).pipe(
       startWith(0),
-      takeUntil(this.stopTimer$),
+      takeUntil(this.stopTimer),
       map((value: number) => {
         if(value === this.countToValue) {
           this.closeModal();
@@ -39,7 +39,7 @@ export class ErrorModalComponent {
   }
 
   closeModal(): void {
-    this.stopTimer$.next('stop');
+    this.stopTimer.next('stop');
     this.store.dispatch(appActions.clearError());
   }
 }
