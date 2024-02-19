@@ -69,12 +69,14 @@ export class UserEffects {
     ofType(userActions.addTokenToLocalStorage),
     tap((action) => {
       this.userService.addTokenToLocalStorage(action.response.token);
-    }),
-    map(() => userActions.navigateToProfile()),
-  ));
+    })
+  ), { dispatch: false });
 
   navigateToProfile$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(userActions.navigateToProfile),
+    ofType(
+      userActions.registerSuccess,
+      userActions.loadUserSuccess
+      ),
     tap(() => {
         this.userService.navigateToHome();
     })

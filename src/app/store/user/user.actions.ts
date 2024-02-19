@@ -14,7 +14,6 @@ export enum UserActionTypes {
   RegisterFail = '[User] Register Fail',
   Logout = '[User] Logout',
   AddTokenToLocalStorage = '[User] Add Token To Local Storage',
-  NavigateToProfile = '[User] Navigate To Profile'
 }
 export const checkToken = createAction(UserActionTypes.CheckToken);
 export const checkTokenSuccess = createAction(UserActionTypes.CheckTokenSuccess, props<{ response: ResponseDataDto }>());
@@ -27,7 +26,6 @@ export const registerSuccess = createAction(UserActionTypes.RegisterSuccess, pro
 export const registerFail = createAction(UserActionTypes.RegisterFail, props<{ error: HttpErrorResponse }>());
 export const logout = createAction(UserActionTypes.Logout);
 export const addTokenToLocalStorage = createAction(UserActionTypes.AddTokenToLocalStorage, props<{ response: ResponseDataDto }>());
-export const navigateToProfile = createAction(UserActionTypes.NavigateToProfile);
 // export const profileApiActions = createActionGroup({
 //   source: '[User]',
 //   events: {

@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CartItem } from '../../models/order';
 import { MenuItem } from '../../models/restaurant.model';
 import { ConvertToAttributeFormatPipe } from '../../pipes/convert-to-attribute-format/convert-to-attribute-format.pipe';
 import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-modal.component';
@@ -13,10 +15,22 @@ import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-moda
   imports: [
     ConvertToAttributeFormatPipe,
     NutrituionsModalComponent,
-    NgForOf
+    NgForOf,
+    FormsModule
   ]
 })
 export class RestaurantAccordionComponent {
-  @Input() menu: MenuItem[];
+  @Input() dish: MenuItem;
+  @Output() addItem: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  quantity: number = 1;
+
+  orderItem(item: MenuItem): void {
+    if(this.quantity > 0) {
+      this.addItem.emit({
+        item,
+        quantity: this.quantity
+      });
+    }
+  }
 
 }

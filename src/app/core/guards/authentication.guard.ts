@@ -1,14 +1,15 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { inject } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { UserService } from '../services/profile/user.service';
 
-export const authenticationGuard: CanActivateFn = (route, state) => {
-  const router: Router = inject(Router);
+export const authenticationGuard: CanActivateFn = async () => {
+  const navigation: UrlTree = inject(Router).createUrlTree(['/profile', 'login']);
 
-  const token: string = localStorage.getItem('token');
-  if (token) {
+  try {
+    await lastValueFrom(inject(UserService).isTokenValid());
     return true;
-  } else {
-    router.navigate(['/profile/login']);
-    return false;
+  } catch (error) {
+    return navigation;
   }
 };

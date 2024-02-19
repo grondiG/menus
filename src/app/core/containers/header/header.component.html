@@ -52,9 +52,13 @@
       </div>
       <div class="col-2 col-md-4 h-100">
         <ng-container *ngIf="isLogged$ | async">
-          <div class="header__auth d-flex align-items-center justify-content-end h-100">
+          <div class="header__auth d-flex align-items-center justify-content-end h-100 gap-4">
+            <button class="btn text-light" (click)="toggleCart()">
+              <i class="bi bi-cart h4"></i>
+            </button>
             <button class="btn btn-outline-light" (click)="logout()">Logout</button>
           </div>
+          <app-cart [isCartOpen]="isCartOpen$ | async"></app-cart>
         </ng-container>
       </div>
     </div>

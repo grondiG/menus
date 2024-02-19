@@ -9,7 +9,11 @@
         <p>{{restaurant.description}}</p>
         <p>{{restaurant.address}}</p>
         <h2>Menu</h2>
-        <app-restaurant-accordion [menu]="restaurant.menu"></app-restaurant-accordion>
+        <div class="accordion" id="accordion">
+          <div class="accordion-item" *ngFor="let dish of restaurant.menu">
+            <app-restaurant-accordion [dish]="dish" (addItem)="addToCart($event)"></app-restaurant-accordion>
+          </div>
+        </div>
       </div>
     </div>
   </div>
