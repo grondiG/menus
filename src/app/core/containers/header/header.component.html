@@ -1,4 +1,7 @@
-<ng-container *ngIf="{ isLogged: isLogged$ | async } as data">
+<ng-container *ngIf="{
+  isLogged: isLogged$ | async,
+  isCartOpen: isCartOpen$ | async
+} as data">
 <div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
       <div class="col-4 col-md-4 h-100">
@@ -51,14 +54,14 @@
         </div>
       </div>
       <div class="col-2 col-md-4 h-100">
-        <ng-container *ngIf="isLogged$ | async">
+        <ng-container *ngIf="data.isLogged">
           <div class="header__auth d-flex align-items-center justify-content-end h-100 gap-4">
             <button class="btn text-light" (click)="toggleCart()">
               <i class="bi bi-cart h4"></i>
             </button>
             <button class="btn btn-outline-light" (click)="logout()">Logout</button>
           </div>
-          <app-cart [isCartOpen]="isCartOpen$ | async"></app-cart>
+          <app-cart [isCartOpen]="data.isCartOpen"></app-cart>
         </ng-container>
       </div>
     </div>

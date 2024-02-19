@@ -1,29 +1,33 @@
-<div class="cart container" [ngClass]="isCartOpen && 'active'">
-  <div class="row cart__header">
-    <div class="col-12 w-100 text-center my-2">
-      <h2>Cart</h2>
+<ng-container *ngIf="{
+  cart: cart$ | async,
+} as data">
+  <div class="cart container" [ngClass]="isCartOpen && 'active'">
+    <div class="row cart__header">
+      <div class="col-12 w-100 text-center my-2">
+        <h2>Cart</h2>
+      </div>
     </div>
-  </div>
-  <div class="row cart__body">
-    <div class="col-12 w-100">
-      <ul>
-        <li *ngFor="let item of cart$ | async">
-          <div class="row w-100 h-100">
-            <div class="col-12 d-flex justify-content-between align-items-center w-100 h-100">
-              <p>{{ item.item.name }}</p>
-              <p>{{ item.quantity }}x</p>
-              <p>{{ (item.item.price | getNumberPrice) * item.quantity | currency }}</p>
-              <button class="btn btn-danger h-50 p-1" (click)="removeFromCart(item)">Remove</button>
+    <div class="row cart__body">
+      <div class="col-12 w-100">
+        <ul>
+          <li *ngFor="let item of data.cart">
+            <div class="row w-100 h-100">
+              <div class="col-12 d-flex justify-content-between align-items-center w-100 h-100">
+                <p>{{ item.item.name }}</p>
+                <p>{{ item.quantity }}x</p>
+                <p>{{ (item.item.price | getNumberPrice) * item.quantity | currency }}</p>
+                <button class="btn btn-danger h-50 p-1" (click)="removeFromCart(item)">Remove</button>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row cart__summary">
+      <div class="col-12 w-100 px-2">
+        <p>Total: {{ data.cart | getTotalCartPrice | currency }}</p>
+        <button class="btn btn-primary" [disabled]="!data.cart.length">Checkout</button>
+      </div>
     </div>
   </div>
-  <div class="row cart__summary">
-    <div class="col-12 w-100 px-2">
-      <p>Total: {{ cart$ | async | getTotalCartPrice | currency }}</p>
-      <button class="btn btn-primary" [disabled]="!(cart$ | async).length">Checkout</button>
-    </div>
-  </div>
-</div>
+</ng-container>
