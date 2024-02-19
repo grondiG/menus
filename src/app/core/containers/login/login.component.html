@@ -1,43 +1,55 @@
-<ng-container *ngIf="{
-  isLoading: isLoading$ | async
-  } as data">
+<ng-container *ngIf="{ isLoading: isLoading$ | async } as data">
   <div class="container">
-    <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
-<!--      <app-error-card [error]="data.error"></app-error-card>-->
+    <div class="row h-100 d-flex align-items-center justify-content-center flex-column">
+      <pre>{{ formValue | json }}</pre>
       <h2 class="text-center">Login</h2>
       <form
+        #form="ngForm"
         class="col-md-6 col-12 form-group"
-        appPreventDefault
-        [formGroup]="loginForm"
-        (ngSubmit)="login()"
+        (ngSubmit)="login(form, $event)"
+        [ngFormOptions]="{ updateOn: 'change' }"
+        autocomplete="off"
       >
         <label for="login">Login</label>
         <input
+          #loginControl="ngModel"
+          [(ngModel)]="formValue.login"
+          [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
+          required
+          [minlength]="3"
+
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="Login"
-          formControlName="login"
         >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
+        <p *ngIf="loginControl.dirty && loginControl.hasError('required')" class="error text-danger">
           Login is required
         </p>
+        <p *ngIf="loginControl.dirty && loginControl.hasError('minlength')" class="error text-danger">
+          <span>Please provide more then <strong>{{ loginControl.getError('minlength')?.requiredLength }}</strong></span>
+        </p>
         <label for="password">Password</label>
+<!--        ngModel-->
+<!--        [ngModel]="formValue.password"-->
+<!--        (ngModelChange)="formValue.password = $event"-->
         <input
+          [(ngModel)]="formValue.password"
+          name="password"
+
           type="password"
           class="form-control my-2"
           id="password"
           placeholder="Password"
-          formControlName="password"
         >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
-          Password is required
-        </p>
+<!--        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">-->
+<!--          Password is required-->
+<!--        </p>-->
         <div class="d-flex align-items-center gap-3">
           <button
             type="submit"
             class="btn btn-primary mt-3 ml-4"
-            [disabled]="loginForm.invalid"
+            [disabled]="false"
           >
             Login
           </button>

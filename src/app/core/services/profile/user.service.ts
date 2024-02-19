@@ -41,4 +41,8 @@ export class UserService {
   isTokenValid(): Observable<ResponseDataDto> {
     return this.http.get<ResponseDataDto>('/api/isTokenValid');
   }
+
+  getNames(): Observable<string[]> {
+    return this.http.get<string[]>(`/api/name-occupied`);
+  }
 }

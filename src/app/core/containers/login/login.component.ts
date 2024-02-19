@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ModelFormGroup } from '../../types/form';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { LoginData } from '../../models/authentication';
-import * as profileAction from '../../../store/user/user.actions';
 import { CoreModule } from '../../core.module';
 import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
@@ -18,13 +16,14 @@ import { LoadingComponent } from '../../components/loading/loading/loading.compo
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    FormsModule,
     PreventDefaultDirective,
     RouterLink,
-    ReactiveFormsModule,
     NgIf,
     CoreModule,
     AsyncPipe,
-    LoadingComponent
+    LoadingComponent,
+    JsonPipe
   ],
   standalone: true
 
@@ -33,22 +32,29 @@ export class LoginComponent {
   private store: Store = inject(Store);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
-  loginForm: ModelFormGroup<LoginData> = new FormGroup({
-    login: new FormControl('', [ Validators.required ]),
-    password: new FormControl('', [ Validators.required ])
-  })
+  formValue: LoginData = {
+    login: '',
+    password: '123'
+  };
 
-  login(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAsDirty();
-      return;
-    }
+  // loginForm: ModelFormGroup<LoginData> = new FormGroup({
+  //   login: new FormControl('', [ Validators.required ]),
+  //   password: new FormControl('', [ Validators.required ])
+  // })
 
-    const data: LoginData = this.loginForm.getRawValue();
-    this.store.dispatch(profileAction.loadUser({ data }));
+  login(form: NgForm, e: SubmitEvent): void {
+    console.log(form);
+
+    // if (this.loginForm.invalid) {
+    //   this.loginForm.markAsDirty();
+    //   return;
+    // }
+    //
+    // const data: LoginData = this.loginForm.getRawValue();
+    // this.store.dispatch(profileAction.loadUser({ data }));
   }
 
-  checkIfInputIsInvalid(inputName: string): boolean {
-    return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
-  }
+  // checkIfInputIsInvalid(inputName: string): boolean {
+  //   return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
+  // }
 }

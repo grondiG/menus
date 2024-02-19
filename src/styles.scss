@@ -1,3 +1,4 @@
+@import "bootstrap/scss/bootstrap";
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; box-sizing: border-box; overflow-x: hidden }
@@ -6,4 +7,19 @@ a{
   text-decoration: none !important;
   color: #fff !important;
 }
-@import "bootstrap/scss/bootstrap";
+
+:root {
+  --color-success: #4caf50;
+  --color-error: #ff5722;
+  --color-info: #449eff;
+  --color-background: #eceff1;
+  --color-text: #263238;
+}
+
+.ng-valid.ng-dirty:not(form) {
+  border: 2px solid var(--color-success)!important;
+}
+
+.ng-invalid.ng-dirty:not(form) {
+  border: 2px solid var(--color-error)!important;
+}
