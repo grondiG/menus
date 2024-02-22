@@ -3,6 +3,9 @@
     <div class="row h-100 d-flex align-items-center justify-content-center flex-column">
       <pre>{{ formValue | json }}</pre>
       <h2 class="text-center">Login</h2>
+
+<!--      ngNativeValidate-->
+<!--      ngNoForm-->
       <form
         #form="ngForm"
         class="col-md-6 col-12 form-group"
@@ -17,6 +20,7 @@
           [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
           required
           [minlength]="3"
+          appBanWords="test"
 
           type="text"
           class="form-control my-2"
@@ -29,32 +33,58 @@
         <p *ngIf="loginControl.dirty && loginControl.hasError('minlength')" class="error text-danger">
           <span>Please provide more then <strong>{{ loginControl.getError('minlength')?.requiredLength }}</strong></span>
         </p>
+        <p *ngIf="loginControl.dirty && loginControl.hasError('banWords')" class="error text-danger">
+          <span>Please do not use ban word</span>
+        </p>
+
+<!--        <ng-container ngModelGroup="passwords">-->
         <label for="password">Password</label>
 <!--        ngModel-->
 <!--        [ngModel]="formValue.password"-->
 <!--        (ngModelChange)="formValue.password = $event"-->
         <input
+          #password="ngModel"
           [(ngModel)]="formValue.password"
           name="password"
+          required
 
           type="password"
           class="form-control my-2"
           id="password"
           placeholder="Password"
         >
-<!--        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">-->
-<!--          Password is required-->
-<!--        </p>-->
+        <p *ngIf="password.dirty && password.hasError('required')" class="error text-danger">
+          Login is required
+        </p>
+
+        <label for="password2">Confirm password</label>
+        <input
+          #password2="ngModel"
+          [(ngModel)]="formValue.password2"
+          name="password2"
+          required
+          appCheckPassword="password"
+
+          type="password"
+          class="form-control my-2"
+          id="password2"
+          placeholder="Confirm password"
+        >
+        <p *ngIf="password2.dirty && password2.hasError('required')" class="error text-danger">
+          Login is required
+        </p>
+        <p *ngIf="password2.dirty && password2.hasError('passwordMatch')" class="error text-danger">
+          Password should match
+        </p>
+<!--        </ng-container>-->
+
         <div class="d-flex align-items-center gap-3">
-          <button
-            type="submit"
-            class="btn btn-primary mt-3 ml-4"
-            [disabled]="false"
-          >
+          <button type="submit" class="btn btn-primary mt-3 ml-4">
             Login
           </button>
-          <a [routerLink]="['/profile','register']" class="text-dark text-decoration-underline mt-3 ml-4">Don't have an
-            account?</a>
+          <a [routerLink]="['/profile','register']" class="text-dark text-decoration-underline mt-3 ml-4">
+            Don't have an account?
+          </a>
         </div>
       </form>
     </div>

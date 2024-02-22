@@ -9,6 +9,7 @@ import { LoginData } from '../../models/authentication';
 import { CoreModule } from '../../core.module';
 import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
+import { BanWordsValidator, CheckPasswordValidator } from '../../directives/validators';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,9 @@ import { LoadingComponent } from '../../components/loading/loading/loading.compo
     CoreModule,
     AsyncPipe,
     LoadingComponent,
-    JsonPipe
+    JsonPipe,
+    BanWordsValidator,
+    CheckPasswordValidator
   ],
   standalone: true
 
@@ -32,9 +35,10 @@ export class LoginComponent {
   private store: Store = inject(Store);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
-  formValue: LoginData = {
+  formValue: LoginData & { password2: string } = {
     login: '',
-    password: '123'
+    password: '123',
+    password2: '13',
   };
 
   // loginForm: ModelFormGroup<LoginData> = new FormGroup({
@@ -43,7 +47,7 @@ export class LoginComponent {
   // })
 
   login(form: NgForm, e: SubmitEvent): void {
-    console.log(form);
+    console.log(form.value);
 
     // if (this.loginForm.invalid) {
     //   this.loginForm.markAsDirty();
