@@ -47,8 +47,4 @@ export class LoginComponent {
     const data: LoginData = this.loginForm.getRawValue();
     this.store.dispatch(profileAction.loadUser({ data }));
   }
-
-  checkIfInputIsInvalid(inputName: string): boolean {
-    return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
-  }
 }

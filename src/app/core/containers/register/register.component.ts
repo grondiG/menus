@@ -44,12 +44,4 @@ export class RegisterComponent {
   register(): void {
     this.store.dispatch({ type: "[Profile] Register", data: this.registerData.value });
   }
-
-  checkIfInputIsInvalid(inputName: string): boolean {
-    if (inputName === 'confirmPassword' && this.registerData.controls[inputName].touched) {
-      return this.registerData.hasError('passwordMismatch');
-    }
-    return this.registerData.controls[inputName].invalid && this.registerData.controls[inputName].touched;
-  }
-
 }

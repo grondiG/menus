@@ -3,7 +3,7 @@
   } as data">
   <div class="container">
     <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2">
-<!--      <app-error-card [error]="data.error"></app-error-card>-->
+      <!--      <app-error-card [error]="data.error"></app-error-card>-->
       <h2 class="text-center">Login</h2>
       <form
         class="col-md-6 col-12 form-group"
@@ -11,28 +11,33 @@
         [formGroup]="loginForm"
         (ngSubmit)="login()"
       >
-        <label for="login">Login</label>
-        <input
-          type="text"
-          class="form-control my-2"
-          id="login"
-          placeholder="Login"
-          formControlName="login"
-        >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
-          Login is required
-        </p>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control my-2"
-          id="password"
-          placeholder="Password"
-          formControlName="password"
-        >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
-          Password is required
-        </p>
+        <ng-container *ngIf="{
+          login: loginForm.controls['login'],
+          password: loginForm.controls['password']
+        } as controls">
+          <label for="login">Login</label>
+          <input
+            type="text"
+            class="form-control my-2"
+            id="login"
+            placeholder="Login"
+            formControlName="login"
+          >
+          <p class="error text-danger" *ngIf="controls.login | formInputError">
+            Login is required
+          </p>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control my-2"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+          >
+          <p class="error text-danger" *ngIf="controls.password | formInputError">
+            Password is required
+          </p>
+        </ng-container>
         <div class="d-flex align-items-center gap-3">
           <button
             type="submit"
