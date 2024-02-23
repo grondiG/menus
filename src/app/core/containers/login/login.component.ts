@@ -35,6 +35,8 @@ export class LoginComponent {
   private store: Store = inject(Store);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
+  bannedWords: string[] = ['asd', '123', 'a12ds', 'test'];
+
   formValue: LoginData & { password2: string } = {
     login: '',
     password: '123',
@@ -47,7 +49,8 @@ export class LoginComponent {
   // })
 
   login(form: NgForm, e: SubmitEvent): void {
-    console.log(form.value);
+    Object.keys(form.controls).forEach((controlName: string) => form.controls[controlName].markAsDirty());
+    console.log(form);
 
     // if (this.loginForm.invalid) {
     //   this.loginForm.markAsDirty();

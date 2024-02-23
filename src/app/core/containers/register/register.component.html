@@ -9,83 +9,103 @@
 <!--      <app-error-card [error]="data.error"></app-error-card>-->
       <h2 class="text-center">Register</h2>
       <form
+        #form="ngForm"
         class="col-md-6 col-12 form-group"
-        appPreventDefault
-        [formGroup]="registerData"
-        (ngSubmit)="register()"
+        (ngSubmit)="register(form)"
+        [ngFormOptions]="{ updateOn: 'change' }"
+        autocomplete="off"
       >
         <label for="login">Login</label>
         <input
+          #loginControl="ngModel"
+          [(ngModel)]="registerForm.login"
+          required
+          name="login"
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="Login"
-          formControlName="login"
         >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('login')">
-          Login is required
-        </p>
+        <app-error-message
+          [control]="loginControl"
+        ></app-error-message>
         <label for="email">Email</label>
         <input
+          #mailControl="ngModel"
+          [(ngModel)]="registerForm.mail"
+          required
+          email
+          name="mail"
           type="email"
           class="form-control my-2"
           id="email"
           placeholder="Email"
-          formControlName="mail"
         />
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('mail')">
-          Email is invalid
-        </p>
+        <app-error-message
+          [control]="mailControl"
+        ></app-error-message>
         <label for="restaurantName">Restaurant Name</label>
         <input
+          #restaurantNameControl="ngModel"
+          [(ngModel)]="registerForm.restaurantName"
+          required
+          name="restaurantName"
           type="text"
           class="form-control my-2"
           id="restaurantName"
           placeholder="Restaurant Name"
-          formControlName="restaurantName"
         />
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('restaurantName')">
-          Restaurant Name is required
-        </p>
+        <app-error-message
+          [control]="restaurantNameControl"
+        ></app-error-message>
         <label for="address">Address</label>
         <input
+          #restaurantAddressControl="ngModel"
+          [(ngModel)]="registerForm.restaurantAddress"
+          required
+          name="restaurantAddress"
           type="text"
           class="form-control my-2"
           id="address"
           placeholder="Address"
-          formControlName="restaurantAddress"
         />
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('restaurantAddress')">
-          Address is required
-        </p>
+        <app-error-message
+          [control]="restaurantAddressControl"
+        ></app-error-message>
         <label for="password">Password</label>
         <input
+          #passwordControl="ngModel"
+          [(ngModel)]="registerForm.password"
+          required
+          appStrongPassword
+          name="password"
           type="password"
           class="form-control my-2"
           id="password"
           placeholder="Password"
-          formControlName="password"
         >
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('password')">
-          Password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter,
-          one number and one special character
-        </p>
+        <app-error-message
+          [control]="passwordControl"
+        ></app-error-message>
         <label for="confirmPassword">Confirm Password</label>
         <input
+          #confirmPasswordControl="ngModel"
+          [(ngModel)]="registerForm.confirmPassword"
+          required
+          appCheckPassword="password"
+          name="confirmPassword"
           type="password"
           class="form-control my-2"
           id="confirmPassword"
           placeholder="Confirm Password"
-          formControlName="confirmPassword"
         />
-        <p class="error text-danger" *ngIf="checkIfInputIsInvalid('confirmPassword')">
-          Passwords do not match
-        </p>
+        <app-error-message
+          [control]="confirmPasswordControl"
+        ></app-error-message>
         <div class="d-flex align-items-center gap-3">
           <button
             type="submit"
             class="btn btn-primary mt-3 ml-4"
-            [disabled]="registerData.invalid"
           >
             Register
           </button>

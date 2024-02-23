@@ -11,6 +11,8 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
 import { ErrorCardComponent } from './components/error-card/error-card.component';
 import { ErrorModalComponent } from './components/modal/error-modal.component';
 import { CartComponent } from './containers/cart/cart.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
 
 @NgModule({
     imports: [
@@ -26,12 +28,13 @@ import { CartComponent } from './containers/cart/cart.component';
         TitleCasePipe,
         CurrencyPipe
     ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    ErrorCardComponent,
-    ErrorModalComponent,
-  ],
+    exports: [
+        HeaderComponent,
+        FooterComponent,
+        ErrorCardComponent,
+        ErrorModalComponent,
+        ErrorMessageComponent,
+    ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -40,6 +43,8 @@ import { CartComponent } from './containers/cart/cart.component';
     CartComponent,
     GetNumberPricePipe,
     GetTotalCartPricePipe,
+    ErrorMessageComponent,
+    GetErrorInfoPipe,
   ]
 })
 export class CoreModule {

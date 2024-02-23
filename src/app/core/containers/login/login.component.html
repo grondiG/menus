@@ -1,11 +1,11 @@
 <ng-container *ngIf="{ isLoading: isLoading$ | async } as data">
   <div class="container">
-    <div class="row h-100 d-flex align-items-center justify-content-center flex-column">
+    <div class="row d-flex align-items-center justify-content-center flex-column">
       <pre>{{ formValue | json }}</pre>
       <h2 class="text-center">Login</h2>
 
-<!--      ngNativeValidate-->
-<!--      ngNoForm-->
+      <!--      ngNativeValidate-->
+      <!--      ngNoForm-->
       <form
         #form="ngForm"
         class="col-md-6 col-12 form-group"
@@ -20,28 +20,20 @@
           [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
           required
           [minlength]="3"
-          appBanWords="test"
+          [appBanWords]="bannedWords"
 
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="Login"
         >
-        <p *ngIf="loginControl.dirty && loginControl.hasError('required')" class="error text-danger">
-          Login is required
-        </p>
-        <p *ngIf="loginControl.dirty && loginControl.hasError('minlength')" class="error text-danger">
-          <span>Please provide more then <strong>{{ loginControl.getError('minlength')?.requiredLength }}</strong></span>
-        </p>
-        <p *ngIf="loginControl.dirty && loginControl.hasError('banWords')" class="error text-danger">
-          <span>Please do not use ban word</span>
-        </p>
-
-<!--        <ng-container ngModelGroup="passwords">-->
+        <app-error-message
+          [control]="loginControl"
+        ></app-error-message>
         <label for="password">Password</label>
-<!--        ngModel-->
-<!--        [ngModel]="formValue.password"-->
-<!--        (ngModelChange)="formValue.password = $event"-->
+        <!--        ngModel-->
+        <!--        [ngModel]="formValue.password"-->
+        <!--        (ngModelChange)="formValue.password = $event"-->
         <input
           #password="ngModel"
           [(ngModel)]="formValue.password"
@@ -53,9 +45,9 @@
           id="password"
           placeholder="Password"
         >
-        <p *ngIf="password.dirty && password.hasError('required')" class="error text-danger">
-          Login is required
-        </p>
+        <app-error-message
+          [control]="password"
+        ></app-error-message>
 
         <label for="password2">Confirm password</label>
         <input
@@ -70,13 +62,10 @@
           id="password2"
           placeholder="Confirm password"
         >
-        <p *ngIf="password2.dirty && password2.hasError('required')" class="error text-danger">
-          Login is required
-        </p>
-        <p *ngIf="password2.dirty && password2.hasError('passwordMatch')" class="error text-danger">
-          Password should match
-        </p>
-<!--        </ng-container>-->
+        <app-error-message
+          [control]="password2"
+        ></app-error-message>
+<!--        &lt;!&ndash;        </ng-container>&ndash;&gt;-->
 
         <div class="d-flex align-items-center gap-3">
           <button type="submit" class="btn btn-primary mt-3 ml-4">

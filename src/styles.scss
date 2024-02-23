@@ -20,6 +20,7 @@ a{
   border: 2px solid var(--color-success)!important;
 }
 
-.ng-invalid.ng-dirty:not(form) {
+.ng-invalid.ng-dirty:not(form), .ng-invalid.ng-touched:not(form) {
   border: 2px solid var(--color-error)!important;
 }
+
