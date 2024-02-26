@@ -15,7 +15,7 @@ export class BanWordsValidator implements Validator {
     if (!control?.value || typeof control.value !== 'string') {
       return null;
     }
-    console.log(control.value.toLowerCase() in this.appBanWords);
+
     return this.appBanWords.includes(control.value.toLowerCase())? { 'banWords': this.appBanWords } : null;
   }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -48,8 +48,13 @@ export class LoginComponent {
   //   password: new FormControl('', [ Validators.required ])
   // })
 
-  login(form: NgForm, e: SubmitEvent): void {
-    Object.keys(form.controls).forEach((controlName: string) => form.controls[controlName].markAsDirty());
+  login(container: NgForm, e: SubmitEvent): void {
+    const form: FormGroup = container.form;
+
+    if (form.invalid) {
+      return;
+    }
+    // Object.keys(container.controls).forEach((controlName: string) => container.controls[controlName].markAsDirty());
     console.log(form);
 
     // if (this.loginForm.invalid) {

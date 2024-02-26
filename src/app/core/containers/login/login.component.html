@@ -27,9 +27,7 @@
           id="login"
           placeholder="Login"
         >
-        <app-error-message
-          [control]="loginControl"
-        ></app-error-message>
+        <app-error-message [errors]="loginControl.errors" [dirty]="form.submitted || loginControl.dirty || loginControl.touched"/>
         <label for="password">Password</label>
         <!--        ngModel-->
         <!--        [ngModel]="formValue.password"-->
@@ -45,9 +43,7 @@
           id="password"
           placeholder="Password"
         >
-        <app-error-message
-          [control]="password"
-        ></app-error-message>
+        <app-error-message [errors]="password.errors" [dirty]="form.submitted || password.dirty || password.touched"/>
 
         <label for="password2">Confirm password</label>
         <input
@@ -62,9 +58,7 @@
           id="password2"
           placeholder="Confirm password"
         >
-        <app-error-message
-          [control]="password2"
-        ></app-error-message>
+        <app-error-message [errors]="password2.errors" [dirty]="form.submitted || password2.dirty || password2.touched"/>
 <!--        &lt;!&ndash;        </ng-container>&ndash;&gt;-->
 
         <div class="d-flex align-items-center gap-3">

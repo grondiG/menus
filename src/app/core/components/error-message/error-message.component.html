@@ -1,5 +1,3 @@
-<ng-container *ngIf="control.statusChanges | async">
-  <p *ngIf="control.control.dirty && control | getErrorInfo" class="error text-danger">
-    {{control | getErrorInfo}}
-  </p>
-</ng-container>
+<p *ngIf="errors && dirty" class="error text-danger">
+  {{ errors | getErrorInfo | titlecase }}
+</p>
