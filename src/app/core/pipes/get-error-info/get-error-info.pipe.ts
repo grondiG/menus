@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
 
-export type ErrorTypeKeys = 'required' | 'minlength';
+export type ErrorTypeKeys = 'required' | 'minlength' | 'banWords' | 'passwordMatch' | 'weakPassword' | 'email';
 
 @Pipe({
   name: 'getErrorInfo'
@@ -20,6 +20,14 @@ export class GetErrorInfoPipe implements PipeTransform {
         return 'Please provide more then ' + errors['minlength']?.requiredLength + ' characters';
       case 'required':
         return 'Input is required';
+      case 'banWords':
+        return 'Please do not use ban word. List of forbidden words: ' + errors['banWords'].join(', ');
+      case 'passwordMatch':
+        return 'Password do not match';
+      case 'weakPassword':
+        return 'Password is too weak';
+      case 'email':
+        return 'Invalid email';
       default:
         return 'Error on input';
     }
