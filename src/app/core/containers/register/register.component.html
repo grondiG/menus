@@ -26,9 +26,7 @@
           id="login"
           placeholder="Login"
         >
-        <app-error-message
-          [control]="loginControl"
-        ></app-error-message>
+        <app-error-message [errors]="loginControl.errors" [dirty]="form | getFormStatus: loginControl"/>
         <label for="email">Email</label>
         <input
           #mailControl="ngModel"
@@ -41,9 +39,7 @@
           id="email"
           placeholder="Email"
         />
-        <app-error-message
-          [control]="mailControl"
-        ></app-error-message>
+        <app-error-message [errors]="mailControl.errors" [dirty]="form | getFormStatus: mailControl"/>
         <label for="restaurantName">Restaurant Name</label>
         <input
           #restaurantNameControl="ngModel"
@@ -55,9 +51,7 @@
           id="restaurantName"
           placeholder="Restaurant Name"
         />
-        <app-error-message
-          [control]="restaurantNameControl"
-        ></app-error-message>
+        <app-error-message [errors]="restaurantNameControl.errors" [dirty]="form | getFormStatus: restaurantNameControl"/>
         <label for="address">Address</label>
         <input
           #restaurantAddressControl="ngModel"
@@ -69,9 +63,7 @@
           id="address"
           placeholder="Address"
         />
-        <app-error-message
-          [control]="restaurantAddressControl"
-        ></app-error-message>
+        <app-error-message [errors]="restaurantAddressControl.errors" [dirty]="form | getFormStatus: restaurantAddressControl"/>
         <label for="password">Password</label>
         <input
           #passwordControl="ngModel"
@@ -84,9 +76,7 @@
           id="password"
           placeholder="Password"
         >
-        <app-error-message
-          [control]="passwordControl"
-        ></app-error-message>
+        <app-error-message [errors]="passwordControl.errors" [dirty]="form | getFormStatus: passwordControl"/>
         <label for="confirmPassword">Confirm Password</label>
         <input
           #confirmPasswordControl="ngModel"
@@ -99,9 +89,7 @@
           id="confirmPassword"
           placeholder="Confirm Password"
         />
-        <app-error-message
-          [control]="confirmPasswordControl"
-        ></app-error-message>
+        <app-error-message [errors]="confirmPasswordControl.errors" [dirty]="form | getFormStatus: confirmPasswordControl"/>
         <div class="d-flex align-items-center gap-3">
           <button
             type="submit"

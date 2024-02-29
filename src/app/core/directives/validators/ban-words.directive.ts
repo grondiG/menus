@@ -16,6 +16,12 @@ export class BanWordsValidator implements Validator {
       return null;
     }
 
-    return this.appBanWords.includes(control.value.toLowerCase())? { 'banWords': this.appBanWords } : null;
+    const pattern: RegExp = new RegExp(this.appBanWords.join('|'), 'gi');
+    const matchingValues: string[] | null = control.value.match(pattern)
+      ?.filter((value: string, index: number, self: string[]) => self.indexOf(value) === index);
+
+    return !matchingValues ? null : { 'banWords': matchingValues };
+
+    // return this.appBanWords.includes(control.value.toLowerCase())? { 'banWords': this.appBanWords } : null;
   }
 }

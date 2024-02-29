@@ -13,6 +13,7 @@ import { ErrorModalComponent } from './components/modal/error-modal.component';
 import { CartComponent } from './containers/cart/cart.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
+import { GetFormStatusPipe } from './pipes/get-form-status/get-form-status.pipe';
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
         ErrorCardComponent,
         ErrorModalComponent,
         ErrorMessageComponent,
+        GetFormStatusPipe,
     ],
   declarations: [
     HeaderComponent,
@@ -45,6 +47,7 @@ import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
     GetTotalCartPricePipe,
     ErrorMessageComponent,
     GetErrorInfoPipe,
+    GetFormStatusPipe,
   ]
 })
 export class CoreModule {
