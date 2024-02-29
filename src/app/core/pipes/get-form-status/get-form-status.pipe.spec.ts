@@ -1,8 +1,8 @@
-import { GetFormStatusPipe } from './get-form-status.pipe';
+import { GetFormStatusForPipe } from './get-form-status.pipe';
 
 describe('GetFormStatusPipe', () => {
   it('create an instance', () => {
-    const pipe = new GetFormStatusPipe();
+    const pipe = new GetFormStatusForPipe();
     expect(pipe).toBeTruthy();
   });
 });

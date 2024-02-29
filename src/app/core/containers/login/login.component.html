@@ -20,14 +20,16 @@
           [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
           required
           [minlength]="3"
-          [appBanWords]="bannedWords"
+          appCheckNames
 
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="Login"
         >
-        <app-error-message [errors]="loginControl.errors" [dirty]="form | getFormStatus: loginControl"/>
+        <app-error-message [errors]="loginControl.errors" [dirty]="form.submitted || loginControl.touched || loginControl.dirty"/>
+
+
         <label for="password">Password</label>
         <!--        ngModel-->
         <!--        [ngModel]="formValue.password"-->
@@ -43,7 +45,7 @@
           id="password"
           placeholder="Password"
         >
-        <app-error-message [errors]="password.errors" [dirty]="form | getFormStatus: password"/>
+        <app-error-message [errors]="password.errors" [dirty]="form.submitted || password.touched || password.dirty"/>
 
         <label for="password2">Confirm password</label>
         <input
@@ -58,8 +60,7 @@
           id="password2"
           placeholder="Confirm password"
         >
-        <app-error-message [errors]="password2.errors" [dirty]="form | getFormStatus: password2"/>
-<!--        &lt;!&ndash;        </ng-container>&ndash;&gt;-->
+        <app-error-message [errors]="password2.errors" [dirty]="form.submitted || password2.touched || password2.dirty"/>
 
         <div class="d-flex align-items-center gap-3">
           <button type="submit" class="btn btn-primary mt-3 ml-4">
