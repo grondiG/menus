@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { CartEffects } from './store/cart/cart.effects';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrderEffects } from './store/order/order.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
         AppRoutingModule,
         CoreModule,
         StoreModule.forRoot(appReducers),
-        EffectsModule.forRoot([ UserEffects, CartEffects ]),
+        EffectsModule.forRoot([ UserEffects, CartEffects, OrderEffects ]),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: isDevMode() }),
         BrowserAnimationsModule,
         LoadingComponent,

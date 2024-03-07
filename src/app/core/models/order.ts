@@ -26,6 +26,6 @@ export interface OrderData {
   totalPrice: number;
 }
 
-export interface OrderShippingData extends OrderData {
+export interface OrderDto extends OrderData {
   shipping: ShippingForm;
 }

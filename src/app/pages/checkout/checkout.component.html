@@ -1,6 +1,7 @@
 <ng-container *ngIf="{
   cart: cartItems$ | async,
-  totalPrice: (cartItems$ | async) | getTotalCartPrice
+  totalPrice: (cartItems$ | async) | getTotalCartPrice,
+  isLoading: isLoading$ | async
 } as data">
   <!--  checkout page-->
   <div class="container">
@@ -103,4 +104,5 @@
       </div>
     </div>
   </div>
+  <app-loading *ngIf="data.isLoading"></app-loading>
 </ng-container>

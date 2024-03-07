@@ -45,6 +45,14 @@ export class CartEffects {
     })
   ), { dispatch: false });
 
+  clearCart$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(cartActions.clearCart),
+    map(() => {
+      localStorage.removeItem('cartItems');
+      return cartActions.clearCart();
+    })
+  ), { dispatch: false });
+
   removeItemFromLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.removeFromCart),
     map((action: { name: string }) => {
