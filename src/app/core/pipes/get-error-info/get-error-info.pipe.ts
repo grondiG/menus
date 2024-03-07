@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
 
-export type ErrorTypeKeys = 'required' | 'minlength' | 'banWords' | 'passwordMatch' | 'weakPassword' | 'email';
+export type ErrorTypeKeys = 'required' | 'minlength' | 'banWords' | 'passwordMatch' | 'weakPassword' | 'email' | 'exists';
 
 @Pipe({
   name: 'getErrorInfo'
@@ -14,7 +14,6 @@ export class GetErrorInfoPipe implements PipeTransform {
     }
 
     const errorKey: ErrorTypeKeys = Object.keys(errors)[0] as ErrorTypeKeys;
-
     switch (errorKey) {
       case 'minlength':
         return 'Please provide more then ' + errors['minlength']?.requiredLength + ' characters';
@@ -28,6 +27,8 @@ export class GetErrorInfoPipe implements PipeTransform {
         return 'Password is too weak';
       case 'email':
         return 'Invalid email';
+      case 'exists':
+        return 'This name already exists';
       default:
         return 'Error on input';
     }

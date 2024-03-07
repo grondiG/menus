@@ -10,23 +10,25 @@ import { CoreModule } from '../../core.module';
 import { RegisterData } from '../../models/authentication';
 import { CheckPasswordValidator } from '../../directives/validators';
 import { StrongPasswordDirective } from '../../directives/validators/strong-password.directive';
+import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    PreventDefaultDirective,
-    FormsModule,
-    RouterLink,
-    NgStyle,
-    NgIf,
-    CoreModule,
-    AsyncPipe,
-    CheckPasswordValidator,
-    StrongPasswordDirective,
-  ],
+    imports: [
+        PreventDefaultDirective,
+        FormsModule,
+        RouterLink,
+        NgStyle,
+        NgIf,
+        CoreModule,
+        AsyncPipe,
+        CheckPasswordValidator,
+        StrongPasswordDirective,
+        CheckNamesValidator,
+    ],
   standalone: true
 })
 export class RegisterComponent{
@@ -34,7 +36,7 @@ export class RegisterComponent{
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
   registerForm: RegisterData = {
-    login: 'asd',
+    login: '12333',
     mail: '',
     restaurantName: '',
     restaurantAddress: '',

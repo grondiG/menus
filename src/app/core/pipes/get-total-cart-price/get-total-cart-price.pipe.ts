@@ -3,6 +3,7 @@ import { CartItem } from '../../models/order';
 
 @Pipe({
   name: 'getTotalCartPrice',
+  standalone: true
 })
 export class GetTotalCartPricePipe implements PipeTransform {
 

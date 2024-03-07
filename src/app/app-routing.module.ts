@@ -6,6 +6,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { OrdersComponent } from "./pages/orders/orders.component";
 import { skipLoginGuard } from './core/guards/skip-login.guard';
+import { emptyCartGuard } from './core/guards/empty-cart.guard';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,12 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
     title: RouteTitle.PROFILE,
     canActivate: [skipLoginGuard]
+  },
+  {
+    path: RoutePath.CHECKOUT,
+    loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutModule),
+    title: RouteTitle.CHECKOUT,
+    canActivate: [authenticationGuard, emptyCartGuard]
   },
   {
     path: '**',

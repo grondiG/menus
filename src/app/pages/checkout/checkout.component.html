@@ -1,0 +1,106 @@
+<ng-container *ngIf="{
+  cart: cartItems$ | async,
+  totalPrice: (cartItems$ | async) | getTotalCartPrice
+} as data">
+  <!--  checkout page-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3>Checkout</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Shipping Address</h4>
+                <form #shippingForm="ngForm" (ngSubmit)="order(data, shippingForm)">
+                  <div class="form-group">
+                    <input
+                      #name="ngModel"
+                      type="text"
+                      class="form-control my-2"
+                      [(ngModel)]="shippingValue.name"
+                      name="name"
+                      placeholder="Name"
+                      required
+                    />
+                    <app-error-message [errors]="name.errors" [dirty]="name.dirty && name.touched"></app-error-message>
+                    <input
+                      #password="ngModel"
+                      type="text"
+                      class="form-control my-2"
+                      [(ngModel)]="shippingValue.address"
+                      placeholder="Address"
+                      name="password"
+                      required
+                    />
+                    <app-error-message [errors]="password.errors" [dirty]="password.dirty && password.touched"></app-error-message>
+                    <input
+                      #city="ngModel"
+                      type="text"
+                      class="form-control my-2"
+                      [(ngModel)]="shippingValue.city"
+                      placeholder="City"
+                      name="city"
+                      required
+                    />
+                    <app-error-message [errors]="city.errors" [dirty]="city.dirty && city.touched"></app-error-message>
+                    <input
+                      #country="ngModel"
+                      type="text"
+                      class="form-control my-2"
+                      [(ngModel)]="shippingValue.country"
+                      placeholder="Country"
+                      name="country"
+                      required
+                    />
+                    <app-error-message [errors]="country.errors" [dirty]="country.dirty && country.touched"></app-error-message>
+                    <input
+                      #zip="ngModel"
+                      type="text"
+                      class="form-control my-2"
+                      [(ngModel)]="shippingValue.zip"
+                      placeholder="Zip"
+                      name="zip"
+                      required
+                    />
+                    <app-error-message [errors]="zip.errors" [dirty]="zip.dirty && zip.touched"></app-error-message>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-6">
+                <h4>Order Summary</h4>
+                <table class="table overflow-y-auto">
+                  <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of data.cart">
+                    <td>{{item.item.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{data.totalPrice | currency}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="text-right
+                ">
+                  <h4>Total: {{(data.totalPrice | currency)}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center my-3">
+        <button class="btn btn-primary" (click)="order(data, shippingForm)">Place Order</button>
+      </div>
+    </div>
+  </div>
+</ng-container>

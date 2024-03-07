@@ -16,27 +16,29 @@ import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
 import { GetFormStatusForPipe } from './pipes/get-form-status/get-form-status.pipe';
 
 @NgModule({
-    imports: [
-        HttpClientModule,
-        RestaurantCardComponent,
-        RouterLink,
-        NgForOf,
-        AsyncPipe,
-        GetCurrentPageByUrlPipe,
-        NgClass,
-        NgIf,
-        RouterLinkActive,
-        TitleCasePipe,
-        CurrencyPipe
-    ],
-    exports: [
-        HeaderComponent,
-        FooterComponent,
-        ErrorCardComponent,
-        ErrorModalComponent,
-        ErrorMessageComponent,
-        GetFormStatusForPipe,
-    ],
+  imports: [
+    HttpClientModule,
+    RestaurantCardComponent,
+    RouterLink,
+    NgForOf,
+    AsyncPipe,
+    GetCurrentPageByUrlPipe,
+    NgClass,
+    NgIf,
+    RouterLinkActive,
+    TitleCasePipe,
+    CurrencyPipe,
+    GetTotalCartPricePipe,
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    ErrorCardComponent,
+    ErrorModalComponent,
+    ErrorMessageComponent,
+    GetFormStatusForPipe,
+    GetNumberPricePipe,
+  ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -44,7 +46,6 @@ import { GetFormStatusForPipe } from './pipes/get-form-status/get-form-status.pi
     ErrorModalComponent,
     CartComponent,
     GetNumberPricePipe,
-    GetTotalCartPricePipe,
     ErrorMessageComponent,
     GetErrorInfoPipe,
     GetFormStatusForPipe,

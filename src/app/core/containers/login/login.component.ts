@@ -4,6 +4,7 @@ import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import * as profileAction from '../../../store/user/user.actions';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { LoginData } from '../../models/authentication';
 import { CoreModule } from '../../core.module';
@@ -38,8 +39,6 @@ export class LoginComponent {
   private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
-  bannedWords: string[] = ['asd', '123', 'a12ds', 'test'];
-
   formValue: LoginData & { password2: string } = {
     login: '',
     password: '123',
@@ -66,8 +65,8 @@ export class LoginComponent {
     //   return;
     // }
     //
-    // const data: LoginData = this.loginForm.getRawValue();
-    // this.store.dispatch(profileAction.loadUser({ data }));
+    const data: LoginData = container.form.getRawValue();
+    this.store.dispatch(profileAction.loadUser({ data }));
   }
 
   // checkIfInputIsInvalid(inputName: string): boolean {

@@ -1,6 +1,16 @@
 import { ChangeDetectorRef, Directive, inject } from '@angular/core';
 import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS, ValidationErrors } from '@angular/forms';
-import { catchError, finalize, map, Observable, of } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  first,
+  map,
+  Observable,
+  of,
+  switchMap
+} from 'rxjs';
 import { UserService } from '../../services/profile/user.service';
 
 @Directive({
@@ -19,10 +29,14 @@ export class CheckNamesValidator implements AsyncValidator {
       return of(null);
     }
 
-    return this.userService.checkName(control.value).pipe(
+    return control.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap(() => this.userService.checkName(control.value)),
       map((response) => response.exists ? { exists: true } : null),
       catchError(() => of({ errorOnCheck: true })),
-      finalize(() => this.cd.markForCheck())
+      finalize(() => this.cd.markForCheck()),
+      first()
     );
   }
 }
