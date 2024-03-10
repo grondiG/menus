@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgModel, ValidationErrors } from '@angular/forms';
+import { ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-error-message',
@@ -9,6 +9,4 @@ import { NgModel, ValidationErrors } from '@angular/forms';
 export class ErrorMessageComponent{
   @Input() dirty: boolean;
   @Input() errors: ValidationErrors | null;
-  // TODO remove
-  @Input() control: NgModel | null;
 }

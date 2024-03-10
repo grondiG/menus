@@ -9,9 +9,10 @@ import { RegisterData } from '../../models/authentication';
 export class CheckIfInputIsValidPipe implements PipeTransform {
 
   transform(inputName: string, registerData: ModelFormGroup<RegisterData>): boolean {
-    console.log('inputName', inputName)
     const control = registerData.get(inputName);
-    if (!control) return false; // If control doesn't exist, consider it valid
+    if (!control) {
+      return false;
+    }
 
     if (inputName === 'confirmPassword' && control.touched) {
       return registerData.hasError('passwordMismatch');

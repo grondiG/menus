@@ -1,6 +1,6 @@
-import { OrderDto } from '../../core/models/order';
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import * as fromOrders from './order.actions';
+import { OrderDto } from '../../core/models/order';
 
 export interface OrderState {
   orders: OrderDto[];
@@ -74,16 +74,15 @@ export const orderSelector = createSelector(
 export const orderLoadingSelector = createSelector(
   orderFeatureSelector,
   (orders: OrderState) => {
-      return orders.loading
+    return orders.loading
   }
 );
 
 export const orderDataSelector = createSelector(
-    orderFeatureSelector,
-    (orders: OrderState) => {
-        console.log('Selector is being called!', orders);
-        return orders?.orders;
-    }
+  orderFeatureSelector,
+  (orders: OrderState) => {
+    return orders?.orders;
+  }
 );
 
 export const {

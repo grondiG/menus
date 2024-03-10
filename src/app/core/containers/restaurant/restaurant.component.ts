@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../../store/cart/cart.actions';
 import { Restaurant } from '../../models/restaurant.model';
-import { RestaurantsStore } from '../../../pages/restaurants/restaurants.store';
 import { CartItem } from '../../models/order';
 import { CoreModule } from '../../core.module';
+import { RestaurantsStore } from '../../../pages/restaurants/restaurants.store';
 import {
   RestaurantAccordionComponent
 } from '../../components/restaurant-accordion/restaurant-accordion.component';

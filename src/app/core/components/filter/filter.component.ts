@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 
 @Component({

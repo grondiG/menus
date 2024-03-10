@@ -5,13 +5,13 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as profileAction from '../../../store/user/user.actions';
-import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoginData } from '../../models/authentication';
 import { CoreModule } from '../../core.module';
-import { userIsLoadingSelector } from '../../../store/user/user.reducer';
-import { LoadingComponent } from '../../components/loading/loading/loading.component';
 import { BanWordsValidator, CheckPasswordValidator } from '../../directives/validators';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
+import { LoadingComponent } from '../../components/loading/loading/loading.component';
 
 @Component({
   selector: 'app-login',

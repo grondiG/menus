@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { interval, map, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { HttpErrorResponse } from '@angular/common/http';
 import * as fromApp from '../../../store/app-state/app-state.reducer';
 import * as appActions from '../../../store/app-state/app-state.actions';
 

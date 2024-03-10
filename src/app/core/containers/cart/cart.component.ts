@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../../store/cart/cart.actions';
 import { cartSelector } from '../../../store/cart/cart.reducer';
 import { CartItem } from '../../models/order';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',

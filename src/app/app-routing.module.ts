@@ -3,10 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RoutePath, RouteTitle } from "./app.config";
 import { authenticationGuard } from "./core/guards/authentication.guard";
 import { HomeComponent } from "./pages/home/home.component";
-import { NotFoundComponent } from "./pages/not-found/not-found.component";
-import { OrdersComponent } from "./pages/orders/orders.component";
 import { skipLoginGuard } from './core/guards/skip-login.guard';
 import { emptyCartGuard } from './core/guards/empty-cart.guard';
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
 
 export const routes: Routes = [
   {
@@ -26,8 +25,8 @@ export const routes: Routes = [
   },
   {
     path: RoutePath.ORDERS,
-    component: OrdersComponent,
     title: RouteTitle.ORDERS,
+    loadChildren: () => import('./pages/orders/orders.module').then(m => m.OrdersModule),
     canActivate: [authenticationGuard]
   },
   {

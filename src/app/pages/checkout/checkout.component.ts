@@ -4,11 +4,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { CartItem, OrderData, OrderDto, ShippingForm } from '../../core/models/order';
 import { cartSelector } from '../../store/cart/cart.reducer';
-import * as fromOrders from '../../store/order/order.actions';
 import { orderDataSelector, orderLoadingSelector } from '../../store/order/order.reducer';
 import { userIdSelector } from '../../store/user/user.reducer';
+import * as fromOrders from '../../store/order/order.actions';
+import { CartItem, OrderData, OrderDto, ShippingForm } from '../../core/models/order';
 
 
 @Component({
@@ -45,7 +45,6 @@ export class CheckoutComponent {
 
     this.userId$.pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((userId: string) => {
-        console.log(userId);
       if(!userId){
         return;
       }

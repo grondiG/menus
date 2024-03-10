@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NgControl, ValidationErrors } from '@angular/forms';
+import { ValidationErrors } from '@angular/forms';
 
 export type ErrorTypeKeys = 'required' | 'minlength' | 'banWords' | 'passwordMatch' | 'weakPassword' | 'email' | 'exists';
 

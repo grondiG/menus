@@ -4,7 +4,6 @@ import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects'
 import { Action } from '@ngrx/store';
 import * as cartActions from './cart.actions';
 import { CartItem } from '../../core/models/order';
-import { getItemsFromLocalStorage } from './cart.actions';
 
 
 @Injectable()

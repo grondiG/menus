@@ -109,7 +109,7 @@ export class UserEffects {
     userInitialized$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(userActions.userInitialized),
         mergeMap((action) => [
-            fromOrders.getOrders({ userId: action.userId }),
+            fromOrders.getOrders({ userId: action.userId })
         ])
     ));
 }
