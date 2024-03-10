@@ -13,6 +13,7 @@ export interface RegisterData {
 }
 
 export interface UserDataDto {
+  id: string;
   login: string;
   mail: string;
   restaurantName: string;
@@ -27,6 +28,7 @@ export interface ResponseDataDto {
 
 // also possible name UserDataVM, IUserData, EcnUserData, AppUserData
 export interface UserData {
+  id: string;
   login: string;
   mail: string;
   restaurantName: string;

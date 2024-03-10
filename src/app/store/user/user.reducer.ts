@@ -43,7 +43,7 @@ export const userFeature = createFeature({
     ),
     on(userActions.loadUserFail,
       userActions.registerFail,
-      (state, action) => ({
+      (state) => ({
         ...state, loading: false, isLogged: false
       })
     ),
@@ -60,6 +60,11 @@ const userFeatureSelector = createFeatureSelector<UserState>(userFeatureKey);
 export const userSelector = createSelector(
   userFeatureSelector,
   (state) => state
+);
+
+export const userIdSelector = createSelector(
+  userFeatureSelector,
+  (state) => state?.data?.id
 );
 
 export const userIsLoggedSelector = createSelector(

@@ -27,5 +27,7 @@ export interface OrderData {
 }
 
 export interface OrderDto extends OrderData {
+  id?: string;
+  userId: string;
   shipping: ShippingForm;
 }

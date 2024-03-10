@@ -40,6 +40,27 @@ export const orderFeature = createFeature({
         loading: false
       })
     ),
+    on(
+      fromOrders.getOrders,
+      (state: OrderState) => ({
+        ...state,
+        loading: true
+      })
+    ),
+    on(
+      fromOrders.getOrdersSuccess,
+      (state: OrderState, action) => ({
+        loading: false,
+        orders: action.orders
+      })
+    ),
+    on(
+      fromOrders.getOrdersFailure,
+      () => ({
+        loading: false,
+        orders: []
+      })
+    )
   )
 });
 
@@ -47,12 +68,22 @@ const orderFeatureSelector = createFeatureSelector<OrderState>(orderFeatureKey);
 
 export const orderSelector = createSelector(
   orderFeatureSelector,
-  (orders) => orders
+  (orders: OrderState) => orders
 );
 
 export const orderLoadingSelector = createSelector(
   orderFeatureSelector,
-  (orders) => orders.loading
+  (orders: OrderState) => {
+      return orders.loading
+  }
+);
+
+export const orderDataSelector = createSelector(
+    orderFeatureSelector,
+    (orders: OrderState) => {
+        console.log('Selector is being called!', orders);
+        return orders?.orders;
+    }
 );
 
 export const {
