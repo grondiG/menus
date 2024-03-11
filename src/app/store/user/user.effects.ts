@@ -7,7 +7,7 @@ import { ResponseDataDto } from '../../core/models/authentication';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
 import * as appStateActions from '../app-state/app-state.actions';
-import * as fromOrders from '../order/order.actions';
+import { getOrders } from '../order/order.actions';
 
 
 @Injectable()
@@ -108,8 +108,6 @@ export class UserEffects {
 
     userInitialized$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(userActions.userInitialized),
-        mergeMap((action) => [
-            fromOrders.getOrders({ userId: action.userId })
-        ])
+        map(()=> getOrders())
     ));
 }

@@ -62,19 +62,19 @@ export const userSelector = createSelector(
   (state) => state
 );
 
-export const userIdSelector = createSelector(
+export const getUserId = createSelector(
   userFeatureSelector,
-  (state) => state?.data?.id
+  (state) => state?.data?.id || null //important
 );
 
 export const userIsLoggedSelector = createSelector(
   userFeatureSelector,
-  (state) => !!state?.isLogged
+  (state) => !!state?.isLogged //it will be always true or false
 );
 
 export const userIsLoadingSelector = createSelector(
   userFeatureSelector,
-  (state) => state?.loading
+  (state) => !!state?.loading
 );
 
 

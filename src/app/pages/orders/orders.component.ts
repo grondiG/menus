@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -18,7 +18,11 @@ import { OrderListComponent } from '../../core/components/order-list/order-list.
   ],
   standalone: true
 })
-export class OrdersComponent{
+export class OrdersComponent implements OnInit{
   private store: Store = inject(Store);
   orders$: Observable<OrderDto[]> = this.store.select(orderDataSelector);
+
+  ngOnInit(): void {
+    //TODO create action to get orders on page enter
+  }
 }

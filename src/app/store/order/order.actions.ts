@@ -21,6 +21,6 @@ export const redirectToOrders = createAction(OrderActions.RedirectToOrders);
 export const removeOrder = createAction(OrderActions.RemoveOrder, props<{ id: string }>());
 export const removeOrderSuccess = createAction(OrderActions.RemoveOrderSuccess, props<{ id: string }>());
 export const removeOrderFailure = createAction(OrderActions.RemoveOrderFailure, props<{ error: any }>());
-export const getOrders = createAction(OrderActions.GetOrders, props<{ userId: string }>());
+export const getOrders = createAction(OrderActions.GetOrders);
 export const getOrdersSuccess = createAction(OrderActions.GetOrdersSuccess, props<{ orders: OrderDto[] }>());
 export const getOrdersFailure = createAction(OrderActions.GetOrdersFailure, props<{ error: any }>());

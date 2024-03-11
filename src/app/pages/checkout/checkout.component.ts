@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { cartSelector } from '../../store/cart/cart.reducer';
 import { orderDataSelector, orderLoadingSelector } from '../../store/order/order.reducer';
-import { userIdSelector } from '../../store/user/user.reducer';
+import { getUserId } from '../../store/user/user.reducer';
 import * as fromOrders from '../../store/order/order.actions';
 import { CartItem, OrderData, OrderDto, ShippingForm } from '../../core/models/order';
 
@@ -23,7 +23,7 @@ export class CheckoutComponent {
   private destroyRef: DestroyRef = inject(DestroyRef);
   cartItems$: Observable<CartItem[]> = this.store.select(cartSelector);
   isLoading$: Observable<boolean> = this.store.select(orderLoadingSelector);
-  userId$: Observable<string> = this.store.select(userIdSelector);
+  userId$: Observable<string> = this.store.select(getUserId);
   orderData$: Observable<OrderData[]> = this.store.select(orderDataSelector);
 
   shippingValue: ShippingForm = {
