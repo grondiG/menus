@@ -18,6 +18,12 @@ export class OrderEffects {
     private router: Router = inject(Router);
     private store: Store = inject(Store);
 
+    onPageLoad$: Observable<Action> = createEffect(() => this.actions$.pipe(
+        ofType(ordersActions.onPageLoad),
+        switchMap(() => this.store.select(fromUser.getUserId)),
+        map(() => ordersActions.getOrders())
+    ));
+
     addOrder$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(ordersActions.addOrder),
         switchMap((action) => this.ordersService.order(action.order).pipe(

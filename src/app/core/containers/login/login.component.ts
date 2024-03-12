@@ -12,6 +12,7 @@ import { BanWordsValidator, CheckPasswordValidator } from '../../directives/vali
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
+import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ import { LoadingComponent } from '../../components/loading/loading/loading.compo
     JsonPipe,
     BanWordsValidator,
     CheckPasswordValidator,
-    CheckNamesValidator
+    CheckNamesValidator,
+    ErrorMessageDirective
   ],
   standalone: true
 

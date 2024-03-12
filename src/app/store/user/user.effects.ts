@@ -106,8 +106,8 @@ export class UserEffects {
         })
     ), { dispatch: false });
 
-    userInitialized$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(userActions.userInitialized),
-        map(()=> getOrders())
-    ));
+    // userInitialized$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    //     ofType(userActions.userInitialized),
+    //     map(()=> getOrders())
+    // ));
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { orderDataSelector } from '../../store/order/order.reducer';
 import { OrderDto } from '../../core/models/order';
 import { OrderListComponent } from '../../core/components/order-list/order-list.component';
+import { onPageLoad } from '../../store/order/order.actions';
 
 @Component({
   selector: 'app-orders',
@@ -23,6 +24,6 @@ export class OrdersComponent implements OnInit{
   orders$: Observable<OrderDto[]> = this.store.select(orderDataSelector);
 
   ngOnInit(): void {
-    //TODO create action to get orders on page enter
+    this.store.dispatch(onPageLoad());
   }
 }

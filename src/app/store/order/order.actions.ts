@@ -12,6 +12,7 @@ export enum OrderActions {
   GetOrders = '[Order] Get orders',
   GetOrdersSuccess = '[Order] Get orders success',
   GetOrdersFailure = '[Order] Get orders failure',
+  OnPageLoad = '[Order] On page load',
 }
 
 export const addOrder = createAction(OrderActions.AddOrder, props<{ order: OrderDto }>());
@@ -24,3 +25,4 @@ export const removeOrderFailure = createAction(OrderActions.RemoveOrderFailure, 
 export const getOrders = createAction(OrderActions.GetOrders);
 export const getOrdersSuccess = createAction(OrderActions.GetOrdersSuccess, props<{ orders: OrderDto[] }>());
 export const getOrdersFailure = createAction(OrderActions.GetOrdersFailure, props<{ error: any }>());
+export const onPageLoad = createAction(OrderActions.OnPageLoad);
