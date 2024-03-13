@@ -28,7 +28,6 @@
           appCheckNames
           appErrorMessage="login"
         >
-        <p *ngIf="loginControl.pending" class="text-secondary">Pending...</p>
         <label for="email">Email</label>
         <input
           #mailControl="ngModel"
@@ -40,8 +39,8 @@
           class="form-control my-2"
           id="email"
           placeholder="Email"
+          appErrorMessage="mail"
         />
-        <app-error-message [errors]="mailControl.errors" [dirty]="form | getFormStatusFor: mailControl"/>
         <label for="restaurantName">Restaurant Name</label>
         <input
           #restaurantNameControl="ngModel"
@@ -52,8 +51,8 @@
           class="form-control my-2"
           id="restaurantName"
           placeholder="Restaurant Name"
+          appErrorMessage="restaurantName"
         />
-        <app-error-message [errors]="restaurantNameControl.errors" [dirty]="form | getFormStatusFor: restaurantNameControl"/>
         <label for="address">Address</label>
         <input
           #restaurantAddressControl="ngModel"
@@ -64,8 +63,8 @@
           class="form-control my-2"
           id="address"
           placeholder="Address"
+          appErrorMessage="restaurantAddress"
         />
-        <app-error-message [errors]="restaurantAddressControl.errors" [dirty]="form | getFormStatusFor: restaurantAddressControl"/>
         <label for="password">Password</label>
         <input
           #passwordControl="ngModel"
@@ -77,8 +76,8 @@
           class="form-control my-2"
           id="password"
           placeholder="Password"
+          appErrorMessage="password"
         >
-        <app-error-message [errors]="passwordControl.errors" [dirty]="form | getFormStatusFor: passwordControl"/>
         <label for="confirmPassword">Confirm Password</label>
         <input
           #confirmPasswordControl="ngModel"
@@ -90,8 +89,8 @@
           class="form-control my-2"
           id="confirmPassword"
           placeholder="Confirm Password"
+          appErrorMessage="confirmPassword"
         />
-        <app-error-message [errors]="confirmPasswordControl.errors" [dirty]="form | getFormStatusFor: confirmPasswordControl"/>
         <div class="d-flex align-items-center gap-3">
           <button
             type="submit"

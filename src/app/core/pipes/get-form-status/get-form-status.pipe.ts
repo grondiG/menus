@@ -7,10 +7,6 @@ export class GetFormStatusForPipe implements PipeTransform {
     const submitted: boolean = form.submitted;
     const formControl: FormControl|undefined = form.control.get(controlName) as FormControl;
 
-    console.log(submitted);
-    console.log(formControl?.dirty);
-    console.log(formControl?.touched);
-
     return form.submitted || control.dirty || control.touched;
   }
 }

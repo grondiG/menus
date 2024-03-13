@@ -14,6 +14,7 @@ import { ErrorCardComponent } from './components/error-card/error-card.component
 import { ErrorModalComponent } from './components/modal/error-modal.component';
 import { CartComponent } from './containers/cart/cart.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { PendingComponent } from './components/pending/pending.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     ErrorMessageComponent,
     GetErrorInfoPipe,
     GetFormStatusForPipe,
+    PendingComponent,
   ]
 })
 export class CoreModule {
