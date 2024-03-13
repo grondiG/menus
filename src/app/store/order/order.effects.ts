@@ -20,7 +20,6 @@ export class OrderEffects {
 
     onPageLoad$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(ordersActions.onPageLoad),
-        switchMap(() => this.store.select(fromUser.getUserId)),
         map(() => ordersActions.getOrders())
     ));
 

@@ -46,12 +46,11 @@ export class ErrorMessageDirective implements AfterViewInit {
   }
 
   private updateErrorMessage(): void {
-    this.errComponent.destroy();
-
-    this.errComponent = this.viewContainerRef.createComponent(ErrorMessageComponent);
+    //TODO add condition to show or hide error message
     this.errComponent.instance.errors = this.parentFormGroup.get(this.control).errors;
     this.errComponent.instance.dirty = this.parentForm?.submitted || this.parentFormGroup.get(this.control).dirty || this.parentFormGroup.get(this.control).touched;
 
     this.cdr.markForCheck();
   }
+  //TODO destroy dynamic component
 }
