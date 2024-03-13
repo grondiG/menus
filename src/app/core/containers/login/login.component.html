@@ -27,7 +27,6 @@
           placeholder="Login"
           appErrorMessage="login"
         >
-<!--        <app-error-message [errors]="loginControl.errors" [dirty]="form.submitted || loginControl.touched || loginControl.dirty"/>-->
 
         <label for="password">Password</label>
         <!--        ngModel-->
@@ -43,9 +42,9 @@
           class="form-control my-2"
           id="password"
           placeholder="Password"
-        >
-        <app-error-message [errors]="password.errors" [dirty]="form.submitted || password.touched || password.dirty"/>
+          appErrorMessage="password"
 
+        >
 <!--        <label for="password2">Confirm password</label>-->
 <!--        <input-->
 <!--          #password2="ngModel"-->

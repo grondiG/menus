@@ -11,24 +11,26 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
 import { CheckPasswordValidator } from '../../directives/validators';
 import { StrongPasswordDirective } from '../../directives/validators/strong-password.directive';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
+import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        PreventDefaultDirective,
-        FormsModule,
-        RouterLink,
-        NgStyle,
-        NgIf,
-        CoreModule,
-        AsyncPipe,
-        CheckPasswordValidator,
-        StrongPasswordDirective,
-        CheckNamesValidator,
-    ],
+  imports: [
+    PreventDefaultDirective,
+    FormsModule,
+    RouterLink,
+    NgStyle,
+    NgIf,
+    CoreModule,
+    AsyncPipe,
+    CheckPasswordValidator,
+    StrongPasswordDirective,
+    CheckNamesValidator,
+    ErrorMessageDirective,
+  ],
   standalone: true
 })
 export class RegisterComponent{

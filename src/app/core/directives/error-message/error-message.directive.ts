@@ -1,12 +1,12 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
   ComponentRef, DestroyRef,
   Directive,
   inject,
-  Input,
+  Input, OnDestroy,
   ViewContainerRef
 } from '@angular/core';
-import { ControlContainer, FormGroup, NgForm } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
 import { ErrorMessageComponent } from '../../components/error-message/error-message.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -14,11 +14,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   standalone: true,
   selector: '[appErrorMessage]'
 })
-export class ErrorMessageDirective implements AfterViewInit {
+export class ErrorMessageDirective implements AfterViewInit, OnDestroy {
   private container: ControlContainer = inject(ControlContainer);
   private viewContainerRef: ViewContainerRef = inject(ViewContainerRef);
   private destroy: DestroyRef = inject(DestroyRef);
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   @Input({ required: true }) set appErrorMessage(value: string) {
     this.control = value;
@@ -38,19 +37,22 @@ export class ErrorMessageDirective implements AfterViewInit {
   ngAfterViewInit(): void {
     this.errComponent = this.viewContainerRef.createComponent(ErrorMessageComponent);
 
-    queueMicrotask(() => this.parentFormGroup.get(this.control).valueChanges.pipe(
+    queueMicrotask(() => this.parentFormGroup.get(this.control).statusChanges.pipe(
       takeUntilDestroyed(this.destroy)
     ).subscribe(() => {
       this.updateErrorMessage();
+      //TODO add pending info
     }));
   }
 
   private updateErrorMessage(): void {
-    //TODO add condition to show or hide error message
-    this.errComponent.instance.errors = this.parentFormGroup.get(this.control).errors;
-    this.errComponent.instance.dirty = this.parentForm?.submitted || this.parentFormGroup.get(this.control).dirty || this.parentFormGroup.get(this.control).touched;
+    const inputControl: AbstractControl = this.parentFormGroup.get(this.control);
+    this.errComponent.setInput('errors', inputControl.errors);
+    this.errComponent.setInput('dirty', this.parentForm?.submitted || inputControl.dirty || inputControl.touched);
 
-    this.cdr.markForCheck();
   }
-  //TODO destroy dynamic component
+
+  ngOnDestroy() {
+    this.errComponent.destroy();
+  }
 }

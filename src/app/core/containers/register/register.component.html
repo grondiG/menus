@@ -26,9 +26,9 @@
           id="login"
           placeholder="Login"
           appCheckNames
+          appErrorMessage="login"
         >
         <p *ngIf="loginControl.pending" class="text-secondary">Pending...</p>
-        <app-error-message [errors]="loginControl.errors" [dirty]="form.submitted || loginControl.touched || loginControl.dirty"/>
         <label for="email">Email</label>
         <input
           #mailControl="ngModel"
