@@ -1,15 +1,18 @@
 import {
   AfterViewInit,
-  ComponentRef, DestroyRef,
+  ComponentRef,
+  DestroyRef,
   Directive,
+  ElementRef,
   inject,
-  Input, OnDestroy,
+  OnDestroy,
   ViewContainerRef
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
+import { ControlContainer, FormControlStatus, NgControl, NgForm } from '@angular/forms';
 import { ErrorMessageComponent } from '../../components/error-message/error-message.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PendingComponent } from '../../components/pending/pending.component';
+import { fromEvent, map, merge, Observable, skip, startWith } from 'rxjs';
 
 @Directive({
   standalone: true,
@@ -19,12 +22,9 @@ export class ErrorMessageDirective implements AfterViewInit, OnDestroy {
   private container: ControlContainer = inject(ControlContainer);
   private viewContainerRef: ViewContainerRef = inject(ViewContainerRef);
   private destroy: DestroyRef = inject(DestroyRef);
+  private ngControl: NgControl = inject(NgControl, { self: true });
+  elementRef: ElementRef = inject(ElementRef);
 
-  @Input({ required: true }) set appErrorMessage(value: string) {
-    this.control = value;
-  }
-
-  private control: string;
   private errComponent!: ComponentRef<ErrorMessageComponent>
   private pendingComponent!: ComponentRef<PendingComponent>;
 
@@ -32,38 +32,57 @@ export class ErrorMessageDirective implements AfterViewInit, OnDestroy {
     return this.container as NgForm;
   }
 
-  get parentFormGroup(): FormGroup {
-    return this.container.control as FormGroup;
+  get ngForm(): NgForm | null {
+    return (this.container?.formDirective || null) as NgForm | null;
   }
+
+  submitted$: Observable<boolean> = this.ngForm?.ngSubmit.pipe(
+    map(() => true),
+    startWith(false),
+    skip(1),
+    takeUntilDestroyed(this.destroy)
+  );
+
+  controlChanges$: Observable<FormControlStatus> = this.ngControl?.control.statusChanges.pipe(
+    skip(1),
+    takeUntilDestroyed(this.destroy)
+  )
+
+  controlTouched$: Observable<unknown> = fromEvent(this.elementRef.nativeElement, 'blur').pipe(
+    takeUntilDestroyed(this.destroy)
+  );
 
   ngAfterViewInit(): void {
+    if (!this.ngControl?.control) {
+      throw Error(`No control model for ${this.ngControl?.name} control...`);
+    }
     this.errComponent = this.viewContainerRef.createComponent(ErrorMessageComponent);
 
-    queueMicrotask(() => this.parentFormGroup.get(this.control).statusChanges.pipe(
-      takeUntilDestroyed(this.destroy)
-    ).subscribe(() => {
-      this.updateErrorMessage();
-      if(this.parentFormGroup.get(this.control).pending){
-        this.updatePending();
-      }
-    }));
+    queueMicrotask(() =>
+      merge(this.submitted$, this.controlChanges$, this.controlTouched$
+      ).subscribe(() => {
+        this.updateErrorMessage();
+        if(this.ngControl.pending){
+          this.updatePending();
+        }
+      })
+    );
   }
 
+
   private updateErrorMessage(): void {
-    const inputControl: AbstractControl = this.parentFormGroup.get(this.control);
-    this.errComponent.setInput('errors', inputControl.errors);
-    this.errComponent.setInput('dirty', this.parentForm?.submitted || inputControl.dirty || inputControl.touched);
+    this.errComponent.setInput('errors', this.ngControl.errors);
+    this.errComponent.setInput('dirty', this.parentForm?.submitted || this.ngControl.dirty || this.ngControl.touched);
     if(!!this.pendingComponent){
       this.pendingComponent.setInput('isPending', false);
     }
   }
 
   private updatePending(): void {
-    const inputControl: AbstractControl = this.parentFormGroup.get(this.control);
       if (!this.pendingComponent) {
         this.pendingComponent = this.viewContainerRef.createComponent(PendingComponent);
       }
-      this.pendingComponent.setInput('isPending', inputControl.pending);
+      this.pendingComponent.setInput('isPending', this.ngControl.pending);
   }
 
   ngOnDestroy() {
