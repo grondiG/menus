@@ -8,10 +8,10 @@ describe('RestaurantComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RestaurantComponent]
+      imports: [RestaurantComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RestaurantComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

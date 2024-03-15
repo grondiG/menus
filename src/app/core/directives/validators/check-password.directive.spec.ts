@@ -1,8 +1,18 @@
-import { CheckPasswordDirective } from './check-password.directive';
+import { CheckPasswordValidator } from './check-password.directive';
+import { TestBed } from '@angular/core/testing';
+import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
-describe('CheckPasswordDirective', () => {
+describe('CheckPasswordValidator', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [{ provide: ControlContainer, useValue: new FormGroupDirective([], []) }]
+    });
+  });
+
   it('should create an instance', () => {
-    const directive = new CheckPasswordDirective();
-    expect(directive).toBeTruthy();
+    TestBed.runInInjectionContext(() => {
+      const directive = new CheckPasswordValidator();
+      expect(directive).toBeTruthy();
+    });
   });
 });

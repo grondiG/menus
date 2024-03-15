@@ -1,8 +1,8 @@
-import { BanWordsDirective } from './ban-words.directive';
+import { BanWordsValidator } from './ban-words.directive';
 
 describe('BanWordsDirective', () => {
   it('should create an instance', () => {
-    const directive = new BanWordsDirective();
+    const directive: BanWordsValidator = new BanWordsValidator();
     expect(directive).toBeTruthy();
   });
 });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { ErrorModalComponent } from './error-modal.component';
 
@@ -8,10 +9,11 @@ describe('ErrorModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ErrorModalComponent]
+      declarations: [ErrorModalComponent],
+      providers: [provideMockStore({})]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ErrorModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
