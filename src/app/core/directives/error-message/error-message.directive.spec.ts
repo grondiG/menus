@@ -8,12 +8,12 @@ const ngControlMock: NgControl = {
   name: 'test'
 } as unknown as NgControl;
 
-const viewContainerRefMock = {
+const viewContainerRefMock: ViewContainerRef = {
   createComponent: () => {
   }
 } as unknown as ViewContainerRef;
 
-const elementRefMock = {
+const elementRefMock: ElementRef = {
   nativeElement: {
     blur: () => {
     }
