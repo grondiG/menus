@@ -11,6 +11,7 @@ import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
 import { BanWordsValidator, CheckPasswordValidator } from '../../directives/validators';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
+import { ShowErrorDirective } from '../../directives/show-error/show-error.directive';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ import { CheckNamesValidator } from '../../directives/validators/check-names.dir
     JsonPipe,
     BanWordsValidator,
     CheckPasswordValidator,
-    CheckNamesValidator
+    CheckNamesValidator,
+    ShowErrorDirective
   ],
   standalone: true
 
