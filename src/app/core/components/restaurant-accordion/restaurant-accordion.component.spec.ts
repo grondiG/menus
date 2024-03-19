@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RestaurantAccordionComponent } from './restaurant-accordion.component';
+import { mockDish } from '../../../mock-data';
 
 describe('RestaurantAccordionComponent', () => {
   let component: RestaurantAccordionComponent;
@@ -8,12 +9,14 @@ describe('RestaurantAccordionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RestaurantAccordionComponent]
+      imports: [RestaurantAccordionComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RestaurantAccordionComponent);
     component = fixture.componentInstance;
+    component.dish = mockDish;
+    component.quantity = 1;
     fixture.detectChanges();
   });
 

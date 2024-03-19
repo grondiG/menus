@@ -1,6 +1,8 @@
-describe('BanWordsDirective', () => {
-  // it('should create an instance', () => {
-  //   const directive = new BanWordsDirective();
-  //   expect(directive).toBeTruthy();
-  // });
+import { BanWordsValidator } from './ban-words.directive';
+
+describe('BanWordsValidator', () => {
+  it('should create an instance', () => {
+    const directive = new BanWordsValidator();
+    expect(directive).toBeTruthy();
+  });
 });
