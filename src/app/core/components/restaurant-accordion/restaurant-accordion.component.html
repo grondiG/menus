@@ -1,20 +1,20 @@
 <h2 class="accordion-header" id="headingOne">
   <button class="accordion-button" type="button" data-bs-toggle="collapse"
-          [attr.data-bs-target]="dish.name | convertToAttributeFormat: '#c'"
-          [attr.aria-controls]="dish.name | convertToAttributeFormat: 'c'"
+          [attr.data-bs-target]="dish?.name | convertToAttributeFormat: '#c'"
+          [attr.aria-controls]="dish?.name | convertToAttributeFormat: 'c'"
           aria-expanded="false"
   >
-    {{dish.name}}
+    {{dish?.name}}
   </button>
 </h2>
-<div [id]="dish.name | convertToAttributeFormat: 'c'"
+<div [id]="dish?.name | convertToAttributeFormat: 'c'"
      class="accordion-collapse collapse"
      aria-labelledby="headingOne"
      data-bs-parent="#accordion"
 >
   <div class="accordion-body">
-    <p>Ingredients: {{dish.ingredients}}</p>
-    <p>{{dish.price}}</p>
+    <p>Ingredients: {{dish?.ingredients}}</p>
+    <p>{{dish?.price}}</p>
     <div class="d-flex align-items-center gap-3">
       <span>Quantity: </span>
       <input class="form-control w-50" type="number" [(ngModel)]="quantity" min="0">
@@ -22,11 +22,11 @@
     <button class="btn btn-success mx-2 my-2" (click)="orderItem(dish)">Order</button>
     <button type="button" class="btn btn-dark"
             data-bs-toggle="modal"
-            [attr.data-bs-target]="dish.name | convertToAttributeFormat: '#m'"
+            [attr.data-bs-target]="dish?.name | convertToAttributeFormat: '#m'"
     >Show nutritions
     </button>
     <app-nutrituions-modal
-      [dish]="dish" [id]="dish.name | convertToAttributeFormat: 'm'"
+      [dish]="dish" [id]="dish?.name | convertToAttributeFormat: 'm'"
     ></app-nutrituions-modal>
   </div>
 </div>

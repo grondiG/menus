@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NutrituionsModalComponent } from './nutrituions-modal.component';
-import { mockDish } from '../../../mock-data';
 
 describe('NutrituionsModalComponent', () => {
   let component: NutrituionsModalComponent;
@@ -15,8 +14,6 @@ describe('NutrituionsModalComponent', () => {
 
     fixture = TestBed.createComponent(NutrituionsModalComponent);
     component = fixture.componentInstance;
-    component.dish = mockDish;
-    component.id = '1';
     fixture.detectChanges();
   });
 

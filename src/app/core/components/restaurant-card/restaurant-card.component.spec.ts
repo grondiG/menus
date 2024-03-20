@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RestaurantCardComponent } from './restaurant-card.component';
-import { restaurantMockData } from '../../../mock-data';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RestaurantCardComponent', () => {
@@ -16,7 +15,6 @@ describe('RestaurantCardComponent', () => {
 
     fixture = TestBed.createComponent(RestaurantCardComponent);
     component = fixture.componentInstance;
-    component.restaurant = restaurantMockData;
     fixture.detectChanges();
   });
 

@@ -12,8 +12,10 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterModule],
       declarations: [HeaderComponent],
-      providers: [provideMockStore(), { provide: ActivatedRoute, useValue: { snapshot: {  } }}],
-      //?
+      providers: [
+        provideMockStore(),
+        { provide: ActivatedRoute, useValue: { snapshot: {  } }}
+      ],
     })
     .compileComponents();
 

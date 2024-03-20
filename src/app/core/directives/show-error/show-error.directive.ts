@@ -1,7 +1,7 @@
 import { DestroyRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
-import { ControlContainer, FormGroup, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest, filter, fromEvent, map, merge, Observable, skip, startWith, withLatestFrom } from 'rxjs';
+import { fromEvent, map, skip, startWith } from 'rxjs';
 
 @Directive({
   // selector: [ngModel]:not([withoutValidationErrors]), // 3
@@ -19,25 +19,25 @@ export class ShowErrorDirective implements OnInit {
     return (this.container?.formDirective || null) as NgForm | null;
   }
 
-  submitted$ = this.ngForm?.ngSubmit.pipe(
+  submitted$ = this.ngForm?.ngSubmit?.pipe(
     map(() => true),
     startWith(false),
     skip(1),
     takeUntilDestroyed(this.destroy)
   );
 
-  controlChanges$ = this.ngControl?.control.valueChanges.pipe(
+  controlChanges$ = this.ngControl?.control.valueChanges?.pipe(
     skip(1),
     takeUntilDestroyed(this.destroy)
   )
 
-  controlTouched$ = fromEvent(this.elementRef.nativeElement, 'blur').pipe(
+  controlTouched$ = fromEvent(this.elementRef?.nativeElement, 'blur')?.pipe(
     takeUntilDestroyed(this.destroy)
   );
 
   ngOnInit() {
-    if (!this.ngControl?.control) {
-      throw Error(`No control model for ${this.ngControl?.name} control...`);
+    if (!this.ngControl || !this.ngControl.control || !this.elementRef.nativeElement) {
+      throw new Error(`No control model or element for ${this.ngControl?.name || 'unknown'} control...`);
     }
 
     this.controlTouched$.subscribe(() => {
