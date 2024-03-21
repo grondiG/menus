@@ -11,8 +11,9 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
 import { ErrorCardComponent } from './components/error-card/error-card.component';
 import { ErrorModalComponent } from './components/modal/error-modal.component';
 import { CartComponent } from './containers/cart/cart.component';
-import { FormInputErrorPipe } from './pipes/form-input-error/form-input-error-required.pipe';
-import { FormErrorPipe } from './pipes/form-error/form-error.pipe';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { GetErrorInfoPipe } from './pipes/get-error-info/get-error-info.pipe';
+import { GetFormStatusForPipe } from './pipes/get-form-status/get-form-status.pipe';
 
 @NgModule({
     imports: [
@@ -28,14 +29,14 @@ import { FormErrorPipe } from './pipes/form-error/form-error.pipe';
         TitleCasePipe,
         CurrencyPipe
     ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    ErrorCardComponent,
-    ErrorModalComponent,
-    FormInputErrorPipe,
-    FormErrorPipe,
-  ],
+    exports: [
+        HeaderComponent,
+        FooterComponent,
+        ErrorCardComponent,
+        ErrorModalComponent,
+        ErrorMessageComponent,
+        GetFormStatusForPipe,
+    ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -44,8 +45,9 @@ import { FormErrorPipe } from './pipes/form-error/form-error.pipe';
     CartComponent,
     GetNumberPricePipe,
     GetTotalCartPricePipe,
-    FormInputErrorPipe,
-    FormErrorPipe,
+    ErrorMessageComponent,
+    GetErrorInfoPipe,
+    GetFormStatusForPipe,
   ]
 })
 export class CoreModule {

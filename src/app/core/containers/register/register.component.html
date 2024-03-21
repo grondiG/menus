@@ -6,101 +6,100 @@
     #modal
   >
     <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2 py-2">
-      <!--      <app-error-card [error]="data.error"></app-error-card>-->
+<!--      <app-error-card [error]="data.error"></app-error-card>-->
       <h2 class="text-center">Register</h2>
       <form
+        #form="ngForm"
         class="col-md-6 col-12 form-group"
-        appPreventDefault
-        [formGroup]="registerData"
-        (ngSubmit)="register()"
+        (ngSubmit)="register(form)"
+        [ngFormOptions]="{ updateOn: 'change' }"
+        autocomplete="off"
       >
-        <ng-container *ngIf="{
-          login: registerData.controls['login'],
-          mail: registerData.controls['mail'],
-          name: registerData.controls['restaurantName'],
-          address: registerData.controls['restaurantAddress'],
-          password: registerData.controls['password'],
-          confirmPassword: registerData.controls['confirmPassword']
-        } as controls">
-          <label for="login">Login</label>
-          <input
-            type="text"
-            class="form-control my-2"
-            id="login"
-            placeholder="Login"
-            formControlName="login"
+        <label for="login">Login</label>
+        <input
+          #loginControl="ngModel"
+          [(ngModel)]="registerForm.login"
+          required
+          name="login"
+          type="text"
+          class="form-control my-2"
+          id="login"
+          placeholder="Login"
+        >
+        <app-error-message [errors]="loginControl.errors" [dirty]="form | getFormStatusFor: loginControl"/>
+        <label for="email">Email</label>
+        <input
+          #mailControl="ngModel"
+          [(ngModel)]="registerForm.mail"
+          required
+          email
+          name="mail"
+          type="email"
+          class="form-control my-2"
+          id="email"
+          placeholder="Email"
+        />
+        <app-error-message [errors]="mailControl.errors" [dirty]="form | getFormStatusFor: mailControl"/>
+        <label for="restaurantName">Restaurant Name</label>
+        <input
+          #restaurantNameControl="ngModel"
+          [(ngModel)]="registerForm.restaurantName"
+          required
+          name="restaurantName"
+          type="text"
+          class="form-control my-2"
+          id="restaurantName"
+          placeholder="Restaurant Name"
+        />
+        <app-error-message [errors]="restaurantNameControl.errors" [dirty]="form | getFormStatusFor: restaurantNameControl"/>
+        <label for="address">Address</label>
+        <input
+          #restaurantAddressControl="ngModel"
+          [(ngModel)]="registerForm.restaurantAddress"
+          required
+          name="restaurantAddress"
+          type="text"
+          class="form-control my-2"
+          id="address"
+          placeholder="Address"
+        />
+        <app-error-message [errors]="restaurantAddressControl.errors" [dirty]="form | getFormStatusFor: restaurantAddressControl"/>
+        <label for="password">Password</label>
+        <input
+          #passwordControl="ngModel"
+          [(ngModel)]="registerForm.password"
+          required
+          appStrongPassword
+          name="password"
+          type="password"
+          class="form-control my-2"
+          id="password"
+          placeholder="Password"
+        >
+        <app-error-message [errors]="passwordControl.errors" [dirty]="form | getFormStatusFor: passwordControl"/>
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          #confirmPasswordControl="ngModel"
+          [(ngModel)]="registerForm.confirmPassword"
+          required
+          appCheckPassword="password"
+          name="confirmPassword"
+          type="password"
+          class="form-control my-2"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+        />
+        <app-error-message [errors]="confirmPasswordControl.errors" [dirty]="form | getFormStatusFor: confirmPasswordControl"/>
+        <div class="d-flex align-items-center gap-3">
+          <button
+            type="submit"
+            class="btn btn-primary mt-3 ml-4"
           >
-          <p class="error text-danger" *ngIf="controls.login | formInputError">
-            Login is required
-          </p>
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control my-2"
-            id="email"
-            placeholder="Email"
-            formControlName="mail"
-          />
-          <p class="error text-danger" *ngIf="controls.mail | formInputError">
-            Email is invalid
-          </p>
-          <label for="restaurantName">Restaurant Name</label>
-          <input
-            type="text"
-            class="form-control my-2"
-            id="restaurantName"
-            placeholder="Restaurant Name"
-            formControlName="restaurantName"
-          />
-          <p class="error text-danger" *ngIf="controls.name | formInputError">
-            Restaurant Name is required
-          </p>
-          <label for="address">Address</label>
-          <input
-            type="text"
-            class="form-control my-2"
-            id="address"
-            placeholder="Address"
-            formControlName="restaurantAddress"
-          />
-          <p class="error text-danger" *ngIf="controls.address | formInputError">
-            Address is required
-          </p>
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control my-2"
-            id="password"
-            placeholder="Password"
-            formControlName="password"
-          >
-          <p class="error text-danger" *ngIf="controls.password | formInputError">
-            Password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter,
-            one number and one special character
-          </p>
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            class="form-control my-2"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            formControlName="confirmPassword"
-          />
-          <p class="error text-danger" *ngIf="registerData | formError">
-            Passwords do not match
-          </p>
-          <div class="d-flex align-items-center gap-3">
-            <button
-              type="submit"
-              class="btn btn-primary mt-3 ml-4"
-              [disabled]="registerData.invalid"
-            >
-              Register
-            </button>
-            <a [routerLink]="['/profile','login']" class="text-dark text-decoration-underline mt-3 ml-4">Already have an
-              account?</a>
-          </div>
-        </ng-container>
+            Register
+          </button>
+          <a [routerLink]="['/profile','login']" class="text-dark text-decoration-underline mt-3 ml-4">Already have an
+            account?</a>
+        </div>
       </form>
     </div>
   </div>

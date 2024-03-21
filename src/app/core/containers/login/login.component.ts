@@ -1,16 +1,17 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ModelFormGroup } from '../../types/form';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { LoginData } from '../../models/authentication';
-import * as profileAction from '../../../store/user/user.actions';
 import { CoreModule } from '../../core.module';
 import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
+import { BanWordsValidator, CheckPasswordValidator } from '../../directives/validators';
+import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
+import { ShowErrorDirective } from '../../directives/show-error/show-error.directive';
 
 @Component({
   selector: 'app-login',
@@ -18,33 +19,60 @@ import { LoadingComponent } from '../../components/loading/loading/loading.compo
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    FormsModule,
     PreventDefaultDirective,
     RouterLink,
-    ReactiveFormsModule,
     NgIf,
     CoreModule,
     AsyncPipe,
-    LoadingComponent
+    LoadingComponent,
+    JsonPipe,
+    BanWordsValidator,
+    CheckPasswordValidator,
+    CheckNamesValidator,
+    ShowErrorDirective
   ],
   standalone: true
 
 })
 export class LoginComponent {
   private store: Store = inject(Store);
+  private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
-  loginForm: ModelFormGroup<LoginData> = new FormGroup({
-    login: new FormControl('', [ Validators.required ]),
-    password: new FormControl('', [ Validators.required ])
-  })
+  bannedWords: string[] = ['asd', '123', 'a12ds', 'test'];
 
-  login(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAsDirty();
+  formValue: LoginData & { password2: string } = {
+    login: '',
+    password: '123',
+    password2: '13',
+  };
+
+  // loginForm: ModelFormGroup<LoginData> = new FormGroup({
+  //   login: new FormControl('', [ Validators.required ]),
+  //   password: new FormControl('', [ Validators.required ])
+  // })
+
+  login(container: NgForm, e: SubmitEvent): void {
+    const form: FormGroup = container.form;
+
+    if (form.invalid) {
+      this.cd.markForCheck();
       return;
     }
+    // Object.keys(container.controls).forEach((controlName: string) => container.controls[controlName].markAsDirty());
+    console.log(form);
 
-    const data: LoginData = this.loginForm.getRawValue();
-    this.store.dispatch(profileAction.loadUser({ data }));
+    // if (this.loginForm.invalid) {
+    //   this.loginForm.markAsDirty();
+    //   return;
+    // }
+    //
+    // const data: LoginData = this.loginForm.getRawValue();
+    // this.store.dispatch(profileAction.loadUser({ data }));
   }
+
+  // checkIfInputIsInvalid(inputName: string): boolean {
+  //   return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
+  // }
 }

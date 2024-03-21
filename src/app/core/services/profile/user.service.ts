@@ -41,4 +41,12 @@ export class UserService {
   isTokenValid(): Observable<ResponseDataDto> {
     return this.http.get<ResponseDataDto>('/api/isTokenValid');
   }
+
+  getNames(): Observable<string[]> {
+    return this.http.get<string[]>(`/api/name-occupied`);
+  }
+
+  checkName(name: string): Observable<{ exists: boolean }> {
+    return this.http.get<{ exists: boolean }>(`/api/ifNameExists?name=${name}`);
+  }
 }

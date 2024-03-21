@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RestaurantComponent } from './restaurant.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('RestaurantComponent', () => {
   let component: RestaurantComponent;
@@ -8,10 +9,11 @@ describe('RestaurantComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RestaurantComponent]
+      imports: [RestaurantComponent, RouterTestingModule],
+      providers: [provideMockStore()]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RestaurantComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
