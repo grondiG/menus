@@ -1,5 +1,5 @@
 <ng-container *ngIf="{
-  cart: cart$ | async,
+  cart: cart$ | async
 } as data">
   <div class="cart container" [ngClass]="isCartOpen && 'active'">
     <div class="row cart__header">
@@ -26,7 +26,11 @@
     <div class="row cart__summary">
       <div class="col-12 w-100 px-2">
         <p>Total: {{ data.cart | getTotalCartPrice | currency }}</p>
-        <button class="btn btn-primary" [disabled]="!data.cart?.length">Checkout</button>
+        <button
+          class="btn btn-primary"
+          (click)="checkout()"
+          [disabled]="!data.cart.length"
+        >Checkout</button>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ export const RoutePath = {
   RESTAURANTS: 'restaurants',
   ORDERS: 'orders',
   PROFILE: 'profile',
+  CHECKOUT: 'checkout',
 } as const;
 
 export const RouteTitle = {
@@ -10,6 +11,7 @@ export const RouteTitle = {
   RESTAURANTS: 'Restaurants',
   ORDERS: 'Orders',
   PROFILE: 'Profile',
+  CHECKOUT: 'Checkout',
 } as const;
 
 /*const routerData: RouterData[] = [

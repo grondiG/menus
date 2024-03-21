@@ -4,12 +4,14 @@ import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { userIsLoadingSelector } from '../../../store/user/user.reducer';
-import { CoreModule } from '../../core.module';
 import { RegisterData } from '../../models/authentication';
+import { CoreModule } from '../../core.module';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { CheckPasswordValidator } from '../../directives/validators';
 import { StrongPasswordDirective } from '../../directives/validators/strong-password.directive';
+import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
+import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +28,8 @@ import { StrongPasswordDirective } from '../../directives/validators/strong-pass
     AsyncPipe,
     CheckPasswordValidator,
     StrongPasswordDirective,
+    CheckNamesValidator,
+    ErrorMessageDirective,
   ],
   standalone: true
 })
@@ -34,7 +38,7 @@ export class RegisterComponent{
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
 
   registerForm: RegisterData = {
-    login: 'asd',
+    login: '12333',
     mail: '',
     restaurantName: '',
     restaurantAddress: '',

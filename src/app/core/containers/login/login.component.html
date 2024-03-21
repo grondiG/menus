@@ -20,16 +20,13 @@
           [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
           required
           [minlength]="3"
-          appCheckNames
-          appShowError
 
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="Login"
+          appErrorMessage
         >
-        <app-error-message [errors]="loginControl.errors" [dirty]="form.submitted || loginControl.touched || loginControl.dirty"/>
-
 
         <label for="password">Password</label>
         <!--        ngModel-->
@@ -45,23 +42,22 @@
           class="form-control my-2"
           id="password"
           placeholder="Password"
+          appErrorMessage
         >
-        <app-error-message [errors]="password.errors" [dirty]="form.submitted || password.touched || password.dirty"/>
+<!--        <label for="password2">Confirm password</label>-->
+<!--        <input-->
+<!--          #password2="ngModel"-->
+<!--          [(ngModel)]="formValue.password2"-->
+<!--          name="password2"-->
+<!--          required-->
+<!--          appCheckPassword="password"-->
 
-        <label for="password2">Confirm password</label>
-        <input
-          #password2="ngModel"
-          [(ngModel)]="formValue.password2"
-          name="password2"
-          required
-          appCheckPassword="password"
-
-          type="password"
-          class="form-control my-2"
-          id="password2"
-          placeholder="Confirm password"
-        >
-        <app-error-message [errors]="password2.errors" [dirty]="form.submitted || password2.touched || password2.dirty"/>
+<!--          type="password"-->
+<!--          class="form-control my-2"-->
+<!--          id="password2"-->
+<!--          placeholder="Confirm password"-->
+<!--        >-->
+<!--        <app-error-message [errors]="password2.errors" [dirty]="form.submitted || password2.touched || password2.dirty"/>-->
 
         <div class="d-flex align-items-center gap-3">
           <button type="submit" class="btn btn-primary mt-3 ml-4">

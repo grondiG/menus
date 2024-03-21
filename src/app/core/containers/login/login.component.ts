@@ -4,14 +4,15 @@ import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import * as profileAction from '../../../store/user/user.actions';
+import { userIsLoadingSelector } from '../../../store/user/user.reducer';
 import { LoginData } from '../../models/authentication';
 import { CoreModule } from '../../core.module';
-import { userIsLoadingSelector } from '../../../store/user/user.reducer';
-import { LoadingComponent } from '../../components/loading/loading/loading.component';
 import { BanWordsValidator, CheckPasswordValidator } from '../../directives/validators';
+import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
-import { ShowErrorDirective } from '../../directives/show-error/show-error.directive';
+import { LoadingComponent } from '../../components/loading/loading/loading.component';
+import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ import { ShowErrorDirective } from '../../directives/show-error/show-error.direc
     BanWordsValidator,
     CheckPasswordValidator,
     CheckNamesValidator,
-    ShowErrorDirective
+    ErrorMessageDirective
   ],
   standalone: true
 
@@ -39,8 +40,6 @@ export class LoginComponent {
   private store: Store = inject(Store);
   private cd: ChangeDetectorRef = inject(ChangeDetectorRef);
   isLoading$: Observable<boolean> = this.store.select(userIsLoadingSelector);
-
-  bannedWords: string[] = ['asd', '123', 'a12ds', 'test'];
 
   formValue: LoginData & { password2: string } = {
     login: '',
@@ -68,8 +67,8 @@ export class LoginComponent {
     //   return;
     // }
     //
-    // const data: LoginData = this.loginForm.getRawValue();
-    // this.store.dispatch(profileAction.loadUser({ data }));
+    const data: LoginData = container.form.getRawValue();
+    this.store.dispatch(profileAction.loadUser({ data }));
   }
 
   // checkIfInputIsInvalid(inputName: string): boolean {

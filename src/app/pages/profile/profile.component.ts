@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { AsyncPipe, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
-import { Store } from '@ngrx/store';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { userIsLoggedSelector } from '../../store/user/user.reducer';
 import * as profileActions from '../../store/user/user.actions';
 

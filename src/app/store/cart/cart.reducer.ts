@@ -54,7 +54,13 @@ export const cartFeature = createFeature({
         items: []
       })
     ),
-  ),
+    on(
+      cartActions.setCartItems,
+      (state: CartState, action) => ({
+        ...state,
+        items: action.items
+      })
+  ))
 });
 
 const cartFeatureSelector = createFeatureSelector(cartFeatureKey);

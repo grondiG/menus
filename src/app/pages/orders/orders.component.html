@@ -1,8 +1,15 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center py-2">
-            <h1>Check orders for</h1>
-            <h5>food from your favourite restaurants</h5>
+<ng-container *ngIf="{ orders: orders$ | async } as data">
+    <div class="container order-container">
+        <div class="row">
+            <div class="col-md-12 text-center py-2">
+                <h1>Check orders for</h1>
+                <h5>food from your favourite restaurants</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" *ngIf="data.orders.length > 0">
+                <app-order-list [orders]="data.orders"></app-order-list>
+            </div>
         </div>
     </div>
-</div>
+</ng-container>

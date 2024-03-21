@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../../store/cart/cart.actions';
 import { cartSelector } from '../../../store/cart/cart.reducer';
 import { CartItem } from '../../models/order';
@@ -13,6 +14,7 @@ import { CartItem } from '../../models/order';
 })
 export class CartComponent {
   private store: Store = inject(Store);
+  private router: Router = inject(Router);
 
   @Input() isCartOpen: boolean;
 
@@ -20,5 +22,9 @@ export class CartComponent {
 
   removeFromCart(item: CartItem): void {
     this.store.dispatch(removeFromCart({name: item.item.name}));
+  }
+
+  checkout(): void {
+    this.router.navigate([ '/checkout' ]).then(r  => {});
   }
 }
