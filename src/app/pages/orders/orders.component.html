@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" *ngIf="data.orders.length > 0">
+            <div class="col-md-12" *ngIf="data?.orders?.length > 0">
                 <app-order-list [orders]="data.orders"></app-order-list>
             </div>
         </div>

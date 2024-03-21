@@ -29,7 +29,7 @@
         <button
           class="btn btn-primary"
           (click)="checkout()"
-          [disabled]="!data.cart.length"
+          [disabled]="!data.cart?.length"
         >Checkout</button>
       </div>
     </div>

@@ -1,40 +1,37 @@
-import { ElementRef, ViewContainerRef } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { ControlContainer, FormControl, FormGroupDirective, NgControl } from '@angular/forms';
 import { ErrorMessageDirective } from './error-message.directive';
+import { TestBed } from '@angular/core/testing';
+import { ControlContainer, NgControl } from '@angular/forms';
+import { ElementRef, ViewContainerRef } from '@angular/core';
 
-const ngControlMock: NgControl = {
-  control: new FormControl(),
-  name: 'test'
-} as unknown as NgControl;
-
-const viewContainerRefMock: ViewContainerRef = {
-  createComponent: () => {
+class MockElementRef extends ElementRef {
+  constructor() {
+    super({
+      addEventListener: ()=>{},
+      removeEventListener: ()=>{}
+    });
   }
-} as unknown as ViewContainerRef;
-
-const elementRefMock: ElementRef = {
-  nativeElement: {
-    blur: () => {
-    }
-  }
-} as unknown as ElementRef;
+}
 
 describe('ErrorMessageDirective', () => {
+  let directive: ErrorMessageDirective;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: NgControl, useValue: ngControlMock },
-        { provide: ControlContainer, useValue: new FormGroupDirective([], []) },
-        { provide: ViewContainerRef, useValue: viewContainerRefMock },
-        { provide: ElementRef, useValue: elementRefMock },
+        { provide: ControlContainer, useValue: { formDirective: {} } },
+        { provide: NgControl, useValue: { control: { valueChanges: { subscribe: () => {}, pipe: () => {} } } } },
+        { provide: ElementRef, useClass: MockElementRef },
+        { provide: ViewContainerRef, useValue: { createComponent: () => {} } },
+        // look for mock object for elementRef
+        ErrorMessageDirective,
       ]
     });
+    //take instance from module
+    directive = TestBed.inject(ErrorMessageDirective);
+    // TestBed.runInInjectionContext(() => {
+    //   directive = new ShowErrorDirective();
+    // });
   });
   it('should create an instance', () => {
-    TestBed.runInInjectionContext(() => {
-      const directive = new ErrorMessageDirective();
-      expect(directive).toBeTruthy();
-    });
+    expect(directive).toBeTruthy();
   });
 });

@@ -25,8 +25,8 @@
                       name="name"
                       placeholder="Name"
                       required
+                      appErrorMessage
                     />
-                    <app-error-message [errors]="name.errors" [dirty]="name.dirty && name.touched"></app-error-message>
                     <input
                       #password="ngModel"
                       type="text"
@@ -35,8 +35,8 @@
                       placeholder="Address"
                       name="password"
                       required
+                      appErrorMessage
                     />
-                    <app-error-message [errors]="password.errors" [dirty]="password.dirty && password.touched"></app-error-message>
                     <input
                       #city="ngModel"
                       type="text"
@@ -45,8 +45,8 @@
                       placeholder="City"
                       name="city"
                       required
+                      appErrorMessage
                     />
-                    <app-error-message [errors]="city.errors" [dirty]="city.dirty && city.touched"></app-error-message>
                     <input
                       #country="ngModel"
                       type="text"
@@ -55,8 +55,8 @@
                       placeholder="Country"
                       name="country"
                       required
+                      appErrorMessage
                     />
-                    <app-error-message [errors]="country.errors" [dirty]="country.dirty && country.touched"></app-error-message>
                     <input
                       #zip="ngModel"
                       type="text"
@@ -65,8 +65,8 @@
                       placeholder="Zip"
                       name="zip"
                       required
+                      appErrorMessage
                     />
-                    <app-error-message [errors]="zip.errors" [dirty]="zip.dirty && zip.touched"></app-error-message>
                   </div>
                 </form>
               </div>

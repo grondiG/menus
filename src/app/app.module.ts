@@ -18,14 +18,12 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AppComponent } from './app.component';
 import { LoadingComponent } from './core/components/loading/loading/loading.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NotFoundComponent,
-    CheckoutComponent,
   ],
     imports: [
         BrowserModule,

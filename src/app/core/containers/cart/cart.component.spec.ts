@@ -10,7 +10,8 @@ describe('CartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartComponent, GetTotalCartPricePipe],
+      imports: [GetTotalCartPricePipe],
+      declarations: [CartComponent],
       providers: [provideMockStore()]
     })
     .compileComponents();

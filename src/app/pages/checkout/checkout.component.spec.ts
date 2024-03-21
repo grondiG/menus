@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckoutComponent } from './checkout.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { GetTotalCartPricePipe } from '../../core/pipes/get-total-cart-price/get-total-cart-price.pipe';
+import { FormsModule } from '@angular/forms';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -9,6 +11,7 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [GetTotalCartPricePipe, FormsModule],
       declarations: [CheckoutComponent],
       providers: [provideMockStore()]
     })

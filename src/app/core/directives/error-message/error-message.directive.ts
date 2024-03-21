@@ -36,19 +36,19 @@ export class ErrorMessageDirective implements AfterViewInit, OnDestroy {
     return (this.container?.formDirective || null) as NgForm | null;
   }
 
-  submitted$: Observable<boolean> = this.ngForm?.ngSubmit.pipe(
+  submitted$: Observable<boolean> = this.ngForm?.ngSubmit?.pipe(
     map(() => true),
     startWith(false),
     skip(1),
     takeUntilDestroyed(this.destroy)
   );
 
-  controlChanges$: Observable<FormControlStatus> = this.ngControl?.control.statusChanges.pipe(
+  controlChanges$: Observable<FormControlStatus> = this.ngControl?.control.statusChanges?.pipe(
     skip(1),
     takeUntilDestroyed(this.destroy)
   );
 
-  controlTouched$: Observable<unknown> = fromEvent(this.elementRef.nativeElement, 'blur').pipe(
+  controlTouched$: Observable<unknown> = fromEvent(this.elementRef.nativeElement, 'blur')?.pipe(
     takeUntilDestroyed(this.destroy)
   );
 
@@ -86,7 +86,7 @@ export class ErrorMessageDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.errComponent.destroy();
+    this.errComponent?.destroy();
     if(this.pendingComponent){
       this.pendingComponent.destroy();
     }
