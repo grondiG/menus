@@ -9,12 +9,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h3>Checkout</h3>
+            <h3>{{'CHECKOUT.TITLE' | translate}}</h3>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                <h4>Shipping Address</h4>
+                <h4>{{'CHECKOUT.ADDRESS' | translate}}</h4>
                 <form #shippingForm="ngForm" (ngSubmit)="order(data, shippingForm)">
                   <div class="form-group">
                     <input
@@ -23,7 +23,7 @@
                       class="form-control my-2"
                       [(ngModel)]="shippingValue.name"
                       name="name"
-                      placeholder="Name"
+                      placeholder="{{'CHECKOUT.INPUTS.NAME' | translate}}"
                       required
                       appErrorMessage
                     />
@@ -32,8 +32,8 @@
                       type="text"
                       class="form-control my-2"
                       [(ngModel)]="shippingValue.address"
-                      placeholder="Address"
-                      name="password"
+                      placeholder="{{'CHECKOUT.INPUTS.ADDRESS' | translate}}"
+                      name="address"
                       required
                       appErrorMessage
                     />
@@ -42,7 +42,7 @@
                       type="text"
                       class="form-control my-2"
                       [(ngModel)]="shippingValue.city"
-                      placeholder="City"
+                      placeholder="{{'CHECKOUT.INPUTS.CITY' | translate}}"
                       name="city"
                       required
                       appErrorMessage
@@ -52,7 +52,7 @@
                       type="text"
                       class="form-control my-2"
                       [(ngModel)]="shippingValue.country"
-                      placeholder="Country"
+                      placeholder="{{'CHECKOUT.INPUTS.COUNTRY' | translate}}"
                       name="country"
                       required
                       appErrorMessage
@@ -62,7 +62,7 @@
                       type="text"
                       class="form-control my-2"
                       [(ngModel)]="shippingValue.zip"
-                      placeholder="Zip"
+                      placeholder="{{'CHECKOUT.INPUTS.ZIP' | translate}}"
                       name="zip"
                       required
                       appErrorMessage
@@ -71,26 +71,26 @@
                 </form>
               </div>
               <div class="col-md-6">
-                <h4>Order Summary</h4>
+                <h4>{{'CHECKOUT.SUMMARY.TITLE' | translate}}</h4>
                 <table class="table overflow-y-auto">
                   <thead>
                   <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>{{'CHECKOUT.SUMMARY.PRODUCT' | translate}}</th>
+                    <th>{{'CHECKOUT.SUMMARY.QUANTITY' | translate}}</th>
+                    <th>{{'CHECKOUT.SUMMARY.PRICE' | translate}}</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr *ngFor="let item of data.cart">
                     <td>{{item.item.name}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{data.totalPrice | currency}}</td>
+                    <td>{{((item.item.price | getNumberPrice) * item.quantity) | currency}}</td>
                   </tr>
                   </tbody>
                 </table>
                 <div class="text-right
                 ">
-                  <h4>Total: {{(data.totalPrice | currency)}}</h4>
+                  <h4>{{'CHECKOUT.SUMMARY.TOTAL' | translate}}: {{(data.totalPrice | currency)}}</h4>
                 </div>
               </div>
             </div>
@@ -100,7 +100,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 text-center my-3">
-        <button class="btn btn-primary" (click)="order(data, shippingForm)">Place Order</button>
+        <button class="btn btn-primary" (click)="order(data, shippingForm)">{{'CHECKOUT.ORDER' | translate}}</button>
       </div>
     </div>
   </div>

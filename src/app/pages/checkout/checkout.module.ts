@@ -6,6 +6,8 @@ import { GetTotalCartPricePipe } from '../../core/pipes/get-total-cart-price/get
 import { CheckoutComponent } from './checkout.component';
 import { LoadingComponent } from '../../core/components/loading/loading/loading.component';
 import { ErrorMessageDirective } from '../../core/directives/error-message/error-message.directive';
+import { TranslateModule } from '@ngx-translate/core';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ErrorMessageDirective } from '../../core/directives/error-message/error
     GetTotalCartPricePipe,
     FormsModule,
     LoadingComponent,
-    ErrorMessageDirective
+    ErrorMessageDirective,
+    TranslateModule,
+    CoreModule
   ],
   exports: [
     GetTotalCartPricePipe

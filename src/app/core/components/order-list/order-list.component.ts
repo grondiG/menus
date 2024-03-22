@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CurrencyPipe, DatePipe, NgForOf } from '@angular/common';
 import { OrderDto } from '../../models/order';
 import { CoreModule } from '../../core.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-list',
@@ -12,7 +13,8 @@ import { CoreModule } from '../../core.module';
     NgForOf,
     CurrencyPipe,
     DatePipe,
-    CoreModule
+    CoreModule,
+    TranslateModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

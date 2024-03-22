@@ -2,38 +2,38 @@
   isLogged: isLogged$ | async,
   isCartOpen: isCartOpen$ | async
 } as data">
-<div class="header container-fluid w-100 bg-dark m-0">
+  <div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
       <div class="col-4 col-md-4 h-100">
         <div class="header__logo d-flex align-items-center h-100 px-2">
-          <a [routerLink]="'/'" class="h4 text-light text-uppercase">Menus</a>
+          <a [routerLink]="'/'" class="h4 text-light text-uppercase">{{'HEADER.NAVBAR.TITLE' | translate}}</a>
         </div>
       </div>
-      <div class="col-4 col-md-4 h-100">
+      <div class="col-2 col-md-4 h-100">
         <div class="header__menu d-flex align-items-center justify-content-end h-100">
           <ul class="header__menu__list text-light d-flex justify-content-center gap-3 w-100 p-0 mb-2">
-<!--            <li-->
-<!--              class="header__menu__list-item"-->
-<!--              *ngFor="let route of routes"-->
-<!--              [routerLink]="route.path"-->
-<!--              [routerLinkActive]="'active'"-->
-<!--              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"-->
-<!--            >-->
-<!--              <span>-->
-<!--                {{ route.title | titlecase }}-->
-<!--              </span>-->
-<!--            </li>-->
+            <!--            <li-->
+            <!--              class="header__menu__list-item"-->
+            <!--              *ngFor="let route of routes"-->
+            <!--              [routerLink]="route.path"-->
+            <!--              [routerLinkActive]="'active'"-->
+            <!--              [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"-->
+            <!--            >-->
+            <!--              <span>-->
+            <!--                {{ route.title | titlecase }}-->
+            <!--              </span>-->
+            <!--            </li>-->
             <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.HOME"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
-              <span>{{ RouteTitle.HOME | titlecase }}</span>
+              <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.HOME | uppercase) | translate }}</span>
             </li>
             <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.RESTAURANTS"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }">
-              <span>{{ RouteTitle.RESTAURANTS | titlecase }}</span>
+              <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.RESTAURANTS | uppercase) | translate }}</span>
             </li>
             <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.ORDERS"
@@ -41,25 +41,45 @@
                 [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
                 *ngIf="data.isLogged"
             >
-              <span>{{ RouteTitle.ORDERS | titlecase }}</span>
+              <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.ORDERS | uppercase) | translate }}</span>
             </li>
             <li class="header__menu__list-item text-light"
                 [routerLink]="RoutePath.PROFILE"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
                 *ngIf="!data.isLogged">
-              <span>{{ RouteTitle.PROFILE | titlecase }}</span>
+              <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.PROFILE | uppercase) | translate }}</span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-2 col-md-4 h-100">
+      <div class="col-2 col-md-3 h-100">
+        <div class="header__auth d-flex justify-content-end h-100 gap-4">
+          <div class="accordion w-25 mt-4" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                  {{ currentLang | uppercase }}
+                </button>
+              </h2>
+              <div *ngFor="let lang of langs" id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                   data-bs-parent="#accordionExample">
+                <div class="accordion-body m-0 pb-0">
+                  <p role="button" (click)="setLang(lang)">{{lang | uppercase}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 col-md-1 h-100">
         <ng-container *ngIf="data.isLogged">
           <div class="header__auth d-flex align-items-center justify-content-end h-100 gap-4">
             <button class="btn text-light" (click)="toggleCart()">
               <i class="bi bi-cart h4"></i>
             </button>
-            <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+            <button class="btn btn-outline-light" (click)="logout()">{{'HEADER.NAVBAR.LOGOUT' | translate}}</button>
           </div>
           <app-cart [isCartOpen]="data.isCartOpen"></app-cart>
         </ng-container>

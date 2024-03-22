@@ -1,7 +1,7 @@
 <div *ngFor="let order of orders" class="card mb-3">
   <div class="card-header">
-    <h5 class="card-title">Order ID: {{ order.id }}</h5>
-    <p class="card-text">Date: {{ order.date | date: 'medium' }}</p>
+    <h5 class="card-title">{{'ORDERS.DATA.ID' | translate}}: {{ order.id }}</h5>
+    <p class="card-text">{{'ORDERS.DATA.DATE' | translate}}: {{ order.date | date: 'medium' }}</p>
 <!--    <p class="card-text">Status: {{ order.status }}</p>-->
   </div>
 
@@ -9,15 +9,15 @@
     <div *ngFor="let item of order.cart" class="card mb-2">
       <div class="card-body">
         <h6 class="card-title">{{ item.item.name }}</h6>
-        <p class="card-text">Quantity: {{ item.quantity }}</p>
-        <p class="card-text">Subtotal: {{ (item.item.price | getNumberPrice) * item.quantity | currency }}</p>
+        <p class="card-text">{{'ORDERS.DATA.QUANTITY' | translate}}: {{ item.quantity }}</p>
+        <p class="card-text">{{'ORDERS.DATA.SUBTOTAL' | translate}}: {{ (item.item.price | getNumberPrice) * item.quantity | currency }}</p>
       </div>
     </div>
   </div>
 
   <div class="card-footer">
-    <p class="card-text">Total: {{ order.totalPrice | currency }}</p>
-    <p class="card-text">User ID: {{ order.userId }}</p>
-    <p class="card-text">Shipping Address: {{ order.shipping.address }}, {{ order.shipping.city }}, {{ order.shipping.country }}</p>
+    <p class="card-text">{{'ORDERS.DATA.TOTAL' | translate}}: {{ order.totalPrice | currency }}</p>
+    <p class="card-text">{{'ORDERS.DATA.USERID' | translate}}: {{ order.userId }}</p>
+    <p class="card-text">{{'ORDERS.DATA.ADDRESS' | translate}}: {{ order.shipping.address }}, {{ order.shipping.city }}, {{ order.shipping.country }}</p>
   </div>
 </div>

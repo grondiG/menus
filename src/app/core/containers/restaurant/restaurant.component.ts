@@ -10,6 +10,7 @@ import { RestaurantsStore } from '../../../pages/restaurants/restaurants.store';
 import {
   RestaurantAccordionComponent
 } from '../../components/restaurant-accordion/restaurant-accordion.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-restaurant',
@@ -18,7 +19,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [RestaurantsStore],
   standalone: true,
-  imports: [ AsyncPipe, CoreModule, RestaurantAccordionComponent, NgIf, NgForOf ]
+  imports: [ AsyncPipe, CoreModule, RestaurantAccordionComponent, NgIf, NgForOf, TranslateModule ]
 })
 export class RestaurantComponent {
   private restaurantsStore: RestaurantsStore = inject(RestaurantsStore);

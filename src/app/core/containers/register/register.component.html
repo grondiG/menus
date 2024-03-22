@@ -7,7 +7,7 @@
   >
     <div class="row h-100 d-flex align-items-center justify-content-center flex-column gap-2 py-2">
 <!--      <app-error-card [error]="data.error"></app-error-card>-->
-      <h2 class="text-center">Register</h2>
+      <h2 class="text-center">{{'REGISTER.TITLE' | translate}}</h2>
       <form
         #form="ngForm"
         class="col-md-6 col-12 form-group"
@@ -15,7 +15,7 @@
         [ngFormOptions]="{ updateOn: 'change' }"
         autocomplete="off"
       >
-        <label for="login">Login</label>
+        <label for="login">{{'REGISTER.INPUTS.LOGIN' | translate}}</label>
         <input
           #loginControl="ngModel"
           [(ngModel)]="registerForm.login"
@@ -24,11 +24,11 @@
           type="text"
           class="form-control my-2"
           id="login"
-          placeholder="Login"
+          placeholder="{{'REGISTER.INPUTS.LOGIN' | translate}}"
           appCheckNames
           appErrorMessage
         >
-        <label for="email">Email</label>
+        <label for="email">{{'REGISTER.INPUTS.EMAIL' | translate}}</label>
         <input
           #mailControl="ngModel"
           [(ngModel)]="registerForm.mail"
@@ -38,10 +38,10 @@
           type="email"
           class="form-control my-2"
           id="email"
-          placeholder="Email"
+          placeholder="{{'REGISTER.INPUTS.EMAIL' | translate}}"
           appErrorMessage
         />
-        <label for="restaurantName">Restaurant Name</label>
+        <label for="restaurantName">{{'REGISTER.INPUTS.RESTAURANT.NAME' | translate}}</label>
         <input
           #restaurantNameControl="ngModel"
           [(ngModel)]="registerForm.restaurantName"
@@ -50,10 +50,10 @@
           type="text"
           class="form-control my-2"
           id="restaurantName"
-          placeholder="Restaurant Name"
+          placeholder="{{'REGISTER.INPUTS.RESTAURANT.NAME' | translate}}"
           appErrorMessage
         />
-        <label for="address">Address</label>
+        <label for="address">{{'REGISTER.INPUTS.RESTAURANT.ADDRESS' | translate}}</label>
         <input
           #restaurantAddressControl="ngModel"
           [(ngModel)]="registerForm.restaurantAddress"
@@ -62,10 +62,10 @@
           type="text"
           class="form-control my-2"
           id="address"
-          placeholder="Address"
+          placeholder="{{'REGISTER.INPUTS.RESTAURANT.ADDRESS' | translate}}"
           appErrorMessage
         />
-        <label for="password">Password</label>
+        <label for="password">{{'REGISTER.INPUTS.PASSWORD' | translate}}</label>
         <input
           #passwordControl="ngModel"
           [(ngModel)]="registerForm.password"
@@ -75,10 +75,10 @@
           type="password"
           class="form-control my-2"
           id="password"
-          placeholder="Password"
+          placeholder="{{'REGISTER.INPUTS.PASSWORD' | translate}}"
           appErrorMessage
         >
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">{{'REGISTER.INPUTS.CONFIRMPASSWORD' | translate}}</label>
         <input
           #confirmPasswordControl="ngModel"
           [(ngModel)]="registerForm.confirmPassword"
@@ -88,7 +88,7 @@
           type="password"
           class="form-control my-2"
           id="confirmPassword"
-          placeholder="Confirm Password"
+          placeholder="{{'REGISTER.INPUTS.CONFIRMPASSWORD' | translate}}"
           appErrorMessage
         />
         <div class="d-flex align-items-center gap-3">
@@ -96,10 +96,9 @@
             type="submit"
             class="btn btn-primary mt-3 ml-4"
           >
-            Register
+            {{'REGISTER.INPUTS.SUBMIT' | translate}}
           </button>
-          <a [routerLink]="['/profile','login']" class="text-dark text-decoration-underline mt-3 ml-4">Already have an
-            account?</a>
+          <a [routerLink]="['/profile','login']" class="text-dark text-decoration-underline mt-3 ml-4">{{'REGISTER.REDIRECT' | translate}}</a>
         </div>
       </form>
     </div>

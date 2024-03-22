@@ -8,7 +8,7 @@
         <h2>{{restaurant.name}}</h2>
         <p>{{restaurant.description}}</p>
         <p>{{restaurant.address}}</p>
-        <h2>Menu</h2>
+        <h2>{{'RESTAURANT.MENU.TITLE' | translate}}</h2>
         <div class="accordion" id="accordion">
           <div class="accordion-item" *ngFor="let dish of restaurant.menu">
             <app-restaurant-accordion [dish]="dish" (addItem)="addToCart($event)"></app-restaurant-accordion>

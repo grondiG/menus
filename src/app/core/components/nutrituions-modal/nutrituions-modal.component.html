@@ -2,18 +2,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nutritions for {{dish?.name}}</h5>
+        <h5 class="modal-title">{{'RESTAURANT.MENU.ITEM.NUTRITIONS.TITLE' | translate}} {{dish?.name}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <table class="table">
           <thead>
             <tr>
-              <th>Calories</th>
-              <th>Protein</th>
-              <th>Carbs</th>
-              <th>Fat</th>
-              <th>Fiber</th>
+              <th>{{'RESTAURANT.MENU.ITEM.NUTRITIONS.CALORIES' | translate}}</th>
+              <th>{{'RESTAURANT.MENU.ITEM.NUTRITIONS.PROTEIN' | translate}}</th>
+              <th>{{'RESTAURANT.MENU.ITEM.NUTRITIONS.CARBS' | translate}}</th>
+              <th>{{'RESTAURANT.MENU.ITEM.NUTRITIONS.FAT' | translate}}</th>
+              <th>{{'RESTAURANT.MENU.ITEM.NUTRITIONS.FIBER' | translate}}</th>
             </tr>
           </thead>
           <tbody>
@@ -27,7 +27,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'RESTAURANT.MENU.ITEM.NUTRITIONS.CLOSE' | translate}}</button>
       </div>
     </div>
   </div>

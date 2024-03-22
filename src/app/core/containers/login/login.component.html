@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row d-flex align-items-center justify-content-center flex-column">
       <pre>{{ formValue | json }}</pre>
-      <h2 class="text-center">Login</h2>
+      <h2 class="text-center">{{'LOGIN.TITLE' | translate}}</h2>
 
       <!--      ngNativeValidate-->
       <!--      ngNoForm-->
@@ -13,7 +13,7 @@
         [ngFormOptions]="{ updateOn: 'change' }"
         autocomplete="off"
       >
-        <label for="login">Login</label>
+        <label for="login">{{'LOGIN.INPUT.LOGIN' | translate}}</label>
         <input
           #loginControl="ngModel"
           [(ngModel)]="formValue.login"
@@ -24,11 +24,11 @@
           type="text"
           class="form-control my-2"
           id="login"
-          placeholder="Login"
+          placeholder="{{'LOGIN.INPUT.LOGIN' | translate}}"
           appErrorMessage
         >
 
-        <label for="password">Password</label>
+        <label for="password">{{'LOGIN.INPUT.PASSWORD' | translate}}</label>
         <!--        ngModel-->
         <!--        [ngModel]="formValue.password"-->
         <!--        (ngModelChange)="formValue.password = $event"-->
@@ -41,7 +41,7 @@
           type="password"
           class="form-control my-2"
           id="password"
-          placeholder="Password"
+          placeholder="{{'LOGIN.INPUT.PASSWORD' | translate}}"
           appErrorMessage
         >
 <!--        <label for="password2">Confirm password</label>-->
@@ -61,10 +61,10 @@
 
         <div class="d-flex align-items-center gap-3">
           <button type="submit" class="btn btn-primary mt-3 ml-4">
-            Login
+            {{'LOGIN.INPUT.SUBMIT' | translate}}
           </button>
           <a [routerLink]="['/profile','register']" class="text-dark text-decoration-underline mt-3 ml-4">
-            Don't have an account?
+            {{'LOGIN.REDIRECT' | translate}}
           </a>
         </div>
       </form>

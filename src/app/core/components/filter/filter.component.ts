@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PreventDefaultDirective } from '../../directives/prevent-default/prevent-default.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter',
@@ -12,7 +13,8 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
   imports: [
     NgClass,
     FormsModule,
-    PreventDefaultDirective
+    PreventDefaultDirective,
+    TranslateModule
   ]
 })
 export class FilterComponent {

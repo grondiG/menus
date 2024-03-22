@@ -12,6 +12,7 @@ import { CheckPasswordValidator } from '../../directives/validators';
 import { StrongPasswordDirective } from '../../directives/validators/strong-password.directive';
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
 import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,7 @@ import { ErrorMessageDirective } from '../../directives/error-message/error-mess
     StrongPasswordDirective,
     CheckNamesValidator,
     ErrorMessageDirective,
+    TranslateModule,
   ],
   standalone: true
 })

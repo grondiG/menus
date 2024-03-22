@@ -5,6 +5,7 @@ import { CartItem } from '../../models/order';
 import { MenuItem } from '../../models/restaurant.model';
 import { ConvertToAttributeFormatPipe } from '../../pipes/convert-to-attribute-format/convert-to-attribute-format.pipe';
 import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-restaurant-accordion',
@@ -16,7 +17,8 @@ import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-moda
     ConvertToAttributeFormatPipe,
     NutrituionsModalComponent,
     NgForOf,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class RestaurantAccordionComponent {

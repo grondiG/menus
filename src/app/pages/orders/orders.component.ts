@@ -6,6 +6,7 @@ import { orderDataSelector } from '../../store/order/order.reducer';
 import { OrderDto } from '../../core/models/order';
 import { OrderListComponent } from '../../core/components/order-list/order-list.component';
 import { onPageLoad } from '../../store/order/order.actions';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-orders',
@@ -15,7 +16,8 @@ import { onPageLoad } from '../../store/order/order.actions';
   imports: [
     AsyncPipe,
     NgIf,
-    OrderListComponent
+    OrderListComponent,
+    TranslateModule
   ],
   standalone: true
 })

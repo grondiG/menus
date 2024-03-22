@@ -4,7 +4,7 @@
   <div class="cart container" [ngClass]="isCartOpen && 'active'">
     <div class="row cart__header">
       <div class="col-12 w-100 text-center my-2">
-        <h2>Cart</h2>
+        <h2>{{'CART.TITLE' | translate}}</h2>
       </div>
     </div>
     <div class="row cart__body">
@@ -16,7 +16,7 @@
                 <p>{{ item.item.name }}</p>
                 <p>{{ item.quantity }}x</p>
                 <p>{{ (item.item.price | getNumberPrice) * item.quantity | currency }}</p>
-                <button class="btn btn-danger h-50 p-1" (click)="removeFromCart(item)">Remove</button>
+                <button class="btn btn-danger h-50 p-1" (click)="removeFromCart(item)">{{'CART.ITEM.REMOVE' | translate}}</button>
               </div>
             </div>
           </li>
@@ -30,7 +30,7 @@
           class="btn btn-primary"
           (click)="checkout()"
           [disabled]="!data.cart?.length"
-        >Checkout</button>
+        >{{'CART.CHECKOUT' | translate}}</button>
       </div>
     </div>
   </div>

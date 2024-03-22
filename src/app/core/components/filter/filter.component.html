@@ -7,7 +7,7 @@
       type="text"
       id="restaurantName"
       class="form-control"
-      placeholder="Restaurant name"
+      placeholder="{{'RESTAURANTS.FILTER.PLACEHOLDER' | translate}}"
     >
     <i [ngClass]="searchValue.length>0 ? 'active':''"
        class="bi bi-x search-input-remove"
@@ -15,6 +15,6 @@
     ></i>
   </div>
   <div class="col-auto">
-    <button type="submit" class="btn btn-dark">Search <i class="bi-search"></i></button>
+    <button type="submit" class="btn btn-dark">{{'RESTAURANTS.FILTER.SUBMIT' | translate}} <i class="bi-search"></i></button>
   </div>
 </div>

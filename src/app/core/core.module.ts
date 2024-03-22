@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AsyncPipe, CurrencyPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, NgClass, NgForOf, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { GetCurrentPageByUrlPipe } from './pipes/get-current-page-by-url/get-current-page-by-url.pipe';
 import { GetNumberPricePipe } from './pipes/get-number-price/get-number-price.pipe';
 import { GetTotalCartPricePipe } from './pipes/get-total-cart-price/get-total-cart-price.pipe';
@@ -15,6 +15,7 @@ import { ErrorModalComponent } from './components/modal/error-modal.component';
 import { CartComponent } from './containers/cart/cart.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { PendingComponent } from './components/pending/pending.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -30,6 +31,8 @@ import { PendingComponent } from './components/pending/pending.component';
     TitleCasePipe,
     CurrencyPipe,
     GetTotalCartPricePipe,
+    UpperCasePipe,
+    TranslateModule,
   ],
   exports: [
     HeaderComponent,

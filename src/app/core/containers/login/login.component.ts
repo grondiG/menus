@@ -13,6 +13,7 @@ import { PreventDefaultDirective } from '../../directives/prevent-default/preven
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
 import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ import { ErrorMessageDirective } from '../../directives/error-message/error-mess
     BanWordsValidator,
     CheckPasswordValidator,
     CheckNamesValidator,
-    ErrorMessageDirective
+    ErrorMessageDirective,
+    TranslateModule
   ],
   standalone: true
 

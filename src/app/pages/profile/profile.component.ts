@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { userIsLoggedSelector } from '../../store/user/user.reducer';
 import * as profileActions from '../../store/user/user.actions';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,8 @@ import * as profileActions from '../../store/user/user.actions';
     NgSwitchCase,
     NgSwitch,
     AsyncPipe,
-    NgSwitchDefault
+    NgSwitchDefault,
+    TranslateModule
   ],
   standalone: true
 })

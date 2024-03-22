@@ -3,30 +3,30 @@
     <div *ngSwitchCase="true">
       <div class="row">
         <div class="alert alert-info">
-          <strong>Success!</strong> You're now registered.
+          <strong>{{'PROFILE.ALERTS.SUCCESS.TITLE' | translate}}</strong> {{'PROFILE.ALERTS.SUCCESS.SUBTITLE' | translate}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 d-flex justify-content-end">
-          <a class="btn btn-primary" [routerLink]="'/profile'">Profile</a>
+          <a class="btn btn-primary" [routerLink]="'/profile'">{{'PROFILE.ALERTS.SUCCESS.REDIRECT.PROFILE' | translate}}</a>
         </div>
         <div class="col-md-6">
-          <a class="btn btn-primary" (click)="logout()">Logout</a>
+          <a class="btn btn-primary" (click)="logout()">{{'PROFILE.ALERTS.SUCCESS.REDIRECT.LOGOUT' | translate}}</a>
         </div>
       </div>
     </div>
     <div *ngSwitchDefault>
       <div class="row">
         <div class="alert alert-danger">
-          <strong>Warning!</strong> You're not authorized yet.
+          <strong>{{'PROFILE.ALERTS.WARNING.TITLE' | translate}}</strong> {{'PROFILE.ALERTS.WARNING.SUBTITLE' | translate}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 d-flex justify-content-end">
-          <a class="btn btn-primary" [routerLink]="'login'">Login</a>
+          <a class="btn btn-primary" [routerLink]="'login'">{{'PROFILE.ALERTS.WARNING.REDIRECT.LOGIN' | translate}}</a>
         </div>
         <div class="col-md-6">
-          <a class="btn btn-primary" [routerLink]="'register'">Register</a>
+          <a class="btn btn-primary" [routerLink]="'register'">{{'PROFILE.ALERTS.WARNING.REDIRECT.REGISTER' | translate}}</a>
         </div>
       </div>
     </div>

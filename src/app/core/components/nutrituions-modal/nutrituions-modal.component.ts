@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MenuItem } from '../../models/restaurant.model';
 import { NgIf } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nutrituions-modal',
@@ -8,7 +9,8 @@ import { NgIf } from '@angular/common';
   styleUrl: './nutrituions-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   standalone: true
 })
