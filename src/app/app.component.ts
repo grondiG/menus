@@ -10,6 +10,7 @@ import { ILanguagesOption } from './core/models/languages';
 })
 export class AppComponent implements OnInit {
   private readonly availableLanguages = [ 'en', 'pl' ];
+  private languageOptions: ILanguagesOption[] = [];
 
   private translateService: TranslateService = inject(TranslateService);
 
