@@ -22,4 +22,6 @@ describe('ErrorModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

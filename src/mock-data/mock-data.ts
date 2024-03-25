@@ -47,3 +47,16 @@ export const mockDish: MenuItem = {
   }
 }
 
+export const mockMenuItem: () => MenuItem = () => ({
+  name: 'test',
+  price: '10',
+  ingredients: ['test'],
+  nutrition: {
+    calories: 10,
+    carbohydrates: 10,
+    fat: 10,
+    protein: 10,
+    fiber: 10,
+  }
+});
+

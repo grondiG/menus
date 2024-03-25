@@ -5,4 +5,5 @@ describe('GetCurrentPageByUrlPipe', () => {
     const pipe = new GetCurrentPageByUrlPipe();
     expect(pipe).toBeTruthy();
   });
+
 });

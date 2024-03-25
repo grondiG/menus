@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FilterComponent } from './filter.component';
+import SpyInstance = jest.SpyInstance;
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
@@ -19,5 +19,21 @@ describe('FilterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('onSearch', () => {
+    let emitSpy: SpyInstance;
+
+    beforeEach(() => {
+      emitSpy = jest.spyOn(component.searchValueChange, 'emit');
+    });
+
+    it('should emit provided searchTerm value', () => {
+      const searchTerm: string = 'test';
+
+      component.onSearch(searchTerm);
+
+      expect(emitSpy).toBeCalledWith(searchTerm);
+    });
   });
 });
