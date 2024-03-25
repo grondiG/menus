@@ -7,11 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class GetCurrentPageByUrlPipe implements PipeTransform {
 
   transform(value: string): string {
-    // Homework please create unit test and replace this logic by one line
-    if(value){
-      return "/" + value.split('/')[1];
-    }
-
-    return "/";
+    return value ? "/" + value.split('/')[value.split('/').length-1] : "/";
   }
 }

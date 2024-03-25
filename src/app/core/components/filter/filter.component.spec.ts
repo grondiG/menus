@@ -8,7 +8,7 @@ describe('FilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilterComponent]
+      imports: [FilterComponent],
     })
     .compileComponents();
 
@@ -34,6 +34,20 @@ describe('FilterComponent', () => {
       component.onSearch(searchTerm);
 
       expect(emitSpy).toBeCalledWith(searchTerm);
+    });
+  });
+
+  describe('resetSearch', () => {
+    let emitSpy: SpyInstance;
+
+    beforeEach(() => {
+      emitSpy = jest.spyOn(component.resetSearchChange, 'emit');
+    });
+
+    it('should emit void value', () => {
+      component.resetSearch();
+
+      expect(emitSpy).toBeCalledWith();
     });
   });
 });

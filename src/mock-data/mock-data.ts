@@ -1,4 +1,5 @@
 import { MenuItem, Restaurant } from '../app/core/models/restaurant.model';
+import { CartItem } from '../app/core/models/order';
 
 export const restaurantMockData: Restaurant = {
   id: '1',
@@ -58,5 +59,10 @@ export const mockMenuItem: () => MenuItem = () => ({
     protein: 10,
     fiber: 10,
   }
+});
+
+export const mockCartItem: () => CartItem = () => ({
+  item: mockMenuItem(),
+  quantity: 1
 });
 
