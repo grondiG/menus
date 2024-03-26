@@ -15,6 +15,8 @@ import { FilterComponent } from '../../core/components/filter/filter.component';
   styleUrl: './restaurants.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  providers: [RestaurantsStore],
+  //? tests not work with this provider
   imports: [
     FilterComponent,
     CoreModule,
