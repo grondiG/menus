@@ -66,3 +66,5 @@ export const mockCartItem: () => CartItem = () => ({
   quantity: 1
 });
 
+export const mockCartItems: () => CartItem[] = () => ([mockCartItem()]);
+

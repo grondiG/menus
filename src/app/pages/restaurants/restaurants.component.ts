@@ -14,7 +14,6 @@ import { FilterComponent } from '../../core/components/filter/filter.component';
   templateUrl: './restaurants.component.html',
   styleUrl: './restaurants.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ RestaurantsStore ],
   standalone: true,
   imports: [
     FilterComponent,

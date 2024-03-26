@@ -45,9 +45,9 @@ describe('CartComponent', () => {
     it('should dispatch removeFromCart action', () => {
       component.removeFromCart(mockCartItem());
 
-      const expectedRestult = removeFromCart({ name: 'test' });
+      const expectedResult = removeFromCart({ name: 'test' });
 
-      expect(spy).toHaveBeenCalledWith(expectedRestult);
+      expect(spy).toHaveBeenCalledWith(expectedResult);
     });
   });
 
