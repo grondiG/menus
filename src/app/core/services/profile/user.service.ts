@@ -11,9 +11,6 @@ export class UserService {
   private http: HttpClient = inject(HttpClient);
   private router: Router = inject(Router);
 
-  constructor() {
-  }
-
   login(credentials: LoginData): Observable<ResponseDataDto> {
     return this.http.post<ResponseDataDto>('/api/login', credentials);
   }

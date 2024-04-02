@@ -110,4 +110,11 @@ export class UserEffects {
     //     ofType(userActions.userInitialized),
     //     map(()=> getOrders())
     // ));
+  private removeTokenFromLocalStorage(): void {
+    localStorage.removeItem('token');
+  }
+
+  private addTokenToLocalStorage(token: string): void {
+    localStorage.setItem('token', token);
+  }
 }

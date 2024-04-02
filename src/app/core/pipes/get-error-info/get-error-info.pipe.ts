@@ -33,6 +33,7 @@ export class GetErrorInfoPipe implements PipeTransform {
         return 'Error on input';
     }
 
+    // Example of ......
     // if (control.hasError('required')) {
     //   return this.capitalizeFirstLetter(control.name as string) +' is required';
     // }
