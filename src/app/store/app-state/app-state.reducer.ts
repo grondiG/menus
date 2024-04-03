@@ -20,5 +20,5 @@ const appStateSelector = (state: { appState: appState }) => state.appState;
 
 export const appStateError = createSelector(
   appStateSelector,
-  (state: appState) => state.error
+  (state: appState) => state?.hasOwnProperty('error') ? state.error : null
 );

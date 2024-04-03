@@ -5,16 +5,16 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class ConvertToAttributeFormatPipe implements PipeTransform {
-
   transform(value: string, indicator?: string): string {
-    if(!value){
-      return "";
+    if (!value) {
+      return '';
     }
-    let finalValue: string = "";
-    if(indicator){
-      finalValue+=indicator;
-    }
-    return finalValue + value.toLowerCase().replace(/ /g, "-")
-  }
 
+    let finalValue: string = '';
+    if (indicator) {
+      finalValue += indicator;
+    }
+
+    return finalValue + value.toLowerCase().replace(/ /g, '-')
+  }
 }

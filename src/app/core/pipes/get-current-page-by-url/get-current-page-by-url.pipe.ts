@@ -7,9 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class GetCurrentPageByUrlPipe implements PipeTransform {
 
   transform(value: string): string {
-    if(value){
-      return "/"+value.split('/')[1];
-    }
-    return "/";
+    return value ? "/" + value.split('/')[value.split('/').length-1] : "/";
   }
 }

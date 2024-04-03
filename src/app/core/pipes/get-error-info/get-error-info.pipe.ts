@@ -34,32 +34,6 @@ export class GetErrorInfoPipe implements PipeTransform {
       default:
         return this.translate.instant("ERROR.INFO.DEFAULT");
     }
-
-    // if (control.hasError('required')) {
-    //   return this.capitalizeFirstLetter(control.name as string) +' is required';
-    // }
-    //
-    // if (control.hasError('minlength')) {
-    //   return 'Please provide more then ' + control.getError('minlength')?.requiredLength + ' characters';
-    // }
-    //
-    // if (control.hasError('email')) {
-    //   return 'Invalid email';
-    // }
-    //
-    // if (control.hasError('banWords')) {
-    //   return 'Please do not use ban word. List of forbidden words: ' + control.getError('banWords').join(', ');
-    // }
-    //
-    // if (control.hasError('passwordMatch')) {
-    //   return 'Password do not match';
-    // }
-    //
-    // if (control.hasError('weakPassword')) {
-    //   return 'Password is too weak';
-    // }
-
-    // return '';
   }
 
 }

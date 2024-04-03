@@ -24,15 +24,17 @@ import { TranslateModule } from '@ngx-translate/core';
 export class RestaurantAccordionComponent {
   @Input() dish: MenuItem;
   @Output() addItem: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+
   quantity: number = 1;
 
   orderItem(item: MenuItem): void {
-    if(this.quantity > 0) {
-      this.addItem.emit({
-        item,
-        quantity: this.quantity
-      });
+    if (this.quantity <= 0) {
+      return;
     }
-  }
 
+    this.addItem.emit({
+      item,
+      quantity: this.quantity
+    });
+  }
 }
