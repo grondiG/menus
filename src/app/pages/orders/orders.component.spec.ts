@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrdersComponent } from './orders.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -9,7 +10,7 @@ describe('OrdersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrdersComponent],
+      imports: [OrdersComponent, TranslateModule.forRoot()],
       providers: [provideMockStore()]
     })
     .compileComponents();

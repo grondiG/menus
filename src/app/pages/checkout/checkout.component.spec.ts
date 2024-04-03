@@ -4,9 +4,10 @@ import { CheckoutComponent } from './checkout.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { GetTotalCartPricePipe } from '../../core/pipes/get-total-cart-price/get-total-cart-price.pipe';
 import { FormsModule, NgForm } from '@angular/forms';
-import SpyInstance = jest.SpyInstance;
 import { OrderData } from '../../core/models/order';
 import { getUserId } from '../../store/user/user.reducer';
+import { TranslateModule } from '@ngx-translate/core';
+import SpyInstance = jest.SpyInstance;
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -15,7 +16,7 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GetTotalCartPricePipe, FormsModule],
+      imports: [GetTotalCartPricePipe, FormsModule, TranslateModule.forRoot()],
       declarations: [CheckoutComponent],
       providers: [provideMockStore()]
     })

@@ -5,6 +5,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { ActivatedRoute } from '@angular/router';
 import * as profileActions from '../../store/user/user.actions';
 import SpyInstance = jest.SpyInstance;
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -13,7 +14,7 @@ describe('ProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileComponent],
+      imports: [ProfileComponent, TranslateModule.forRoot()],
       providers: [provideMockStore(), { provide: ActivatedRoute, useValue: { snapshot: {  } }}],
     })
     .compileComponents();

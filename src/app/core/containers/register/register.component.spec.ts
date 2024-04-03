@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
 import { provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -10,7 +11,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterComponent, RouterTestingModule],
+      imports: [RegisterComponent, RouterTestingModule, TranslateModule.forRoot()],
       providers: [provideMockStore()],
     })
     .compileComponents();

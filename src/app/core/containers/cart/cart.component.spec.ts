@@ -9,6 +9,7 @@ import { removeFromCart } from '../../../store/cart/cart.actions';
 import SpyInstance = jest.SpyInstance;
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -20,7 +21,9 @@ describe('CartComponent', () => {
     await TestBed.configureTestingModule({
       imports: [GetTotalCartPricePipe, RouterTestingModule.withRoutes([
         { path: 'checkout', component: CartComponent }
-      ])],
+      ]),
+        TranslateModule.forRoot()
+      ],
       declarations: [CartComponent],
       providers: [provideMockStore()]
     })

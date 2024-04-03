@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NutrituionsModalComponent } from './nutrituions-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('NutrituionsModalComponent', () => {
   let component: NutrituionsModalComponent;
@@ -8,7 +9,7 @@ describe('NutrituionsModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NutrituionsModalComponent]
+      imports: [NutrituionsModalComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
 

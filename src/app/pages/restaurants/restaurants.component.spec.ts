@@ -4,6 +4,7 @@ import { RestaurantsComponent } from './restaurants.component';
 import { ActivatedRoute } from '@angular/router';
 import SpyInstance = jest.SpyInstance;
 import { RestaurantsStore } from './restaurants.store';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RestaurantsComponent', () => {
   let component: RestaurantsComponent;
@@ -12,7 +13,7 @@ describe('RestaurantsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RestaurantsComponent],
+      imports: [RestaurantsComponent, TranslateModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: {  } }},
         RestaurantsStore

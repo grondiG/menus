@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FilterComponent } from './filter.component';
 import SpyInstance = jest.SpyInstance;
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
@@ -8,7 +9,7 @@ describe('FilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilterComponent],
+      imports: [FilterComponent, TranslateModule.forRoot()],
     })
     .compileComponents();
 

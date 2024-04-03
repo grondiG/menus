@@ -4,9 +4,10 @@ import { ConvertToAttributeFormatPipe } from '../../pipes/convert-to-attribute-f
 import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-modal.component';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import SpyInstance = jest.SpyInstance;
 import { MenuItem } from '../../models/restaurant.model';
-import { mockDish, mockMenuItem } from '../../../../mock-data/mock-data';
+import { mockMenuItem } from '../../../../mock-data/mock-data';
+import { TranslateModule } from '@ngx-translate/core';
+import SpyInstance = jest.SpyInstance;
 
 
 describe('RestaurantAccordionComponent', () => {
@@ -19,7 +20,8 @@ describe('RestaurantAccordionComponent', () => {
         ConvertToAttributeFormatPipe,
         NutrituionsModalComponent,
         FormsModule,
-        NgForOf
+        NgForOf,
+        TranslateModule.forRoot()
       ]
     })
     .compileComponents();

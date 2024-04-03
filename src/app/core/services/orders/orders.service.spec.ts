@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { OrdersService } from './orders.service';
-import DoneCallback = jest.DoneCallback;
 import { OrderDto } from '../../models/order';
+import DoneCallback = jest.DoneCallback;
 
 describe('OrdersService', () => {
   let service: OrdersService;
@@ -27,6 +26,25 @@ describe('OrdersService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('order', () => {
+    it('should should make post request', (done: DoneCallback) => {
+      const expectedResult: OrderDto = { id: 'mockId' } as OrderDto;
+
+      service.order({} as OrderDto).subscribe({
+        next: (result: OrderDto) => {
+          expect(result).toEqual(expectedResult);
+          done();
+        }
+      });
+
+      const request: TestRequest = httpMock.expectOne('/api/order');
+
+      expect(request.request.method).toEqual('POST');
+
+      request.flush({ id: 'mockId' });
+    });
   });
 
   describe('getOrdersForUserById', () => {

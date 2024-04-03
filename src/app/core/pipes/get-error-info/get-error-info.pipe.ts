@@ -1,4 +1,4 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -8,7 +8,7 @@ export type ErrorTypeKeys = 'required' | 'minlength' | 'banWords' | 'passwordMat
   name: 'getErrorInfo'
 })
 export class GetErrorInfoPipe implements PipeTransform {
-  private translate: TranslateService = inject(TranslateService);
+  constructor(private translate: TranslateService) {}
 
   transform(errors: ValidationErrors | null): string | null {
     if (!errors) {
@@ -35,5 +35,4 @@ export class GetErrorInfoPipe implements PipeTransform {
         return this.translate.instant("ERROR.INFO.DEFAULT");
     }
   }
-
 }

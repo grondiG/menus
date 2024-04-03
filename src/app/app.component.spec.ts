@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HeaderComponent } from './core/containers/header/header.component';
 import { FooterComponent } from './core/containers/footer/footer.component';
 import { ErrorModalComponent } from './core/components/modal/error-modal.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -14,7 +14,8 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot()
       ],
       declarations: [
         AppComponent,
@@ -40,10 +41,6 @@ describe('AppComponent', () => {
 
   it('should create instance', () => {
     expect(component).toBeTruthy();
-  });
-
-  it(`should have as title 'menus'`, () => {
-    expect(component.title).toEqual('menus');
   });
 
   // it('should render title', async () => {

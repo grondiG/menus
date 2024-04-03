@@ -6,6 +6,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import SpyInstance = jest.SpyInstance;
 import { logout } from '../../../store/user/user.actions';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,7 +15,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterModule ],
+      imports: [ RouterModule, TranslateModule.forRoot() ],
       declarations: [ HeaderComponent ],
       providers: [
         provideMockStore(),

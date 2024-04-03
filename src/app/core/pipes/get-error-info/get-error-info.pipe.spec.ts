@@ -1,19 +1,21 @@
 import { GetErrorInfoPipe } from './get-error-info.pipe';
 import { TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('GetErrorInfoPipe', () => {
   let pipe: GetErrorInfoPipe;
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [GetErrorInfoPipe]
-    });
+      TestBed.configureTestingModule({
+        imports: [TranslateModule.forRoot()],
+        providers: [GetErrorInfoPipe]
+      });
+
     pipe = TestBed.inject(GetErrorInfoPipe);
   });
   it('create an instance', () => {
-    const pipe = new GetErrorInfoPipe();
     expect(pipe).toBeTruthy();
   });
-
+  //TODO: Check how to work with translated values
   describe('transform', () => {
     it('should return null if errors is null', () => {
       const errors = null;
