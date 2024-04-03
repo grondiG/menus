@@ -22,6 +22,8 @@ export class UserService {
     return this.http.post<ResponseDataDto>('/api/register', credentials);
   }
 
+  //move this out of here
+
   addTokenToLocalStorage(token: string): void {
     localStorage.setItem('token', token);
   }
