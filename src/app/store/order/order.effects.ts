@@ -49,12 +49,12 @@ export class OrderEffects {
         map(() => cartActions.clearCart())
     ));
 
-    getOrder$: Observable<Action> = createEffect(() =>
+    getOrders$: Observable<Action> = createEffect(() =>
         this.actions$.pipe(
             ofType(ordersActions.getOrders),
             concatLatestFrom(() => [this.store.select(fromUser.getUserId)]), // can get multiple data
             switchMap(([, userId]: [Action, string | null]) =>
-                this.ordersService.getOrders(userId).pipe(
+                this.ordersService.getOrdersForUserById(userId).pipe(
                     map((response: OrderDto[]) => ordersActions.getOrdersSuccess({ orders: response })),
                     catchError((error: HttpErrorResponse) => of(ordersActions.getOrdersFailure({ error })))
                 )
