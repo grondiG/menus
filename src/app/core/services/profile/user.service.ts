@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginData, RegisterData, ResponseDataDto } from '../../models/authentication';
@@ -9,7 +8,6 @@ import { LoginData, RegisterData, ResponseDataDto } from '../../models/authentic
 })
 export class UserService {
   private http: HttpClient = inject(HttpClient);
-  private router: Router = inject(Router);
 
   login(credentials: LoginData): Observable<ResponseDataDto> {
     return this.http.post<ResponseDataDto>('/api/login', credentials);
@@ -19,30 +17,8 @@ export class UserService {
     return this.http.post<ResponseDataDto>('/api/register', credentials);
   }
 
-  //move this out of here
-
-  addTokenToLocalStorage(token: string): void {
-    localStorage.setItem('token', token);
-  }
-
-  navigateToHome(): void {
-    this.router.navigate(['/home']);
-  }
-
-  navigateToLogin(): void {
-    this.router.navigate(['profile','login']);
-  }
-
-  removeTokenFromLocalStorage(): void {
-    localStorage.removeItem('token');
-  }
-
   isTokenValid(): Observable<ResponseDataDto> {
     return this.http.get<ResponseDataDto>('/api/isTokenValid');
-  }
-
-  getNames(): Observable<string[]> {
-    return this.http.get<string[]>(`/api/name-occupied`);
   }
 
   checkName(name: string): Observable<{ exists: boolean }> {

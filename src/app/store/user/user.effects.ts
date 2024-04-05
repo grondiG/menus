@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
@@ -7,13 +8,13 @@ import { ResponseDataDto } from '../../core/models/authentication';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
 import * as appStateActions from '../app-state/app-state.actions';
-import { getOrders } from '../order/order.actions';
 
 
 @Injectable()
 export class UserEffects {
     private actions$: Actions = inject(Actions);
     private userService: UserService = inject(UserService);
+    private router: Router = inject(Router);
 
     init$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(ROOT_EFFECTS_INIT),
@@ -74,7 +75,7 @@ export class UserEffects {
     addTokenToLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(userActions.addTokenToLocalStorage),
         tap((action) => {
-            this.userService.addTokenToLocalStorage(action.response.token);
+          localStorage.setItem('userToken', action.response.token);
         }),
         map((action) => userActions.userInitialized({ userId: action.response.data.id })),
     ));
@@ -85,7 +86,7 @@ export class UserEffects {
             userActions.loadUserSuccess
         ),
         tap(() => {
-            this.userService.navigateToHome();
+          this.router.navigate(['/home']);
         })
     ), { dispatch: false });
 
@@ -95,14 +96,14 @@ export class UserEffects {
             userActions.checkTokenFail
         ),
         tap(() => {
-            this.userService.removeTokenFromLocalStorage();
+          localStorage.removeItem('userToken');
         })
     ), { dispatch: false });
 
     redirectAfterLogout$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(userActions.logout),
         tap(() => {
-            this.userService.navigateToLogin();
+          this.router.navigate(['profile','login']);
         })
     ), { dispatch: false });
 
@@ -110,11 +111,4 @@ export class UserEffects {
     //     ofType(userActions.userInitialized),
     //     map(()=> getOrders())
     // ));
-  private removeTokenFromLocalStorage(): void {
-    localStorage.removeItem('token');
-  }
-
-  private addTokenToLocalStorage(token: string): void {
-    localStorage.setItem('token', token);
-  }
 }
