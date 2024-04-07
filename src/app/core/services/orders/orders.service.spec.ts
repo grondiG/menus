@@ -48,19 +48,17 @@ describe('OrdersService', () => {
   });
 
   describe('getOrdersForUserById', () => {
-    const id: string = 'mockId';
-
     it('should should make get request', (done: DoneCallback) => {
       const expectedResult: OrderDto[] = [{ id: 'mockId' } as OrderDto];
 
-      service.getOrdersForUserById(id).subscribe({
+      service.getOrdersForUserById().subscribe({
         next: (result: OrderDto[]) => {
           expect(result).toEqual(expectedResult);
           done();
         }
       });
 
-      const request: TestRequest = httpMock.expectOne('/api/orders?userId=' + id);
+      const request: TestRequest = httpMock.expectOne('/api/orders');
 
       expect(request.request.method).toEqual('GET');
 

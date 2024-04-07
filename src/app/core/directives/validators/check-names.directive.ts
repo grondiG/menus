@@ -29,7 +29,13 @@ export class CheckNamesValidator implements AsyncValidator {
       return of(null);
     }
 
-    return control.valueChanges.pipe(
+    const valueChanges = control.valueChanges;
+
+    if (!valueChanges || typeof valueChanges.pipe !== 'function') {
+      return of(null);
+    }
+
+    return valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
       switchMap(() => this.userService.checkName(control.value)),

@@ -54,6 +54,16 @@ describe('HeaderComponent', () => {
       const expectedResult = logout();
 
       expect(spy).toHaveBeenCalledWith(expectedResult);
-    })
+    });
+  });
+
+  describe('setLang', () => {
+    it('should set language', () => {
+      const lang: string = 'en';
+      component.setLang(lang);
+
+      const result: string = component.currentLang;
+      expect(result).toBe(lang);
+    });
   });
 });

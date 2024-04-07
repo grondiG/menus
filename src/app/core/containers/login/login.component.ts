@@ -61,19 +61,7 @@ export class LoginComponent {
       this.cd.markForCheck();
       return;
     }
-    // Object.keys(container.controls).forEach((controlName: string) => container.controls[controlName].markAsDirty());
-    console.log(form);
-
-    // if (this.loginForm.invalid) {
-    //   this.loginForm.markAsDirty();
-    //   return;
-    // }
-    //
     const data: LoginData = container.form.getRawValue();
     this.store.dispatch(profileAction.loadUser({ data }));
   }
-
-  // checkIfInputIsInvalid(inputName: string): boolean {
-  //   return this.loginForm.controls[inputName].invalid && this.loginForm.controls[inputName].touched;
-  // }
 }

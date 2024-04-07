@@ -13,6 +13,7 @@ import { StrongPasswordDirective } from '../../directives/validators/strong-pass
 import { CheckNamesValidator } from '../../directives/validators/check-names.directive';
 import { ErrorMessageDirective } from '../../directives/error-message/error-message.directive';
 import { TranslateModule } from '@ngx-translate/core';
+import * as profileAction from '../../../store/user/user.actions';
 
 @Component({
   selector: 'app-register',
@@ -47,26 +48,11 @@ export class RegisterComponent{
     password: 'asd',
     confirmPassword: ''
   }
-  // registerData: ModelFormGroup<RegisterData> = new FormGroup({
-  //   login: new FormControl('', [ Validators.required, Validators.minLength(3) ]),
-  //   mail: new FormControl('', [ Validators.required, Validators.email ]),
-  //   restaurantName: new FormControl('', [ Validators.required ]),
-  //   restaurantAddress: new FormControl('', [ Validators.required ]),
-  //   password: new FormControl('', [ Validators.required, passwordValidator ]),
-  //   confirmPassword: new FormControl('', [ Validators.required ])
-  // }, confirmPasswordValidator)
 
   register(form: NgForm): void {
-    Object.keys(form.controls).forEach((controlName: string) => form.controls[controlName].markAsDirty());
-    console.log(form);
-    // this.store.dispatch({ type: "[Profile] Register", data: this.registerData.value });
+    if(form.form.invalid){
+      return;
+    }
+    this.store.dispatch(profileAction.register({ data: form.form.getRawValue() }));
   }
-
-  // checkIfInputIsInvalid(inputName: string): boolean {
-  //   if (inputName === 'confirmPassword' && this.registerData.controls[inputName].touched) {
-  //     return this.registerData.hasError('passwordMismatch');
-  //   }
-  //   return this.registerData.controls[inputName].invalid && this.registerData.controls[inputName].touched;
-  // }
-
 }
