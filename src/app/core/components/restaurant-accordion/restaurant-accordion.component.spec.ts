@@ -4,8 +4,8 @@ import { ConvertToAttributeFormatPipe } from '../../pipes/convert-to-attribute-f
 import { NutrituionsModalComponent } from '../nutrituions-modal/nutrituions-modal.component';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MenuItem } from '../../models/restaurant.model';
-import { mockMenuItem } from '../../../../mock-data/mock-data';
+import { MenuItem } from '../../models';
+import { mockMenuItem, mockQuantity } from '../../../../mock-data';
 import { TranslateModule } from '@ngx-translate/core';
 import SpyInstance = jest.SpyInstance;
 
@@ -46,13 +46,12 @@ describe('RestaurantAccordionComponent', () => {
 
     it('should emit quantity and menu item if quantity is more then 0', () => {
       const item: MenuItem = mockMenuItem();
-      const quantity: number = 10;
       // const item: MenuItem = { ...mockDish };
-      component.quantity = quantity;
+      component.quantity = mockQuantity();
 
       component.orderItem(item);
 
-      expect(emitSpy).toHaveBeenCalledWith({ item, quantity });
+      expect(emitSpy).toHaveBeenCalledWith({ item, quantity: mockQuantity() });
     });
 
     it('should not call emit if quantity is 0 nad less', () => {

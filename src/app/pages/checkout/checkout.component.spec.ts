@@ -4,10 +4,11 @@ import { CheckoutComponent } from './checkout.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { GetTotalCartPricePipe } from '../../core/pipes/get-total-cart-price/get-total-cart-price.pipe';
 import { FormsModule, NgForm } from '@angular/forms';
-import { OrderData } from '../../core/models/order';
+import { OrderData } from '../../core/models';
 import { getUserId } from '../../store/user/user.reducer';
 import { TranslateModule } from '@ngx-translate/core';
 import SpyInstance = jest.SpyInstance;
+import { mockOrder, mockUserId, mockValidForm } from '../../../mock-data';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -42,9 +43,8 @@ describe('CheckoutComponent', () => {
       const form = {
         invalid: true
       } as any;
-      const result: void = component.order({} as any, form);
 
-      expect(result).toBeUndefined();
+      expect(component.order({} as any, form)).toBeUndefined();
     });
 
     it('should return if userId is not defined', () => {
@@ -55,15 +55,12 @@ describe('CheckoutComponent', () => {
     });
 
     it('should dispatch addOrder action', () => {
-      const form: NgForm = {
-        invalid: false
-      } as NgForm;
-      const order: OrderData = {
-        cart: [],
-        totalPrice: 0
-      } as OrderData;
-      const userId = '123';
+      const form: NgForm = mockValidForm();
+      const order: OrderData = mockOrder();
+      const userId: string = mockUserId();
+
       store.overrideSelector(getUserId, userId);
+
       const expectedResult = {
         order: {
           cart: order.cart,
@@ -77,8 +74,5 @@ describe('CheckoutComponent', () => {
 
       expect(spy).toHaveBeenCalledWith(expectedResult);
     });
-
-
   });
-
 });

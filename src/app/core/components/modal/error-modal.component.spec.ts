@@ -5,6 +5,7 @@ import { lastValueFrom, Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as fromApp from '../../../store/app-state/app-state.reducer';
 import SpyInstance = jest.SpyInstance;
+import { mockError } from '../../../../mock-data';
 
 describe('ErrorModalComponent', () => {
   let component: ErrorModalComponent;
@@ -42,13 +43,9 @@ describe('ErrorModalComponent', () => {
     });
 
     it('should call createCloseModalTimer when error$ emits HttpErrorResponse', () => {
-      const mockError: HttpErrorResponse = {
-        error: 'Test error',
-        status: 404,
-        statusText: 'Not Found',
-      } as HttpErrorResponse;
 
-      store.overrideSelector(fromApp.appStateError, mockError);
+
+      store.overrideSelector(fromApp.appStateError, mockError());
 
       expect(component.createCloseModalTimer).not.toHaveBeenCalled();
 

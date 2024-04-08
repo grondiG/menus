@@ -4,7 +4,7 @@ import { CartComponent } from './cart.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { GetTotalCartPricePipe } from '../../pipes/get-total-cart-price/get-total-cart-price.pipe';
 import { HttpErrorResponse } from '@angular/common/http';
-import { mockCartItem } from '../../../../mock-data/mock-data';
+import { mockCartItem, mockCheckoutRoutes, mockCheckoutRouting } from '../../../../mock-data';
 import { removeFromCart } from '../../../store/cart/cart.actions';
 import SpyInstance = jest.SpyInstance;
 import { RouterTestingModule } from '@angular/router/testing';
@@ -19,9 +19,7 @@ describe('CartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GetTotalCartPricePipe, RouterTestingModule.withRoutes([
-        { path: 'checkout', component: CartComponent }
-      ]),
+      imports: [GetTotalCartPricePipe, RouterTestingModule.withRoutes(mockCheckoutRouting()),
         TranslateModule.forRoot()
       ],
       declarations: [CartComponent],
@@ -54,15 +52,18 @@ describe('CartComponent', () => {
     });
   });
 
-  describe('checkout', () => {});
+  describe('checkout', () => {
+    let routerSpy: SpyInstance;
+    beforeEach(() => {
+      routerSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
+    });
     it('should redirect to /checkout', () => {
-      const routerSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
-
       component.checkout();
 
-      const expectedResult: string[] = ['/checkout'];
+      const expectedResult: string[] = mockCheckoutRoutes();
 
       expect(routerSpy).toHaveBeenCalledWith(expectedResult);
-
+    });
   });
+
 });

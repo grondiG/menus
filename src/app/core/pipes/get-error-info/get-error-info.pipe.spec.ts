@@ -1,17 +1,19 @@
 import { GetErrorInfoPipe } from './get-error-info.pipe';
 import { TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 describe('GetErrorInfoPipe', () => {
   let pipe: GetErrorInfoPipe;
+  let translate: TranslateService;
   beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [TranslateModule.forRoot()],
-        providers: [GetErrorInfoPipe]
+        providers: [GetErrorInfoPipe, { provide: TranslateService, useValue: { instant: jest.fn() }}]
       });
 
     pipe = TestBed.inject(GetErrorInfoPipe);
+    translate = TestBed.inject(TranslateService);
   });
+  
   it('create an instance', () => {
     expect(pipe).toBeTruthy();
   });

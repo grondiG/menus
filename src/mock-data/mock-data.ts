@@ -1,5 +1,12 @@
-import { MenuItem, Restaurant } from '../app/core/models/restaurant.model';
-import { CartItem } from '../app/core/models/order';
+import { MenuItem, Restaurant } from '../app/core/models';
+import { CartItem, OrderData } from '../app/core/models';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CartComponent } from '../app/core/containers/cart/cart.component';
+import { ComponentRef, ElementRef } from '@angular/core';
+import { Routes } from '@angular/router';
+import { NgControl, NgForm } from '@angular/forms';
+import { ErrorMessageComponent } from '../app/core/components/error-message/error-message.component';
+import { PendingComponent } from '../app/core/components/pending/pending.component';
 
 export const restaurantMockData: () => Restaurant = () => ({
   id: '1',
@@ -61,12 +68,88 @@ export const mockMenuItem: () => MenuItem = () => ({
   }
 });
 
+export const mockOrder: () => OrderData = () => ({
+  cart: [mockCartItem()],
+  totalPrice: 10
+});
+
+export const mockQuantity: () => number = ()=> 10;
+
+export const mockLanguage: () => string = () => 'en';
+
+export const mockCheckoutRouting: () => Routes = () => ([{ path: 'checkout', component: CartComponent }]);
+export const mockCheckoutRoutes: () => string[]  = () => (['/checkout']);
+
+export const mockError: () => HttpErrorResponse = () => ({
+  error: 'Test error',
+  status: 404,
+  statusText: 'Not Found',
+} as HttpErrorResponse);
+
 export const mockCartItem: () => CartItem = () => ({
   item: mockMenuItem(),
   quantity: 1
 });
 
 export const mockCartItems: () => CartItem[] = () => ([mockCartItem()]);
+
+
+export const mockForm: () => NgForm = () => ({
+  form: {
+    invalid: false,
+    getRawValue: () => {}
+  }
+} as NgForm);
+
+export const mockInvalidForm: () => NgForm = () => ({
+  form: {
+    invalid: true,
+    getRawValue: () => {}
+  }
+} as NgForm);
+
+export const mockElementRef: () => ElementRef = () => new MockElementRef();
+
+export const mockErrComponent: () => ComponentRef<ErrorMessageComponent> = () => ({
+  destroy: jest.fn(),
+  setInput: jest.fn()
+}) as unknown as ComponentRef<ErrorMessageComponent>;
+
+export const mockPendingComponent: () => ComponentRef<PendingComponent> = () => ({
+  destroy: jest.fn(),
+  setInput: jest.fn()
+}) as unknown as ComponentRef<PendingComponent>;
+
+export const mockViewContainerRef: () => { createComponent: jest.Mock<any, any, any> } = () => ({
+  createComponent: jest.fn().mockReturnValue({
+    instance: {},
+    destroy: jest.fn()
+  })
+}) as { createComponent: jest.Mock<any, any, any> };
+
+export const mockNgControlWithoutControl: () => NgControl = () => ({
+  control: null,
+  valueChanges: { subscribe: () => {}, pipe: () => {} }
+}) as NgControl;
+
+export const mockSubmitEvent: () => Event = () => new Event('submit');
+
+export const mockValidForm: () => NgForm = () => ({
+  invalid: false
+}) as NgForm;
+
+export const mockUserId: () => string = () => '123';
+
+class MockElementRef extends ElementRef {
+  constructor() {
+    super({
+      addEventListener: () => {
+      },
+      removeEventListener: () => {
+      }
+    });
+  }
+}
 
 export const mockSearchValue: 'searchValue' = 'searchValue';
 

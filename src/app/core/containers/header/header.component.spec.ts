@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 import SpyInstance = jest.SpyInstance;
 import { logout } from '../../../store/user/user.actions';
 import { TranslateModule } from '@ngx-translate/core';
+import { mockLanguage } from '../../../../mock-data';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -59,7 +60,7 @@ describe('HeaderComponent', () => {
 
   describe('setLang', () => {
     it('should set language', () => {
-      const lang: string = 'en';
+      const lang: string = mockLanguage();
       component.setLang(lang);
 
       const result: string = component.currentLang;

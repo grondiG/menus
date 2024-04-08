@@ -5,7 +5,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import SpyInstance = jest.SpyInstance;
-import { NgForm } from '@angular/forms';
+import { mockForm, mockInvalidForm } from '../../../../mock-data';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -37,26 +37,13 @@ describe('RegisterComponent', () => {
     });
 
     it('should call store', () => {
-      let mockForm: NgForm = {
-        form: {
-          invalid: false,
-          getRawValue: () => {}
-        }
-      } as NgForm;
-
-      component.register(mockForm);
+      component.register(mockForm());
 
       expect(spy).toHaveBeenCalled();
     });
 
     it('should not call store if form is invalid', () => {
-      let mockForm: NgForm = {
-        form: {
-          invalid: true
-        }
-      } as NgForm;
-
-      component.register(mockForm);
+      component.register(mockInvalidForm());
 
       expect(spy).not.toHaveBeenCalled();
     });

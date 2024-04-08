@@ -6,42 +6,19 @@ import { ErrorMessageComponent } from '../../components/error-message/error-mess
 import { PendingComponent } from '../../components/pending/pending.component';
 import { merge, of, take } from 'rxjs';
 import SpyInstance = jest.SpyInstance;
-
-class MockElementRef extends ElementRef {
-  constructor() {
-    super({
-      addEventListener: () => {
-      },
-      removeEventListener: () => {
-      }
-    });
-  }
-}
-
-class MockPendingComponent {
-  setInput(key: string, value: any) {}
-}
-
+import {
+  mockElementRef,
+  mockErrComponent,
+  mockNgControlWithoutControl,
+  mockPendingComponent, mockViewContainerRef
+} from '../../../../mock-data';
 
 describe('ErrorMessageDirective', () => {
   let directive: ErrorMessageDirective;
-  let mockViewContainerRef: { createComponent: jest.Mock<any, any, any> };
+  let viewContainerRef: { createComponent: jest.Mock<any, any, any> };
   let ngControl: NgControl;
 
-  const mockErrComponent = {
-    destroy: jest.fn(),
-    setInput: jest.fn()
-  };
-  const mockPendingComponent = {
-    destroy: jest.fn()
-  };
-
-  mockViewContainerRef = {
-    createComponent: jest.fn().mockReturnValue({
-      instance: {},
-      destroy: jest.fn()
-    })
-  };
+  viewContainerRef = mockViewContainerRef();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,12 +26,11 @@ describe('ErrorMessageDirective', () => {
       providers: [
         { provide: ControlContainer, useValue: { formDirective: { ngSubmit: { pipe: () => {} } } as unknown as NgForm } },
         { provide: NgControl, useValue: { control: { valueChanges: { subscribe: jest.fn(), pipe: () => {} }, patchValue: ()=>{} }, pending: true } },
-        { provide: ElementRef, useClass: MockElementRef },
-        { provide: ViewContainerRef, useValue: mockViewContainerRef },
+        { provide: ElementRef, useValue: mockElementRef() },
+        { provide: ViewContainerRef, useValue: viewContainerRef },
         ErrorMessageDirective,
       ]
     });
-    //take instance from module
     directive = TestBed.inject(ErrorMessageDirective);
     ngControl = TestBed.inject(NgControl);
     // TestBed.runInInjectionContext(() => {
@@ -76,7 +52,7 @@ describe('ErrorMessageDirective', () => {
     let updateErrorMessageSpy: SpyInstance;
     let updatePendingSpy: SpyInstance;
     beforeEach(() => {
-      spy = jest.spyOn(mockViewContainerRef, 'createComponent');
+      spy = jest.spyOn(viewContainerRef, 'createComponent');
       updateErrorMessageSpy = jest.spyOn(directive as any, 'updateErrorMessage');
       updatePendingSpy = jest.spyOn(directive as any, 'updatePending');
     });
@@ -85,12 +61,8 @@ describe('ErrorMessageDirective', () => {
     });
 
     it('should throw error if no control model', () => {
-      const mockNgControlWithoutControl = {
-        control: null,
-        valueChanges: { subscribe: () => {}, pipe: () => {} }
-      };
 
-      directive['ngControl'] = mockNgControlWithoutControl as unknown as NgControl;
+      directive['ngControl'] = mockNgControlWithoutControl();
 
       const directiveWithoutControl = TestBed.inject(ErrorMessageDirective);
 
@@ -112,7 +84,7 @@ describe('ErrorMessageDirective', () => {
       merge(directive['submitted$'], directive['controlChanges$'], directive['controlTouched$'])
         .pipe(take(1))
         .subscribe(() => {
-          directive['errComponent'] = mockErrComponent as unknown as ComponentRef<ErrorMessageComponent>;
+          directive['errComponent'] = mockErrComponent();
           expect(updateErrorMessageSpy).toHaveBeenCalled();
           expect(updatePendingSpy).toHaveBeenCalled();
         });
@@ -125,13 +97,13 @@ describe('ErrorMessageDirective', () => {
     let spy: SpyInstance;
 
     beforeEach(() => {
-      spy = jest.spyOn(mockViewContainerRef, 'createComponent');
+      spy = jest.spyOn(viewContainerRef, 'createComponent');
     });
 
     it('should update error message', () => {
       directive.ngAfterViewInit();
 
-      directive['errComponent'] = mockErrComponent as unknown as ComponentRef<ErrorMessageComponent>;
+      directive['errComponent'] = mockErrComponent();
       directive['updateErrorMessage']();
 
       expect(spy).toHaveBeenCalled();
@@ -139,8 +111,8 @@ describe('ErrorMessageDirective', () => {
     it('should update pending component if its exists', () => {
       directive.ngAfterViewInit();
 
-      directive['errComponent'] = mockErrComponent as unknown as ComponentRef<ErrorMessageComponent>;
-      directive['pendingComponent'] = mockErrComponent as unknown as ComponentRef<PendingComponent>;
+      directive['errComponent'] = mockErrComponent();
+      directive['pendingComponent'] = mockPendingComponent();
       directive['updateErrorMessage']();
 
       expect(spy).toHaveBeenCalled();
@@ -150,47 +122,45 @@ describe('ErrorMessageDirective', () => {
   describe('updatePending', () => {
     let spy: SpyInstance;
     beforeEach(() => {
-      spy = jest.spyOn(mockViewContainerRef, 'createComponent');
+      spy = jest.spyOn(viewContainerRef, 'createComponent');
     });
 
     it('should update pending component', () => {
       directive.ngAfterViewInit();
 
-      directive['pendingComponent'] = mockErrComponent as unknown as ComponentRef<PendingComponent>;
+      directive['pendingComponent'] = mockPendingComponent();
       directive['updatePending']();
 
       expect(spy).toHaveBeenCalled();
     });
 
     it('should create an instance if there is no pendingComponent', () => {
-      const mockComponentRef = {
-        instance: new MockPendingComponent(),
-        setInput: jest.fn(), // Mock the setInput method,
-        destroy: jest.fn()
-      };
-      spy.mockReturnValue(mockComponentRef);
+      let componentRef: ComponentRef<PendingComponent> = mockPendingComponent();
+      spy.mockReturnValue(componentRef);
 
       expect(directive['pendingComponent']).toBeUndefined();
 
       directive['updatePending']();
 
       expect(spy).toHaveBeenCalled();
-      expect(mockComponentRef.setInput).toHaveBeenCalledWith('isPending', ngControl.pending);
+      expect(componentRef.setInput).toHaveBeenCalledWith('isPending', ngControl.pending);
     });
   });
 
   describe('destroy', () => {
     let spyErrDestroy: SpyInstance;
     let spyPendingDestroy: SpyInstance;
+    let errComponent = mockErrComponent();
+    let pendingComponent = mockPendingComponent();
 
     beforeEach(() => {
-      spyErrDestroy = mockErrComponent.destroy;
-      spyPendingDestroy = mockPendingComponent.destroy;
+      spyErrDestroy = jest.spyOn(errComponent, 'destroy');
+      spyPendingDestroy = jest.spyOn(pendingComponent, 'destroy');
     });
 
     it('should destroy components on destroy', () => {
-      directive['errComponent'] = mockErrComponent as unknown as ComponentRef<ErrorMessageComponent>;
-      directive['pendingComponent'] = mockPendingComponent as unknown as ComponentRef<PendingComponent>;
+      directive['errComponent'] = errComponent;
+      directive['pendingComponent'] = pendingComponent;
 
       directive.ngOnDestroy();
 
@@ -199,7 +169,7 @@ describe('ErrorMessageDirective', () => {
     });
 
     it('should not destroy pendingComponent if null', () => {
-      directive['errComponent'] = mockErrComponent as unknown as ComponentRef<ErrorMessageComponent>;
+      directive['errComponent'] = errComponent;
       directive['pendingComponent'] = null;
 
       directive.ngOnDestroy();
