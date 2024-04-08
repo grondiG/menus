@@ -1,7 +1,7 @@
 import { MenuItem, Restaurant } from '../app/core/models/restaurant.model';
 import { CartItem } from '../app/core/models/order';
 
-export const restaurantMockData: Restaurant = {
+export const restaurantMockData: () => Restaurant = () => ({
   id: '1',
   name: 'Test Restaurant',
   description: 'A test restaurant for testing purposes',
@@ -33,7 +33,7 @@ export const restaurantMockData: Restaurant = {
       }
     }
   ]
-};
+});
 
 export const mockDish: MenuItem = {
   name: 'test',
@@ -67,4 +67,6 @@ export const mockCartItem: () => CartItem = () => ({
 });
 
 export const mockCartItems: () => CartItem[] = () => ([mockCartItem()]);
+
+export const mockSearchValue: 'searchValue' = 'searchValue';
 

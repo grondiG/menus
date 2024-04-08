@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import * as cartActions from './cart.actions';
-import { CartItem } from '../../core/models/order';
+import { CartItem } from '../../core/models';
 
 
 @Injectable()

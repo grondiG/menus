@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { removeFromCart } from '../../../store/cart/cart.actions';
 import { cartSelector } from '../../../store/cart/cart.reducer';
-import { CartItem } from '../../models/order';
+import { CartItem } from '../../models';
 
 @Component({
   selector: 'app-cart',

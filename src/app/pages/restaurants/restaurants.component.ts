@@ -11,18 +11,18 @@ import { FilterComponent } from '../../core/components/filter/filter.component';
 
 @Component({
   selector: 'app-restaurants',
-  templateUrl: './restaurants.component.html',
-  styleUrl: './restaurants.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  providers: [RestaurantsStore],
-  //? tests not work with this provider
   imports: [
     FilterComponent,
     CoreModule,
     AsyncPipe,
     RestaurantCardContainerComponent
-  ]
+  ],
+  templateUrl: './restaurants.component.html',
+  styleUrl: './restaurants.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  //? tests not work with this provider
+  providers: [RestaurantsStore]
 })
 export class RestaurantsComponent {
   private restaurantsStore: RestaurantsStore = inject(RestaurantsStore);

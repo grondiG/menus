@@ -5,25 +5,45 @@ import { ActivatedRoute } from '@angular/router';
 import SpyInstance = jest.SpyInstance;
 import { RestaurantsStore } from './restaurants.store';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  RestaurantCardContainerComponent
+} from '../../core/components/restaurant-card-container/restaurant-card-container.component';
+import { createSpyObj } from 'jest-createspyobj';
+import { FilterComponent } from '../../core/components/filter/filter.component';
+import { mockSearchValue } from '../../../mock-data/mock-data';
 
 describe('RestaurantsComponent', () => {
   let component: RestaurantsComponent;
   let fixture: ComponentFixture<RestaurantsComponent>;
   let restaurantsStore: RestaurantsStore;
 
+  const mockRestaurantsStore = createSpyObj('RestaurantsStore', [
+    'loadRestaurants',
+    'searchRestaurants',
+  ]);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RestaurantsComponent, TranslateModule.forRoot()],
+      imports: [
+        RestaurantsComponent,
+        TranslateModule.forRoot(),
+        RestaurantCardContainerComponent,
+        FilterComponent
+      ],
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: {  } }},
-        RestaurantsStore
       ]
     })
     .compileComponents();
 
-    restaurantsStore = TestBed.inject(RestaurantsStore);
-    fixture = TestBed.createComponent(RestaurantsComponent);
+    fixture = TestBed
+      .overrideTemplate(RestaurantCardContainerComponent, '')
+      .overrideTemplate(FilterComponent, '')
+      .overrideProvider(RestaurantsStore, { useValue: mockRestaurantsStore })
+      .createComponent(RestaurantsComponent);
     component = fixture.componentInstance;
+
+    restaurantsStore = TestBed.inject(RestaurantsStore);
     fixture.detectChanges();
   });
 
@@ -33,16 +53,17 @@ describe('RestaurantsComponent', () => {
 
   describe('onSearch', () => {
     let spy: SpyInstance;
+
     beforeEach(() => {
       spy = jest.spyOn(restaurantsStore, 'searchRestaurants');
     });
-    it('should call searchRestaurants', () => {
-      const searchValue: 'searchValue' = 'searchValue';
-      component.searchValue = searchValue;
+
+    it('should call searchRestaurants with params', () => {
+      component.searchValue = mockSearchValue;
 
       component.onSearch();
 
-      expect(spy).toHaveBeenCalledWith(searchValue);
+      expect(spy).toHaveBeenCalledWith(mockSearchValue);
     });
   });
 
@@ -51,6 +72,15 @@ describe('RestaurantsComponent', () => {
     beforeEach(() => {
       spy = jest.spyOn(restaurantsStore, 'searchRestaurants');
     });
+
+    it('should provide empty string to search', () => {
+      component.searchValue = mockSearchValue;
+
+      component.resetSearch();
+
+      expect(component.searchValue).toEqual('');
+    });
+
     it('should call searchRestaurants', () => {
       component.searchValue = 'searchValue';
 
