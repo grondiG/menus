@@ -1,36 +1,26 @@
 import { Observable, of } from 'rxjs';
 import { CartEffects } from './cart.effects';
-import { EffectsMetadata, getEffectsMetadata } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import * as cartActions from './cart.actions';
-import Spy = jasmine.Spy;
+import { Action } from '@ngrx/store';
 import DoneCallback = jest.DoneCallback;
+import SpyInstance = jest.SpyInstance;
+import { mockCartItems } from '../../../mock-data';
 
 describe('CartEffects', () => {
   let actions$: Observable<any>;
   let effects: CartEffects;
-  let metadata: EffectsMetadata<CartEffects>;
-  let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
       providers: [
         CartEffects,
         provideMockActions(() => actions$),
-        provideMockStore(),
       ]
     });
 
-    store = TestBed.inject(MockStore);
     effects = TestBed.inject(CartEffects);
-    metadata = getEffectsMetadata(effects);
-  });
-
-  afterEach(() => {
-    store.resetSelectors();
   });
 
   it('should be created', () => {
@@ -38,16 +28,41 @@ describe('CartEffects', () => {
   });
 
   describe('getItemsFromLocalStorage$', () => {
-    let getItemSpy: jest.SpyInstance;
+    let getItemSpy: SpyInstance;
 
     beforeEach(() => {
       actions$ = of(cartActions.getItemsFromLocalStorage());
-      getItemSpy = jest.spyOn(localStorage, 'getItem');
+      getItemSpy = jest.spyOn(window.localStorage['__proto__'], 'getItem');
     });
 
-    it('should call localStorage.getItem with params', (done: DoneCallback) => {
+    it('should call localStorage.getItem', (done: DoneCallback) => {
       effects.getItemsFromLocalStorage$.subscribe(() => {
         expect(getItemSpy).toHaveBeenCalledWith('cartItems');
+        done();
+      });
+    });
+
+    it('should return setCartItems action', (done: DoneCallback) => {
+      getItemSpy.mockReturnValue(JSON.stringify(mockCartItems()));
+
+      effects.getItemsFromLocalStorage$.subscribe((action: Action) => {
+        expect(action).toEqual(cartActions.setCartItems({items: mockCartItems()}));
+        done();
+      });
+    });
+  });
+
+  describe('clearCart$', () => {
+    let removeItemSpy: SpyInstance;
+
+    beforeEach(() => {
+      actions$ = of(cartActions.clearCart());
+      removeItemSpy = jest.spyOn(window.localStorage['__proto__'], 'removeItem');
+    });
+
+    it('should call localStorage.removeItem', (done: DoneCallback) => {
+      effects.clearCart$.subscribe(() => {
+        expect(removeItemSpy).toHaveBeenCalledWith('cartItems');
         done();
       });
     });
