@@ -18,6 +18,7 @@ export class CartEffects {
   getItemsFromLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.getItemsFromLocalStorage),
     map(() => {
+      //TODO create injection token for localStorage
       const cartItems: string = localStorage.getItem('cartItems');
       const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
       return cartActions.setCartItems({ items });

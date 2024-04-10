@@ -7,10 +7,14 @@ import { Action } from '@ngrx/store';
 import DoneCallback = jest.DoneCallback;
 import SpyInstance = jest.SpyInstance;
 import { mockCartItems } from '../../../mock-data';
+import { EffectsMetadata, getEffectsMetadata } from '@ngrx/effects';
+// import objectContaining = jasmine.objectContaining;
+//TODO change to jest
 
 describe('CartEffects', () => {
   let actions$: Observable<any>;
   let effects: CartEffects;
+  let metadata: EffectsMetadata<CartEffects>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,6 +25,7 @@ describe('CartEffects', () => {
     });
 
     effects = TestBed.inject(CartEffects);
+    metadata = getEffectsMetadata(effects);
   });
 
   it('should be created', () => {
@@ -66,5 +71,9 @@ describe('CartEffects', () => {
         done();
       });
     });
+
+    //TODO it('should not dispatch', () => {
+    //   expect(metadata.clearCart$).toEqual(objectContaining({ dispatch: false }));
+    // });
   });
 });
