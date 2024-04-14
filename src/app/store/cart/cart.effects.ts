@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import * as cartActions from './cart.actions';
 import { CartItem } from '../../core/models';
@@ -11,8 +11,10 @@ export class CartEffects {
   private actions$: Actions = inject(Actions);
 
   init$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(ROOT_EFFECTS_INIT),
-    map(() => cartActions.getItemsFromLocalStorage())
+    ofType(cartActions.cartInit),
+    map(() => {
+      return cartActions.getItemsFromLocalStorage()
+    })
   ));
 
   getItemsFromLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
@@ -30,7 +32,7 @@ export class CartEffects {
     map((action: { item: CartItem }) => {
       const cartItems: string = localStorage.getItem('cartItems');
       const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
-      if (items.find(item => item.item.name === action.item.item.name)) {
+      if (items.find((item: CartItem): boolean => item.item.name === action.item.item.name)) {
         items.map((item: CartItem) => {
           if (item.item.name === action.item.item.name) {
             item.quantity += action.item.quantity;

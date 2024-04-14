@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { OrderDto } from '../../core/models/order';
+import { OrderDto } from '../../core/models';
+import { ROOT_EFFECTS_INIT } from '@ngrx/effects';
 
 export enum OrderActions {
   AddOrder = '[Order] Add order',
@@ -12,7 +13,7 @@ export enum OrderActions {
   GetOrders = '[Order] Get orders',
   GetOrdersSuccess = '[Order] Get orders success',
   GetOrdersFailure = '[Order] Get orders failure',
-  OnPageLoad = '[Order] On page load',
+  OnPageLoad = ROOT_EFFECTS_INIT,
 }
 
 export const addOrder = createAction(OrderActions.AddOrder, props<{ order: OrderDto }>());
