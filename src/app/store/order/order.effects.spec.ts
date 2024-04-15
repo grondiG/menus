@@ -6,9 +6,9 @@ import { OrderEffects } from './order.effects';
 import { EffectsMetadata, getEffectsMetadata, rootEffectsInit } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { OrdersService } from '../../core/services/orders/orders.service';
-import { HttpClient, HttpErrorResponse, HttpHandler } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { mockOrder, mockOrderDto, mockOrdersRoutes, mockOrdersRouting } from '../../../mock-data';
+import { getBadRequestError, mockOrderDto, mockOrdersRoutes, mockOrdersRouting } from '../../../mock-data';
 import SpyInstance = jest.SpyInstance;
 import * as appStateActions from '../app-state/app-state.actions';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -103,13 +103,14 @@ describe('OrderEffects', () => {
 
   describe('addOrderFailure$', () => {
     beforeEach(() => {
+      const error: HttpErrorResponse = getBadRequestError();
+
+      actions$ = of(orderActions.addOrderFailure({ error }));
     });
 
     it('should call setError effect on failure', (done: DoneCallback) => {
-      const error: Error = new Error('error');
-      actions$ = of(orderActions.addOrderFailure({ error }));
       effects.addOrderFailure$.subscribe((action: Action) => {
-        expect(action).toEqual(appStateActions.setError(new HttpErrorResponse({ error: 'error' })));
+        expect(action).toEqual(appStateActions.setError(getBadRequestError()));
         done();
       });
     });
@@ -142,6 +143,7 @@ describe('OrderEffects', () => {
 
     beforeEach(() => {
       serviceSpy = jest.spyOn(ordersService, 'getOrdersForUserById');
+      actions$ = of(orderActions.getOrders());
     });
 
     it('should call ordersActions.getOrdersSuccess() if success', (done: DoneCallback) => {
@@ -154,13 +156,26 @@ describe('OrderEffects', () => {
     });
 
     it('should call appStateActions.setError() if failure', (done: DoneCallback) => {
-      const error: HttpErrorResponse = new HttpErrorResponse({ error: 'error' });
+      const error: Error = new Error('error');
       serviceSpy.mockReturnValue(throwError(() => error));
 
       effects.getOrders$.subscribe((action: Action) => {
-        expect(action).toEqual(appStateActions.setError(error));
+        expect(action).toEqual(orderActions.getOrdersFailure({ error }));
         done();
       });
     });
   });
+
+  describe('getOrdersFailure$', () => {
+    it('should call setError effect on failure', (done: DoneCallback) => {
+      const error: HttpErrorResponse = getBadRequestError();
+
+      actions$ = of(orderActions.getOrdersFailure({ error }));
+
+      effects.getOrdersFailure$.subscribe((action: Action) => {
+        expect(action).toEqual(appStateActions.setError(getBadRequestError()));
+        done();
+      });
+    });
+  })
 });

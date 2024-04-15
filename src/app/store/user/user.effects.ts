@@ -2,9 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { ResponseDataDto } from '../../core/models/authentication';
+import { ResponseDataDto } from '../../core/models';
 import { UserService } from '../../core/services/profile/user.service';
 import * as userActions from './user.actions';
 import * as appStateActions from '../app-state/app-state.actions';
@@ -17,7 +17,7 @@ export class UserEffects {
     private router: Router = inject(Router);
 
     init$: Observable<Action> = createEffect(() => this.actions$.pipe(
-        ofType(ROOT_EFFECTS_INIT),
+        ofType(userActions.userInit),
         mergeMap(() => [
             userActions.checkToken(),
         ]),

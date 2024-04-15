@@ -4,11 +4,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import * as cartActions from './cart.actions';
 import { CartItem } from '../../core/models';
+import { CART_STORAGE, cartStorage } from '../../app.config';
 
 
 @Injectable()
 export class CartEffects {
   private actions$: Actions = inject(Actions);
+  private cartStorage: cartStorage = inject(CART_STORAGE);
 
   init$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.cartInit),
@@ -20,29 +22,14 @@ export class CartEffects {
   getItemsFromLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.getItemsFromLocalStorage),
     map(() => {
-      //TODO create injection token for localStorage
-      const cartItems: string = localStorage.getItem('cartItems');
-      const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
-      return cartActions.setCartItems({ items });
+      return cartActions.setCartItems({ items: this.cartStorage.getItems() });
     })
   ));
 
   addItemToLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.addToCart),
     map((action: { item: CartItem }) => {
-      const cartItems: string = localStorage.getItem('cartItems');
-      const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
-      if (items.find((item: CartItem): boolean => item.item.name === action.item.item.name)) {
-        items.map((item: CartItem) => {
-          if (item.item.name === action.item.item.name) {
-            item.quantity += action.item.quantity;
-          }
-        });
-        localStorage.setItem('cartItems', JSON.stringify(items));
-        return cartActions.addToCart({ item: action.item });
-      }
-      items.push(action.item);
-      localStorage.setItem('cartItems', JSON.stringify(items));
+      this.cartStorage.addItem(action.item);
       return cartActions.addToCart({ item: action.item });
     })
   ), { dispatch: false });
@@ -50,7 +37,7 @@ export class CartEffects {
   clearCart$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.clearCart),
     map(() => {
-      localStorage.removeItem('cartItems');
+      this.cartStorage.clearCart();
       return cartActions.clearCart();
     })
   ), { dispatch: false });
@@ -58,10 +45,7 @@ export class CartEffects {
   removeItemFromLocalStorage$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.removeFromCart),
     map((action: { name: string }) => {
-      const cartItems: string = localStorage.getItem('cartItems');
-      const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
-      const updatedItems: CartItem[] = items.filter((item: CartItem) => item.item.name !== action.name);
-      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+      this.cartStorage.removeItem(action.name);
       return cartActions.removeFromCart({ name: action.name });
     })
   ), { dispatch: false });

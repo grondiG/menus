@@ -1,8 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoginData, RegisterData, ResponseDataDto } from '../../core/models/authentication';
+import { LoginData, RegisterData, ResponseDataDto } from '../../core/models';
+import { ROOT_EFFECTS_INIT } from '@ngrx/effects';
 
 export enum UserActionTypes {
+  UserInit= ROOT_EFFECTS_INIT,
   CheckToken = '[User] Check Token',
   CheckTokenSuccess = '[User] Check Token Success',
   CheckTokenFail = '[User] Check Token Fail',
@@ -16,6 +18,8 @@ export enum UserActionTypes {
   AddTokenToLocalStorage = '[User] Add Token To Local Storage',
   UserInitialized = '[User] User Initalized',
 }
+
+export const userInit = createAction(UserActionTypes.UserInit);
 export const checkToken = createAction(UserActionTypes.CheckToken);
 export const checkTokenSuccess = createAction(UserActionTypes.CheckTokenSuccess, props<{ response: ResponseDataDto }>());
 export const checkTokenFail = createAction(UserActionTypes.CheckTokenFail, props<{ error: HttpErrorResponse }>());

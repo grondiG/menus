@@ -1,4 +1,12 @@
-import { MenuItem, OrderDto, Restaurant, ShippingForm } from '../app/core/models';
+import {
+  LoginData,
+  MenuItem,
+  OrderDto, RegisterData,
+  ResponseDataDto,
+  Restaurant,
+  ShippingForm,
+  UserDataDto
+} from '../app/core/models';
 import { CartItem, OrderData } from '../app/core/models';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CartComponent } from '../app/core/containers/cart/cart.component';
@@ -8,6 +16,8 @@ import { NgControl, NgForm } from '@angular/forms';
 import { ErrorMessageComponent } from '../app/core/components/error-message/error-message.component';
 import { PendingComponent } from '../app/core/components/pending/pending.component';
 import { OrdersComponent } from '../app/pages/orders/orders.component';
+import { HomeComponent } from '../app/pages/home/home.component';
+import { LoginComponent } from '../app/core/containers/login/login.component';
 
 export const restaurantMockData: () => Restaurant = () => ({
   id: '1',
@@ -100,6 +110,9 @@ export const mockCheckoutRoutes: () => string[] = () => ([ '/checkout' ]);
 export const mockOrdersRouting: () => Routes = () => ([ { path: 'orders', component: OrdersComponent } ]);
 export const mockOrdersRoutes: () => string[] = () => ([ '/orders' ]);
 
+export const mockUserRouting: () => Routes = () => ([ { path: 'home', component: HomeComponent } ,{ path: 'profile/login', component: LoginComponent}]);
+export const mockUserRoutes: () => any = () => ({ home: ['/home'], login: ['profile', 'login'] });
+
 export const mockError: () => HttpErrorResponse = () => ({
   error: 'Test error',
   status: 404,
@@ -165,6 +178,39 @@ export const mockValidForm: () => NgForm = () => ({
 }) as NgForm;
 
 export const mockUserId: () => string = () => '123';
+
+export const getBadRequestError: () => HttpErrorResponse = () => new HttpErrorResponse({
+  error: new Error('error'),
+  status: 400,
+  statusText: 'Bad Request'
+});
+
+export const mockUserLoginData: () => LoginData = () => ({
+  login: 'test',
+  password: 'test'
+});
+
+export const mockUserRegisterData: () => RegisterData = () => ({
+  login: 'test',
+  mail: 'test@test.pl',
+  restaurantName: 'test',
+  restaurantAddress: 'test',
+  password: 'test',
+  confirmPassword: 'test'
+});
+
+export const mockUserData: () => UserDataDto = () => ({
+  id: '123',
+  login: 'test',
+  mail: 'test@test.pl',
+  restaurantName: 'test',
+  restaurantAddress: 'test'
+});
+
+export const mockUserResponse: () => ResponseDataDto = () => ({
+  data: mockUserData(),
+  token: 'test'
+});
 
 class MockElementRef extends ElementRef {
   constructor() {
