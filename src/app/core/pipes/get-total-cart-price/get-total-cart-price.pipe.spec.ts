@@ -1,6 +1,6 @@
 import { GetTotalCartPricePipe } from './get-total-cart-price.pipe';
 import { TestBed } from '@angular/core/testing';
-import { mockCartItems } from '../../../../mock-data/mock-data';
+import { mockCartItems } from '../../../../mock-data';
 
 describe('GetTotalCartPricePipe', () => {
   let pipe: GetTotalCartPricePipe;
@@ -38,7 +38,7 @@ describe('GetTotalCartPricePipe', () => {
 
     it('should return total cart price', () => {
       const result: number = pipe.transform(mockCartItems());
-      const expectedResult: number = 10;
+      const expectedResult: number = 20;
 
       expect(result).toEqual(expectedResult);
     });

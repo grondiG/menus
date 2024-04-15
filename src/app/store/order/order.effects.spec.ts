@@ -4,7 +4,7 @@ import * as orderActions from './order.actions';
 import { Observable, of, throwError } from 'rxjs';
 import { OrderEffects } from './order.effects';
 import { EffectsMetadata, getEffectsMetadata, rootEffectsInit } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { OrdersService } from '../../core/services/orders/orders.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import * as cartActions from '../cart/cart.actions';
 import * as ordersActions from './order.actions';
 import DoneCallback = jest.DoneCallback;
+import { provideMockStore } from '@ngrx/store/testing';
 
 
 describe('OrderEffects', () => {
@@ -24,6 +25,7 @@ describe('OrderEffects', () => {
   let metadata: EffectsMetadata<OrderEffects>;
   let ordersService: OrdersService;
   let router: Router;
+  let store: Store;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,12 +36,14 @@ describe('OrderEffects', () => {
       providers: [
         OrderEffects,
         provideMockActions(() => actions$),
+        provideMockStore()
       ],
     });
 
     effects = TestBed.inject(OrderEffects);
     metadata = getEffectsMetadata(effects);
     ordersService = TestBed.inject(OrdersService);
+    store = TestBed.inject(Store);
     router = TestBed.inject(Router);
   });
 
@@ -48,13 +52,25 @@ describe('OrderEffects', () => {
   });
 
   describe('onPageLoad$', () => {
+    let userStoreSpy: SpyInstance;
     beforeEach(() => {
       actions$ = of(rootEffectsInit());
     });
 
-    it('should call getOrders effect on init', (done: DoneCallback) => {
+    it('should call getOrders effect on init if fromUser.userIsLoggedSelector is true', (done: DoneCallback) => {
+      userStoreSpy = jest.spyOn(store, 'select').mockReturnValue(of(true));
+
       effects.onPageLoad$.subscribe((action: Action) => {
         expect(action).toEqual(orderActions.getOrders());
+        done();
+      });
+    });
+
+    it('should return empty observable if fromUser.userIsLoggedSelector is false', (done: DoneCallback) => {
+      userStoreSpy = jest.spyOn(store, 'select').mockReturnValue(of(false));
+
+      effects.onPageLoad$.subscribe((action: Action) => {
+        expect(action).toEqual({ type: 'NO_ACTION' });
         done();
       });
     });

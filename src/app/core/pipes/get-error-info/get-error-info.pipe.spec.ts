@@ -7,13 +7,25 @@ describe('GetErrorInfoPipe', () => {
   beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [TranslateModule.forRoot()],
-        providers: [GetErrorInfoPipe, { provide: TranslateService, useValue: { instant: jest.fn() }}]
+        providers: [GetErrorInfoPipe, TranslateService]
       });
 
     pipe = TestBed.inject(GetErrorInfoPipe);
     translate = TestBed.inject(TranslateService);
+    translate.use('en')
+    translate.setTranslation('en', {
+      'ERROR.INFO.MINLENGTH.TITLE': 'Please provide more then',
+      'ERROR.INFO.MINLENGTH.SUBTITLE': 'characters',
+      'ERROR.INFO.REQUIRED': 'Input is required',
+      'ERROR.INFO.BANWORDS': 'Please do not use ban word. List of forbidden words: ',
+      'ERROR.INFO.PASSWORDMATCH': 'Password do not match',
+      'ERROR.INFO.WEAKPASSWORD': 'Password is too weak',
+      'ERROR.INFO.EMAIL': 'Invalid email',
+      'ERROR.INFO.EXISTS': 'This name already exists',
+      'ERROR.INFO.DEFAULT': 'Error on input'
+    })
   });
-  
+
   it('create an instance', () => {
     expect(pipe).toBeTruthy();
   });

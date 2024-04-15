@@ -2,23 +2,31 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
-import { Action } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action, Store } from '@ngrx/store';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import * as ordersActions from './order.actions';
 import * as appStateActions from '../app-state/app-state.actions';
 import * as cartActions from '../cart/cart.actions';
-import { OrderDto } from '../../core/models/order';
+import * as fromUser from '../user/user.reducer';
+import { OrderDto } from '../../core/models';
 import { OrdersService } from '../../core/services/orders/orders.service';
 
 @Injectable()
 export class OrderEffects {
     private actions$: Actions = inject(Actions);
+    private store: Store = inject(Store);
     private ordersService: OrdersService = inject(OrdersService);
     private router: Router = inject(Router);
 
     onPageLoad$: Observable<Action> = createEffect(() => this.actions$.pipe(
         ofType(ordersActions.onPageLoad),
-        map(() => ordersActions.getOrders())
+        concatLatestFrom(() => this.store.select(fromUser.userIsLoggedSelector)),
+        switchMap(([ , isUserLoggedIn]) => {
+          if(isUserLoggedIn === true) {
+            return of(ordersActions.getOrders());
+          }
+          return of({ type: 'NO_ACTION' });
+        })
     ));
 
     addOrder$: Observable<Action> = createEffect(() => this.actions$.pipe(
