@@ -1,63 +1,123 @@
-<ng-container *ngIf="{ isLoading: isLoading$ | async } as data">
+<ng-container *ngIf="{
+  isLoading: isLoading$ | async,
+  skills: skills$ | async
+} as data">
   <div class="container">
     <div class="row d-flex align-items-center justify-content-center flex-column">
-      <pre>{{ formValue | json }}</pre>
       <h2 class="text-center">{{'LOGIN.TITLE' | translate}}</h2>
-
-      <!--      ngNativeValidate-->
-      <!--      ngNoForm-->
+      <div class="d-flex align-items-center justify-content-center mt-5">
+        <pre>
+          {{ form.getRawValue() | json }}
+        </pre>
+      </div>
       <form
-        #form="ngForm"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
         class="col-md-6 col-12 form-group"
-        (ngSubmit)="login(form, $event)"
-        [ngFormOptions]="{ updateOn: 'change' }"
         autocomplete="off"
       >
+
+        <label for="search">Search</label>
+        <input
+          [formControl]="searchControl"
+          type="text"
+          class="form-control my-2"
+          id="search"
+          placeholder="Search"
+        >
+
         <label for="login">{{'LOGIN.INPUT.LOGIN' | translate}}</label>
         <input
-          #loginControl="ngModel"
-          [(ngModel)]="formValue.login"
-          [ngModelOptions]="{ name: 'login', updateOn: 'change' }"
-          required
-          [minlength]="3"
-
+          formControlName="login"
           type="text"
           class="form-control my-2"
           id="login"
           placeholder="{{'LOGIN.INPUT.LOGIN' | translate}}"
-          appErrorMessage
         >
 
         <label for="password">{{'LOGIN.INPUT.PASSWORD' | translate}}</label>
-        <!--        ngModel-->
-        <!--        [ngModel]="formValue.password"-->
-        <!--        (ngModelChange)="formValue.password = $event"-->
         <input
-          #password="ngModel"
-          [(ngModel)]="formValue.password"
-          name="password"
-          required
-
+          formControlName="password"
           type="password"
           class="form-control my-2"
           id="password"
           placeholder="{{'LOGIN.INPUT.PASSWORD' | translate}}"
-          appErrorMessage
         >
-<!--        <label for="password2">Confirm password</label>-->
-<!--        <input-->
-<!--          #password2="ngModel"-->
-<!--          [(ngModel)]="formValue.password2"-->
-<!--          name="password2"-->
-<!--          required-->
-<!--          appCheckPassword="password"-->
 
-<!--          type="password"-->
-<!--          class="form-control my-2"-->
-<!--          id="password2"-->
-<!--          placeholder="Confirm password"-->
-<!--        >-->
-<!--        <app-error-message [errors]="password2.errors" [dirty]="form.submitted || password2.touched || password2.dirty"/>-->
+        <input
+          formControlName="password2"
+          type="password"
+          class="form-control my-2"
+          id="password2"
+          placeholder="{{'LOGIN.INPUT.PASSWORD' | translate}}"
+        >
+
+<!--        <fieldset formArrayName="phones">-->
+<!--          <legend>Phones</legend>-->
+<!--          <div class="d-flex my-3">-->
+<!--            <button (click)="addPhone()" type="button">Add Phone</button>-->
+<!--          </div>-->
+
+<!--          <ng-container *ngFor="let phone of form.controls.phones.controls; let i = index">-->
+<!--            <label [for]="'phones-id-' + i">Phone number</label>-->
+<!--            <div class="d-flex gap-3">-->
+<!--              <input-->
+<!--                [id]="'phones-id-' + i"-->
+<!--                [formControlName]="i"-->
+<!--                type="tel"-->
+<!--                class="form-control my-2"-->
+<!--                placeholder="Enter phone"-->
+<!--              >-->
+<!--              <button (click)="removePhone(i)" class="my-2" type="button">-->
+<!--                <i class='bi bi-trash'></i>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </ng-container>-->
+<!--        </fieldset>-->
+
+        <fieldset formArrayName="phones">
+          <legend>Phones</legend>
+          <div class="d-flex my-3">
+            <button (click)="addPhone()" type="button">Add Phone</button>
+          </div>
+
+          <ng-container *ngFor="let phone of form.controls.phones.controls; let i = index">
+            <label [for]="'phones-id-' + i">Phone number</label>
+            <div [formGroupName]="i" class="d-flex gap-3">
+              <select formControlName="label" class="my-2">
+                <option *ngFor="let phoneLabel of phoneLabels" [value]="phoneLabel">
+                  {{ phoneLabel | titlecase }}
+                </option>
+              </select>
+              <input
+                [id]="'phones-id-' + i"
+                formControlName="number"
+                type="tel"
+                class="form-control my-2"
+                placeholder="Enter phone"
+              >
+              <button (click)="removePhone(i)" class="my-2" type="button">
+                <i class='bi bi-trash'></i>
+              </button>
+            </div>
+          </ng-container>
+        </fieldset>
+
+
+        <fieldset formGroupName="skills">
+          <legend>Skills</legend>
+          <div *ngFor="let skill of data.skills" class="form-check">
+            <input
+              [formControlName]="skill"
+              class="form-check-input cursor-pointer"
+              type="checkbox"
+              [id]="'skill-' + skill"
+            >
+            <label class="form-check-label cursor-pointer" [for]="'skill-' + skill">
+              {{ skill | titlecase }}
+            </label>
+          </div>
+        </fieldset>
 
         <div class="d-flex align-items-center gap-3">
           <button type="submit" class="btn btn-primary mt-3 ml-4">

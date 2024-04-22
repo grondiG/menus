@@ -40,14 +40,19 @@ export const ROUTER_DATA: InjectionToken<RouterData[]> = new InjectionToken<Rout
   factory: () => routerData,
 })*/
 
-export interface cartStorage {
+export interface CartStorage {
   getItems(): CartItem[];
   addItem(items: CartItem): boolean;
   clearCart(): void;
   removeItem(name: string): void;
 }
 
-const cartStorageFactory = {
+const localStorageToken: InjectionToken<Storage> = new InjectionToken<Storage>('local storage implementation', {
+  providedIn: 'root',
+  factory: () => window?.localStorage || null
+});
+
+const cartStorageFactory: CartStorage = {
     getItems(): CartItem[] {
       const cartItems: string = localStorage.getItem('cartItems');
       const items: CartItem[] = cartItems ? JSON.parse(cartItems) : [];
@@ -81,6 +86,6 @@ const cartStorageFactory = {
     }
 }
 
-export const CART_STORAGE: InjectionToken<cartStorage> = new InjectionToken<cartStorage>('cart storage', {
+export const CART_STORAGE: InjectionToken<CartStorage> = new InjectionToken<CartStorage>('cart storage', {
   factory: () => cartStorageFactory
 });

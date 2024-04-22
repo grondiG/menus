@@ -4,13 +4,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import * as cartActions from './cart.actions';
 import { CartItem } from '../../core/models';
-import { CART_STORAGE, cartStorage } from '../../app.config';
+import { CART_STORAGE, CartStorage } from '../../app.config';
 
 
 @Injectable()
 export class CartEffects {
   private actions$: Actions = inject(Actions);
-  private cartStorage: cartStorage = inject(CART_STORAGE);
+  private cartStorage: CartStorage = inject(CART_STORAGE);
 
   init$: Observable<Action> = createEffect(() => this.actions$.pipe(
     ofType(cartActions.cartInit),
