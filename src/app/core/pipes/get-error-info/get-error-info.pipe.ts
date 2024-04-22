@@ -18,11 +18,20 @@ export class GetErrorInfoPipe implements PipeTransform {
     const errorKey: ErrorTypeKeys = Object.keys(errors)[0] as ErrorTypeKeys;
     switch (errorKey) {
       case 'minlength':
-        return this.translate.instant("ERROR.INFO.MINLENGTH.TITLE") + " " + errors['minlength']?.requiredLength + ' ' + this.translate.instant("ERROR.INFO.MINLENGTH.SUBTITLE");
+        return typeof errors['minlength']?.requiredLength === 'number'
+          ? this.translate.instant('ERROR.INFO.MINLENGTH.TITLE')
+          + ' '
+          + errors['minlength'].requiredLength
+          + ' '
+          + this.translate.instant('ERROR.INFO.MINLENGTH.SUBTITLE')
+          : this.translate.instant('ERROR.INFO.MINLENGTH.TITLE');
       case 'required':
         return this.translate.instant("ERROR.INFO.REQUIRED");
       case 'banWords':
-        return this.translate.instant("ERROR.INFO.BANWORDS") + errors['banWords'].join(', ');
+        if(errors['banWords'] instanceof Array){
+          return this.translate.instant("ERROR.INFO.BANWORDS") + errors['banWords'].join(', ');
+        }
+        return this.translate.instant("ERROR.INFO.BANWORDS");
       case 'passwordMatch':
         return this.translate.instant("ERROR.INFO.PASSWORDMATCH");
       case 'weakPassword':

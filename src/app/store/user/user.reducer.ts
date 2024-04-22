@@ -1,5 +1,5 @@
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store'
-import { UserData } from '../../core/models/authentication';
+import { UserData } from '../../core/models';
 import * as userActions from './user.actions';
 import { UserUtils } from './user.utils';
 
@@ -8,6 +8,7 @@ export interface UserState {
   data: UserData;
   isLogged: boolean;
   token: string;
+  isAdmin: boolean;
 }
 
 export const initialState: UserState = {
@@ -15,6 +16,7 @@ export const initialState: UserState = {
   data: null,
   isLogged: false,
   token: null,
+  isAdmin: false
 };
 
 export const userFeatureKey: "user" = "user" as const;
@@ -38,7 +40,8 @@ export const userFeature = createFeature({
         isLogged: true,
         loading: false,
         data: UserUtils.mapUserDataDtoToUserData(action.response.data),
-        token: action.response.token
+        token: action.response.token,
+        isAdmin: action.response.data.login == "admin"
       })
     ),
     on(userActions.loadUserFail,
@@ -60,6 +63,11 @@ const userFeatureSelector = createFeatureSelector<UserState>(userFeatureKey);
 export const userSelector = createSelector(
   userFeatureSelector,
   (state) => state
+);
+
+export const userIsAdminSelector = createSelector(
+  userFeatureSelector,
+  (state) => state?.isAdmin
 );
 
 export const getUserId = createSelector(

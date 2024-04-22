@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RoutePath, RouteTitle } from '../../../app.config';
-import { userIsLoggedSelector } from '../../../store/user/user.reducer';
+import { userIsAdminSelector, userIsLoggedSelector } from '../../../store/user/user.reducer';
 import * as profileActions from '../../../store/user/user.actions';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,6 +17,7 @@ export class HeaderComponent {
   private isCartOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private translate: TranslateService = inject(TranslateService);
 
+  isAdmin$: Observable<boolean> = this.store.select(userIsAdminSelector);
   isCartOpen$: Observable<boolean> = this.isCartOpen.asObservable();
   isLogged$: Observable<boolean> = this.store.select(userIsLoggedSelector);
 

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>Admin panel</h1>
+      <p>manage all data from the store</p>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center">
+      <a class="btn btn-dark w-50" [routerLink]="['manage-products']">Manage products</a>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center">
+      <a class="btn btn-dark w-50" [routerLink]="['add-products']">Add products</a>
+    </div>
+    <div class="col-md-12 mt-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

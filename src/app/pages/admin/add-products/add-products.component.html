@@ -1,0 +1,38 @@
+<ng-container *ngIf="{
+  restaurants: restaurants$ | async,
+} as data">
+  <div class="text-center d-flex flex-column align-items-center">
+    <h1>Add product to restaurant</h1>
+    <form class="w-50">
+      <div class="form-group">
+        <label for="restaurant">Restaurant</label>
+        <select class="form-control" id="restaurant">
+          <option *ngFor="let restaurant of data.restaurants" [value]="restaurant.id">{{ restaurant.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" placeholder="Enter price">
+      </div>
+      <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <div class="d-flex gap-1">
+          <input type="text" class="form-control" id="ingredients" placeholder="Enter ingredient">
+          <button type="button" class="btn btn-primary">+</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nutritions">Nutritions</label>
+        <div class="d-flex gap-1">
+          <input type="text" class="form-control" id="nutritions" placeholder="Enter nutrition">
+          <button type="button" class="btn btn-primary">+</button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Add</button>
+    </form>
+  </div>
+</ng-container>

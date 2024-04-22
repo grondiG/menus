@@ -1,6 +1,7 @@
 <ng-container *ngIf="{
   isLogged: isLogged$ | async,
-  isCartOpen: isCartOpen$ | async
+  isCartOpen: isCartOpen$ | async,
+  isAdmin: isAdmin$ | async,
 } as data">
   <div class="header container-fluid w-100 bg-dark m-0">
     <div class="row h-100">
@@ -50,12 +51,19 @@
                 *ngIf="!data.isLogged">
               <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.PROFILE | uppercase) | translate }}</span>
             </li>
+            <li class="header__menu__list-item text-light"
+                [routerLink]="RoutePath.ADMIN"
+                [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{ matrixParams: 'ignored', queryParams: 'ignored', fragment: 'ignored', paths: 'subset' }"
+                *ngIf="data.isLogged && data.isAdmin">
+              <span>{{ "HEADER.NAVBAR.ROUTES." + (RouteTitle.ADMIN | uppercase) | translate }}</span>
+            </li>
           </ul>
         </div>
       </div>
       <div class="col-2 col-md-3 h-100">
         <div class="header__auth d-flex justify-content-end align-items-center h-100">
-          <div class="accordion w-25 h-100 d-flex align-items-center" id="accordionExample">
+          <div class="accordion w-25 h-100 d-flex align-items-center mx-3" id="accordionExample">
             <div class="accordion-item w-100">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button collapsed p-2 h-auto btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"

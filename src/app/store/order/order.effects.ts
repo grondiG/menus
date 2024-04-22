@@ -60,7 +60,8 @@ export class OrderEffects {
             ofType(ordersActions.getOrders),
             switchMap(() =>
                 this.ordersService.getOrdersForUserById().pipe(
-                    map((response: OrderDto[]) => ordersActions.getOrdersSuccess({ orders: response })),
+                    map((response: OrderDto[]) => ordersActions.getOrdersSuccess({ orders: response })
+                    ),
                     catchError((error: HttpErrorResponse) => of(ordersActions.getOrdersFailure({ error })))
                 )
             )

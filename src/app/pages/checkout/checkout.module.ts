@@ -8,6 +8,7 @@ import { LoadingComponent } from '../../core/components/loading/loading/loading.
 import { ErrorMessageDirective } from '../../core/directives/error-message/error-message.directive';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from '../../core/core.module';
+import { RestaurantsStore } from '../restaurants/restaurants.store';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CoreModule } from '../../core/core.module';
   ],
   exports: [
     GetTotalCartPricePipe
-  ]
+  ],
+  providers: [RestaurantsStore]
 })
 export class CheckoutModule { }

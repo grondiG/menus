@@ -29,6 +29,7 @@
 	"HEADER.LOGOUT": "Wyloguj się",
 	"HEADER.NAVBAR.LOGOUT": "Wyloguj się",
 	"HEADER.NAVBAR.ROUTES.HOME": "Strona główna",
+	"HEADER.NAVBAR.ROUTES.ADMIN": "Panel admina",
 	"HEADER.NAVBAR.ROUTES.ORDERS": "Zamówienia",
 	"HEADER.NAVBAR.ROUTES.PROFILE": "Profil",
 	"HEADER.NAVBAR.ROUTES.RESTAURANTS": "Restauracje",

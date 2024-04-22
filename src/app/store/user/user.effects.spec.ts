@@ -41,7 +41,7 @@ describe('UserEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: Router,
-          useValue: { navigate: jest.fn() } // Mock the Router
+          useValue: { navigate: jest.fn() }
         }
       ],
     });
@@ -72,7 +72,7 @@ describe('UserEffects', () => {
   describe('login$', () => {
     let loginSpy: SpyInstance;
     const mockResponse: ResponseDataDto = mockUserResponse();
-    const mockError: HttpErrorResponse = new HttpErrorResponse({ /* Mock your error data here */ });
+    const mockErr: HttpErrorResponse = mockError();
 
     beforeEach(() => {
       actions$ = of(userActions.loadUser({ data: mockUserLoginData()}));
@@ -96,9 +96,9 @@ describe('UserEffects', () => {
     });
 
     it('should dispatch loadUserFail on error', (done: DoneCallback) => {
-      loginSpy.mockReturnValue(throwError(() => mockError));
+      loginSpy.mockReturnValue(throwError(() => mockErr));
       effects.login$.subscribe((action: Action) => {
-        expect(action).toEqual(userActions.loadUserFail({ error: mockError }));
+        expect(action).toEqual(userActions.loadUserFail({ error: mockErr }));
         done();
       });
     });
@@ -133,7 +133,7 @@ describe('UserEffects', () => {
   describe('register$', () => {
     let registerSpy: SpyInstance;
     const mockResponse: ResponseDataDto = mockUserResponse();
-    const mockError: HttpErrorResponse = new HttpErrorResponse({ /* Mock your error data here */ });
+    const mockErr: HttpErrorResponse = mockError();
 
     beforeEach(() => {
       actions$ = of(userActions.register({ data: mockUserRegisterData() }));
@@ -157,9 +157,9 @@ describe('UserEffects', () => {
     });
 
     it('should dispatch registerFail on error', (done: DoneCallback) => {
-      registerSpy.mockReturnValue(throwError(() => mockError));
+      registerSpy.mockReturnValue(throwError(() => mockErr));
       effects.register$.subscribe((action: Action) => {
-        expect(action).toEqual(userActions.registerFail({ error: mockError }));
+        expect(action).toEqual(userActions.registerFail({ error: mockErr }));
         done();
       });
     });
